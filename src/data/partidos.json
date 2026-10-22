@@ -1,0 +1,43 @@
+[
+  {
+    "id": "2024-25-01", "temporada": "2024-25", "fecha": "2024-10-05",
+    "rival": "Los Galácticos", "local": true, "competicion": "Liga",
+    "golesFavor": 3, "golesContra": 1,
+    "cronica": "Debut con victoria. Juan se marcó un doblete y Pablo no dejó pasar ni el aire.",
+    "apariciones": [
+      { "jugador": "juan",   "goles": 2, "mvp": true },
+      { "jugador": "marcos", "goles": 1, "asistencias": 1 },
+      { "jugador": "pablo",  "amarillas": 1 },
+      { "jugador": "luis" }
+    ]
+  },
+  {
+    "id": "2024-25-02", "temporada": "2024-25", "fecha": "2024-10-19",
+    "rival": "Deportivo Bar Paco", "local": false, "competicion": "Liga",
+    "golesFavor": 1, "golesContra": 1,
+    "apariciones": [
+      { "jugador": "juan",   "goles": 1 },
+      { "jugador": "marcos", "asistencias": 1, "amarillas": 1 },
+      { "jugador": "pablo" },
+      { "jugador": "luis",   "mvp": true }
+    ]
+  },
+  {
+    "id": "2025-26-01", "temporada": "2025-26", "fecha": "2025-10-04",
+    "rival": "Atlético Resaca", "local": true, "competicion": "Liga",
+    "golesFavor": 0, "golesContra": 2,
+    "cronica": "Mala tarde. Lo mejor fue la cerveza de después.",
+    "apariciones": [
+      { "jugador": "juan" },
+      { "jugador": "marcos" },
+      { "jugador": "pablo", "rojas": 1 },
+      { "jugador": "luis" }
+    ]
+  },
+  {
+    "id": "2025-26-02", "temporada": "2025-26", "fecha": "2027-01-10",
+    "rival": "Real Sofá", "local": false, "competicion": "Copa",
+    "golesFavor": null, "golesContra": null,
+    "apariciones": []
+  }
+]

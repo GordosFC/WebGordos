@@ -1,0 +1,27 @@
+---
+import { type Partido, jugado, resultado, fecha, url } from '../lib/stats';
+interface Props { p: Partido }
+const { p } = Astro.props;
+const r = resultado(p);
+const marcador = jugado(p)
+  ? (p.local ? `${p.golesFavor}–${p.golesContra}` : `${p.golesContra}–${p.golesFavor}`)
+  : 'vs';
+---
+<a class="partido" href={url(`/partidos/${p.id}/`)}>
+  <span class={`res ${r ?? 'P'}`}>{r ?? '–'}</span>
+  <span class="info">
+    <strong>{p.local ? 'Nosotros' : p.rival} {marcador} {p.local ? p.rival : 'Nosotros'}</strong>
+    <small>{fecha(p.fecha)} · {p.competicion}</small>
+  </span>
+</a>
+
+<style>
+  .partido {
+    display: flex; align-items: center; gap: 0.8rem;
+    padding: 0.7rem 0.9rem; background: var(--superficie); border: 1px solid var(--linea);
+    color: inherit; text-decoration: none; margin-bottom: -1px;
+  }
+  .partido:hover { background: color-mix(in srgb, var(--superficie) 90%, var(--cesped-claro)); }
+  .info { display: flex; flex-direction: column; }
+  small { color: var(--suave); }
+</style>

@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import Partido from '../../components/Partido.astro';
+import { temporadas, partidosDe, balance, getJugador, statsJugador, url } from '../../lib/stats';
+
+export function getStaticPaths() {
+  return temporadas.map((t) => ({ params: { id: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const lista = partidosDe(t.id);
+const b = balance(lista);
+const plantilla = t.plantilla.map(getJugador);
+---
+<Base titulo={t.nombre}>
+  <h1>{t.nombre}</h1>
+  <div class="cifras">
+    <div class="cifra"><strong>{b.pj}</strong><span>Jugados</span></div>
+    <div class="cifra"><strong>{b.v}-{b.e}-{b.d}</strong><span>V-E-D</span></div>
+    <div class="cifra"><strong>{b.gf}–{b.gc}</strong><span>Goles</span></div>
+  </div>
+
+  <h2>Plantilla</h2>
+  <div class="tabla-wrap">
+    <table>
+      <thead><tr><th class="num">#</th><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
+      <tbody>
+        {plantilla.map((j) => {
+          const s = statsJugador(j.id, lista);
+          return (
+            <tr>
+              <td class="num">{j.dorsal}</td>
+              <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
+              <td>{j.posicion}</td>
+              <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
+              <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Partidos</h2>
+  <div>{[...lista].reverse().map((p) => <Partido p={p} />)}</div>
+</Base>

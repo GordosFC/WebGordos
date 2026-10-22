@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Partido from '../components/Partido.astro';
+import NoticiaItem from '../components/NoticiaItem.astro';
+import { partidos, balance, ranking, ultimosPartidos, proximoPartido, fecha, url, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
+
+const b = balance(partidos);
+const proximo = proximoPartido();
+const gala = galaAbierta();
+const goleadores = ranking('goles', partidos, 3);
+---
+<Base>
+  <h1>Nombre del Club</h1>
+  <p class="suave">Resultados, plantillas y estadísticas de todas las temporadas.</p>
+
+  {proximo && (
+    <section class="proximo">
+      <p>Próximo partido</p>
+      <h2>{proximo.local ? 'Nosotros' : proximo.rival} vs {proximo.local ? proximo.rival : 'Nosotros'}</h2>
+      <p>{fecha(proximo.fecha)} · {proximo.competicion}</p>
+    </section>
+  )}
+
+  {gala && (
+    <a class="gala" href={url('/premios/')}>
+      Gala {nombreTemporada(gala.temporada)}: votaciones abiertas. Mira los nominados.
+    </a>
+  )}
+
+  <h2>Noticias recientes</h2>
+  <div>{noticias.slice(0, 3).map((n) => <NoticiaItem n={n} />)}</div>
+  <p><a href={url('/noticias/')}>Ver todas las noticias</a></p>
+
+  <h2>Balance histórico</h2>
+  <div class="cifras">
+    <div class="cifra"><strong>{b.pj}</strong><span>Jugados</span></div>
+    <div class="cifra"><strong>{b.v}</strong><span>Victorias</span></div>
+    <div class="cifra"><strong>{b.e}</strong><span>Empates</span></div>
+    <div class="cifra"><strong>{b.d}</strong><span>Derrotas</span></div>
+    <div class="cifra"><strong>{b.gf}–{b.gc}</strong><span>Goles</span></div>
+  </div>
+
+  <h2>Últimos resultados</h2>
+  <div>{ultimosPartidos(5).map((p) => <Partido p={p} />)}</div>
+
+  <h2>Máximos goleadores</h2>
+  <ol>
+    {goleadores.map(({ jugador, valor }) => (
+      <li><a href={url(`/jugadores/${jugador.id}/`)}>{jugador.nombre}</a> — {valor} goles</li>
+    ))}
+  </ol>
+</Base>
+
+<style>
+  .gala { display: block; background: var(--amarilla); color: #17211b; padding: 0.8rem 1.1rem; font-weight: 600; text-decoration: none; margin-bottom: 1rem; }
+  .proximo { background: var(--cesped); color: #fff; padding: 1.2rem 1.4rem; margin: 1.5rem 0; }
+  .proximo h2 { margin: 0.2rem 0 0.4rem; font-size: 1.8rem; }
+  .proximo p { margin: 0; color: #dfe9e2; }
+</style>

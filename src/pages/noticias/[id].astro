@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { noticias, etiquetaTipo, fecha, url } from '../../lib/stats';
+
+export function getStaticPaths() {
+  return noticias.map((n) => ({ params: { id: n.id }, props: { n } }));
+}
+const { n } = Astro.props;
+const parrafos = (n.cuerpo ?? n.resumen).split(/\n\s*\n/);
+---
+<Base titulo={n.titulo}>
+  <p class="suave">{etiquetaTipo[n.tipo]} · {fecha(n.fecha)}</p>
+  <h1>{n.titulo}</h1>
+  {parrafos.map((p) => <p>{p}</p>)}
+  <p><a href={url('/noticias/')}>Volver a noticias</a></p>
+</Base>

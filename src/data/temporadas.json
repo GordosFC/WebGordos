@@ -1,0 +1,4 @@
+[
+  { "id": "2024-25", "nombre": "Temporada 2024/25", "plantilla": ["juan", "pablo", "marcos", "luis"] },
+  { "id": "2025-26", "nombre": "Temporada 2025/26", "plantilla": ["juan", "pablo", "marcos", "luis"] }
+]

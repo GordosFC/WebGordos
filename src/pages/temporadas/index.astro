@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import { temporadas, partidosDe, balance, url } from '../../lib/stats';
+---
+<Base titulo="Temporadas">
+  <h1>Temporadas</h1>
+  <div class="tabla-wrap">
+    <table>
+      <thead><tr><th>Temporada</th><th class="num">PJ</th><th class="num">V</th><th class="num">E</th><th class="num">D</th><th class="num">GF</th><th class="num">GC</th></tr></thead>
+      <tbody>
+        {[...temporadas].reverse().map((t) => {
+          const b = balance(partidosDe(t.id));
+          return (
+            <tr>
+              <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a></td>
+              <td class="num">{b.pj}</td><td class="num">{b.v}</td><td class="num">{b.e}</td>
+              <td class="num">{b.d}</td><td class="num">{b.gf}</td><td class="num">{b.gc}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</Base>

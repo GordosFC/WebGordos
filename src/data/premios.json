@@ -1,0 +1,33 @@
+[
+  {
+    "temporada": "2024-25",
+    "estado": "entregados",
+    "categorias": [
+      { "id": "mejor-jugador", "nombre": "Mejor jugador",
+        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": "juan" },
+      { "id": "mejor-portero", "nombre": "Mejor portero",
+        "nominados": [{ "jugador": "luis" }], "ganador": "luis" },
+      { "id": "maximo-goleador", "nombre": "Máximo goleador",
+        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": "juan" },
+      { "id": "mejor-gol", "nombre": "Mejor gol",
+        "nominados": [
+          { "jugador": "marcos", "detalle": "Disparo desde fuera del área ante Los Galácticos" },
+          { "jugador": "juan", "detalle": "Chilena en Bar Paco" }
+        ], "ganador": "marcos" }
+    ]
+  },
+  {
+    "temporada": "2025-26",
+    "estado": "votaciones",
+    "categorias": [
+      { "id": "mejor-jugador", "nombre": "Mejor jugador",
+        "nominados": [{ "jugador": "juan" }, { "jugador": "pablo" }, { "jugador": "marcos" }], "ganador": null },
+      { "id": "mejor-portero", "nombre": "Mejor portero",
+        "nominados": [{ "jugador": "luis" }], "ganador": null },
+      { "id": "maximo-goleador", "nombre": "Máximo goleador",
+        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": null },
+      { "id": "mejor-gol", "nombre": "Mejor gol",
+        "nominados": [{ "jugador": "juan", "detalle": "Describe aquí el gol" }], "ganador": null }
+    ]
+  }
+]

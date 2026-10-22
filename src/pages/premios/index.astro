@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import { galas, getJugador, nombreTemporada, url } from '../../lib/stats';
+---
+<Base titulo="Premios">
+  <h1>Gala de premios</h1>
+  {galas.map((g) => (
+    <section>
+      <h2>
+        {nombreTemporada(g.temporada)}
+        {g.estado === 'votaciones' && <span class="abierta">Votaciones abiertas</span>}
+      </h2>
+      <div class="categorias">
+        {g.categorias.map((c) => (
+          <article class="categoria">
+            <h3>{c.nombre}</h3>
+            {c.ganador ? (
+              <p class="ganador">
+                🏆 <a href={url(`/jugadores/${c.ganador}/`)}>{getJugador(c.ganador).nombre}</a>
+              </p>
+            ) : (
+              <p class="suave">Ganador por decidir</p>
+            )}
+            <ul>
+              {c.nominados.map((nom) => (
+                <li class={nom.jugador === c.ganador ? 'gana' : ''}>
+                  <a href={url(`/jugadores/${nom.jugador}/`)}>{getJugador(nom.jugador).nombre}</a>
+                  {nom.detalle && <span class="suave"> — {nom.detalle}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .abierta { font-size: 0.8rem; font-weight: 700; background: var(--amarilla); color: #17211b; padding: 0.15rem 0.5rem; margin-left: 0.6rem; vertical-align: middle; }
+  .categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.75rem; }
+  .categoria { background: var(--superficie); border: 1px solid var(--linea); padding: 0.9rem 1rem; }
+  .ganador { font-size: 1.15rem; font-weight: 700; margin: 0.4rem 0; }
+  ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+  li.gana { font-weight: 600; }
+</style>

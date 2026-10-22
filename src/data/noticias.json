@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fichaje-ejemplo",
+    "fecha": "2025-09-01",
+    "tipo": "fichaje",
+    "titulo": "Marcos se incorpora a la plantilla",
+    "resumen": "El centrocampista llega para reforzar el medio campo esta temporada.",
+    "cuerpo": "Texto completo de la noticia. Puedes escribir varios párrafos separándolos con una línea en blanco.\n\nSegundo párrafo de ejemplo."
+  },
+  {
+    "id": "gala-votaciones-2025-26",
+    "fecha": "2026-10-15",
+    "tipo": "premio",
+    "titulo": "Abiertas las votaciones de la gala 2025/26",
+    "resumen": "Ya están los nominados a mejor jugador, mejor portero, máximo goleador y mejor gol.",
+    "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios."
+  },
+  {
+    "id": "gala-ganadores-2024-25",
+    "fecha": "2025-07-10",
+    "tipo": "premio",
+    "titulo": "Ganadores de la gala 2024/25",
+    "resumen": "Juan, Luis y Marcos se llevan los premios de la temporada.",
+    "cuerpo": "Resumen de la gala. Todos los ganadores están en la página de premios."
+  }
+]

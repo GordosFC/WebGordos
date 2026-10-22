@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { ranking, url } from '../lib/stats';
+
+const tablas = [
+  { titulo: 'Goleadores', campo: 'goles' },
+  { titulo: 'Asistentes', campo: 'asistencias' },
+  { titulo: 'Más partidos', campo: 'pj' },
+  { titulo: 'MVP', campo: 'mvp' },
+  { titulo: 'Tarjetas amarillas', campo: 'amarillas' },
+  { titulo: 'Tarjetas rojas', campo: 'rojas' },
+] as const;
+---
+<Base titulo="Clasificaciones">
+  <h1>Clasificaciones</h1>
+  <p class="suave">Acumulado de todas las temporadas.</p>
+  {tablas.map(({ titulo, campo }) => {
+    const filas = ranking(campo);
+    return (
+      <>
+        <h2>{titulo}</h2>
+        {filas.length === 0 ? <p class="suave">Todavía nadie.</p> : (
+          <div class="tabla-wrap">
+            <table>
+              <tbody>
+                {filas.map(({ jugador, valor }, i) => (
+                  <tr>
+                    <td class="num">{i + 1}</td>
+                    <td><a href={url(`/jugadores/${jugador.id}/`)}>{jugador.nombre}</a></td>
+                    <td class="num"><strong>{valor}</strong></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </>
+    );
+  })}
+</Base>

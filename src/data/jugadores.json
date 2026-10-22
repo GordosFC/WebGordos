@@ -1,0 +1,6 @@
+[
+  { "id": "juan",   "nombre": "Juan Pérez",   "apodo": "Juanito",  "dorsal": 10, "posicion": "Delantero" },
+  { "id": "pablo",  "nombre": "Pablo Ruiz",   "apodo": "El Muro",  "dorsal": 4,  "posicion": "Defensa" },
+  { "id": "marcos", "nombre": "Marcos Díaz",  "apodo": "Marqui",   "dorsal": 8,  "posicion": "Centrocampista" },
+  { "id": "luis",   "nombre": "Luis Gómez",   "apodo": "Lucho",    "dorsal": 1,  "posicion": "Portero" }
+]

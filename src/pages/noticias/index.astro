@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import NoticiaItem from '../../components/NoticiaItem.astro';
+import { noticias } from '../../lib/stats';
+---
+<Base titulo="Noticias">
+  <h1>Noticias</h1>
+  <p class="suave">Fichajes, premios y todo lo que pasa en el club.</p>
+  <div>{noticias.map((n) => <NoticiaItem n={n} />)}</div>
+</Base>

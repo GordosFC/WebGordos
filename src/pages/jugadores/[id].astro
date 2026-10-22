@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import { jugadores, temporadas, partidosDe, statsJugador, url } from '../../lib/stats';
+
+export function getStaticPaths() {
+  return jugadores.map((j) => ({ params: { id: j.id }, props: { j } }));
+}
+const { j } = Astro.props;
+const total = statsJugador(j.id);
+const porTemporada = temporadas
+  .filter((t) => t.plantilla.includes(j.id))
+  .map((t) => ({ t, s: statsJugador(j.id, partidosDe(t.id)) }));
+---
+<Base titulo={j.nombre}>
+  <h1>{j.nombre}</h1>
+  <p class="suave">#{j.dorsal} · {j.posicion}{j.apodo ? ` · «${j.apodo}»` : ''}</p>
+
+  <div class="cifras">
+    <div class="cifra"><strong>{total.pj}</strong><span>Partidos</span></div>
+    <div class="cifra"><strong>{total.goles}</strong><span>Goles</span></div>
+    <div class="cifra"><strong>{total.asistencias}</strong><span>Asistencias</span></div>
+    <div class="cifra"><strong>{total.mvp}</strong><span>MVP</span></div>
+    <div class="cifra"><strong>{total.amarillas}/{total.rojas}</strong><span>Amarillas/Rojas</span></div>
+  </div>
+
+  <h2>Por temporada</h2>
+  <div class="tabla-wrap">
+    <table>
+      <thead><tr><th>Temporada</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
+      <tbody>
+        {porTemporada.map(({ t, s }) => (
+          <tr>
+            <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a></td>
+            <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
+            <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

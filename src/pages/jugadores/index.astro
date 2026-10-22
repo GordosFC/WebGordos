@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { jugadores, statsJugador, url } from '../../lib/stats';
+---
+<Base titulo="Jugadores">
+  <h1>Jugadores</h1>
+  <p class="suave">Estadísticas acumuladas de todas las temporadas.</p>
+  <div class="tabla-wrap">
+    <table>
+      <thead><tr><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
+      <tbody>
+        {jugadores.map((j) => {
+          const s = statsJugador(j.id);
+          return (
+            <tr>
+              <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
+              <td>{j.posicion}</td>
+              <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
+              <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</Base>
