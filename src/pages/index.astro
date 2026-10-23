@@ -10,7 +10,7 @@ const gala = galaAbierta();
 const goleadores = ranking('goles', partidos, 3);
 ---
 <Base>
-  <h1>Nombre del Club</h1>
+  <h1>Gordos FC</h1>
   <p class="suave">Resultados, plantillas y estadísticas de todas las temporadas.</p>
 
   {proximo && (
@@ -37,7 +37,8 @@ const goleadores = ranking('goles', partidos, 3);
     <div class="cifra"><strong>{b.v}</strong><span>Victorias</span></div>
     <div class="cifra"><strong>{b.e}</strong><span>Empates</span></div>
     <div class="cifra"><strong>{b.d}</strong><span>Derrotas</span></div>
-    <div class="cifra"><strong>{b.gf}–{b.gc}</strong><span>Goles</span></div>
+    <div class="cifra"><strong>{b.gf}</strong><span>Goles a favor</span></div>
+    <div class="cifra"><strong>{b.gc}</strong><span>Goles en contra</span></div>
   </div>
 
   <h2>Últimos resultados</h2>
@@ -52,7 +53,7 @@ const goleadores = ranking('goles', partidos, 3);
 </Base>
 
 <style>
-  .gala { display: block; background: var(--amarilla); color: #17211b; padding: 0.8rem 1.1rem; font-weight: 600; text-decoration: none; margin-bottom: 1rem; }
+  .gala { display: block; background: var(--destacado); color: #17211b; padding: 0.8rem 1.1rem; font-weight: 600; text-decoration: none; margin-bottom: 1rem; }
   .proximo { background: var(--cesped); color: #fff; padding: 1.2rem 1.4rem; margin: 1.5rem 0; }
   .proximo h2 { margin: 0.2rem 0 0.4rem; font-size: 1.8rem; }
   .proximo p { margin: 0; color: #dfe9e2; }

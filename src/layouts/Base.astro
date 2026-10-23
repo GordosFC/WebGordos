@@ -2,8 +2,7 @@
 import { url } from '../lib/stats';
 interface Props { titulo?: string }
 const { titulo } = Astro.props;
-const nombreClub = 'Nombre del Club'; // <- cámbialo
-const pagina = titulo ? `${titulo} · ${nombreClub}` : nombreClub;
+const nombreClub = 'Gordos FC';
 const nav = [
   ['Inicio', '/'],
   ['Noticias', '/noticias/'],
@@ -18,12 +17,15 @@ const nav = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-    <title>{pagina}</title>
+    <link rel="icon" type="image/png" href={url('/favicon.png')} />
+    <title>Web oficial de Gordos FC</title>
   </head>
   <body>
     <header class="cabecera">
-      <a class="marca" href={url('/')}>{nombreClub}</a>
+      <a class="marca" href={url('/')}>
+        <img src={url('/escudoGordos.png')} alt="" width="50" height="50" />
+        Gordos FC
+      </a>
       <nav>
         {nav.map(([texto, ruta]) => <a href={url(ruta)}>{texto}</a>)}
       </nav>
@@ -31,32 +33,34 @@ const nav = [
     <main>
       <slot />
     </main>
-    <footer class="pie">{nombreClub} · hecho por y para amigos</footer>
+    <footer class="pie">#vamosgordos</footer>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --fondo: #f1f4f0;
-    --superficie: #ffffff;
+    --fondo: #f1f4f0;          /* fondo de la página */
+    --superficie: #ffffff;     /* tarjetas y tablas */
     --texto: #17211b;
-    --suave: #5d6b62;
-    --linea: #d5ddd6;
-    --cesped: #14452f;
-    --cesped-claro: #1f7a4d;
-    --amarilla: #f2c230;
-    --roja: #d64545;
+    --suave: #5d6b62;          /* texto secundario */
+    --linea: #d5ddd6;          /* bordes */
+    --cesped: #fdf5c5;         /* cabecera y banner de próximo partido */
+    --enlaces: #f1f123;        /* enlaces */
+    --victoria: #49e913;        /* victorias */
+    --destacado: #f1c40f;       /* acentos (gala, foco al navegar) */
+    --fichaje: #c16f17;        /* fichaje en inicio */
+    --derrota: #d43939;           /* derrotas */
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --fondo: #0f1612;
-      --superficie: #17211b;
-      --texto: #eaf0ea;
-      --suave: #93a399;
-      --linea: #2a372f;
-      --cesped: #0b2a1d;
-      --cesped-claro: #3fae7a;
+      --fondo: #16160f;
+      --superficie: #191816;
+      --texto: #f0efea; 
+      --suave: #a3a293;
+      --linea: #37362a;
+      --cesped: #23241f;
+      --enlaces: #dab318;
     }
   }
   * { box-sizing: border-box; }
@@ -68,7 +72,7 @@ const nav = [
     line-height: 1.55;
   }
   main { max-width: 56rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
-  a { color: var(--cesped-claro); }
+  a { color: var(--enlaces); }
   h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.05; margin: 0 0 1rem; letter-spacing: -0.02em; }
   h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
   p { max-width: 65ch; }
@@ -84,7 +88,7 @@ const nav = [
   .cabecera nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   .cabecera nav a { opacity: 0.85; }
   .cabecera nav a:hover { opacity: 1; text-decoration: underline; }
-  a:focus-visible { outline: 3px solid var(--amarilla); outline-offset: 2px; }
+  a:focus-visible { outline: 3px solid var(--destacado); outline-offset: 2px; }
   .pie { text-align: center; color: var(--suave); padding: 2rem 1rem; font-size: 0.9rem; }
 
   .tabla-wrap { overflow-x: auto; }
@@ -95,9 +99,9 @@ const nav = [
   tr:last-child td { border-bottom: 0; }
 
   .res { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; font-weight: 800; font-size: 0.8rem; color: #fff; }
-  .res.V { background: var(--cesped-claro); }
+  .res.V { background: var(--victoria); }
   .res.E { background: var(--suave); }
-  .res.D { background: var(--roja); }
+  .res.D { background: var(--derrota); }
   .res.P { background: transparent; color: var(--suave); border: 1px dashed var(--suave); }
 
   .cifras { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0; }
