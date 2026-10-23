@@ -1,16 +1,39 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { noticias, etiquetaTipo, fecha, url } from '../../lib/stats';
+import { noticias, etiquetaTipo, fecha, url, portadaDe, fotoUrl } from '../../lib/stats';
 
 export function getStaticPaths() {
   return noticias.map((n) => ({ params: { id: n.id }, props: { n } }));
 }
 const { n } = Astro.props;
 const parrafos = (n.cuerpo ?? n.resumen).split(/\n\s*\n/);
+const portada = portadaDe(n);
+const resto = (n.fotos ?? []).filter((f) => f !== portada);
 ---
 <Base titulo={n.titulo}>
   <p class="suave">{etiquetaTipo[n.tipo]} · {fecha(n.fecha)}</p>
   <h1>{n.titulo}</h1>
+  {portada && <img class="portada" src={fotoUrl(n, portada)} alt={n.titulo} />}
   {parrafos.map((p) => <p>{p}</p>)}
+
+  {resto.length > 0 && (
+    <>
+      <h2>Más fotos</h2>
+      <div class="galeria">
+        {resto.map((f, i) => (
+          <a href={fotoUrl(n, f)} target="_blank" rel="noopener">
+            <img src={fotoUrl(n, f)} alt={`Foto ${i + 2} de «${n.titulo}»`} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </>
+  )}
+
   <p><a href={url('/noticias/')}>Volver a noticias</a></p>
 </Base>
+
+<style>
+  .portada { display: block; width: 100%; max-height: 28rem; object-fit: cover; margin: 0 0 1.2rem; background: var(--linea); }
+  .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 0.6rem; }
+  .galeria img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: var(--linea); }
+</style>

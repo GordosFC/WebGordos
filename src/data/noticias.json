@@ -5,7 +5,14 @@
     "tipo": "fichaje",
     "titulo": "Marcos se incorpora a la plantilla",
     "resumen": "El centrocampista llega para reforzar el medio campo esta temporada.",
-    "cuerpo": "Texto completo de la noticia. Puedes escribir varios párrafos separándolos con una línea en blanco.\n\nSegundo párrafo de ejemplo."
+    "cuerpo": "Texto completo de la noticia. Puedes escribir varios párrafos separándolos con una línea en blanco.\n\nSegundo párrafo de ejemplo.",
+    "fotos": [
+      "ejemplo-1.svg",
+      "ejemplo-2.svg",
+      "ejemplo-3.svg"
+    ],
+    "portada": "ejemplo-2.svg",
+    "destacada": true
   },
   {
     "id": "gala-votaciones-2025-26",
@@ -13,7 +20,11 @@
     "tipo": "premio",
     "titulo": "Abiertas las votaciones de la gala 2025/26",
     "resumen": "Ya están los nominados a mejor jugador, mejor portero, máximo goleador y mejor gol.",
-    "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios."
+    "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios.",
+    "destacada": true,
+    "fotos": [
+      "portada.svg"
+    ]
   },
   {
     "id": "gala-ganadores-2024-25",

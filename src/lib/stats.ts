@@ -18,7 +18,10 @@ export type Partido = {
   fecha: string;
   rival: string;
   local: boolean;
-  competicion: string;
+  split: number;                 // 1, 2 o 3
+  fase: 'grupos' | 'playoff';
+  jornada?: number;              // solo en fase de grupos
+  nota?: string;                 // p. ej. "Ganamos en los penaltis"
   golesFavor: number | null;
   golesContra: number | null;
   cronica?: string;
@@ -99,6 +102,9 @@ import rawPremios from '../data/premios.json';
 export type Noticia = {
   id: string; fecha: string; tipo: 'fichaje' | 'premio' | 'partido' | 'general';
   titulo: string; resumen: string; cuerpo?: string;
+  fotos?: string[];   // nombres de archivo dentro de public/noticias/<id>/
+  portada?: string;   // la foto principal; si no se pone, la primera de `fotos`
+  destacada?: boolean; // las destacadas salen en el carrusel de la portada
 };
 export type Nominado = { jugador: string; detalle?: string };
 export type Categoria = { id: string; nombre: string; nominados: Nominado[]; ganador: string | null };
@@ -111,3 +117,117 @@ export const etiquetaTipo: Record<Noticia['tipo'], string> = {
 };
 export const nombreTemporada = (id: string) => temporadas.find((t) => t.id === id)?.nombre ?? id;
 export const galaAbierta = () => galas.find((g) => g.estado === 'votaciones');
+
+// ---------- Splits, grupos y play-off ----------
+import rawGrupos from '../data/grupos.json';
+
+export const nombreClub = 'Gordos FC';
+export const PLAZAS_PLAYOFF = 2;              // clasifican los N primeros de cada grupo
+const PUNTOS_VICTORIA = 3;
+const PUNTOS_EMPATE = 1;
+
+type ResultadoAjeno = { jornada?: number; local: string; visitante: string; golesLocal: number; golesVisitante: number };
+type Grupo = { temporada: string; split: number; grupoFinalizado?: boolean; resultados: ResultadoAjeno[] };
+const grupos = rawGrupos as Grupo[];
+const grupoDe = (temporadaId: string, split: number) =>
+  grupos.find((g) => g.temporada === temporadaId && g.split === split);
+
+export const etiquetaPartido = (p: Partido) =>
+  `Split ${p.split} · ${p.fase === 'playoff' ? 'Play-off de ascenso' : p.jornada ? `Jornada ${p.jornada}` : 'Fase de grupos'}`;
+
+/** Splits que existen en una temporada (por sus partidos o por sus datos de grupo). */
+export function splitsDe(temporadaId: string): number[] {
+  const set = new Set<number>(partidosDe(temporadaId).map((p) => p.split));
+  grupos.filter((g) => g.temporada === temporadaId).forEach((g) => set.add(g.split));
+  return [...set].sort((a, b) => a - b);
+}
+
+const partidosGrupo = (temporadaId: string, split: number) =>
+  partidosDe(temporadaId).filter((p) => p.split === split && p.fase === 'grupos');
+
+export type FilaClasificacion = {
+  club: string; pj: number; v: number; e: number; d: number; gf: number; gc: number; dif: number; pts: number; nuestro: boolean;
+};
+
+/** Tabla del grupo de un split: nuestros partidos de grupos + los resultados de los demás equipos. */
+export function clasificacion(temporadaId: string, split: number): FilaClasificacion[] {
+  const filas = new Map<string, FilaClasificacion>();
+  const fila = (club: string) => {
+    if (!filas.has(club)) filas.set(club, { club, pj: 0, v: 0, e: 0, d: 0, gf: 0, gc: 0, dif: 0, pts: 0, nuestro: club === nombreClub });
+    return filas.get(club)!;
+  };
+  const registrar = (a: string, ga: number, b: string, gb: number) => {
+    for (const [club, f, c] of [[a, ga, gb], [b, gb, ga]] as const) {
+      const x = fila(club);
+      x.pj++; x.gf += f; x.gc += c;
+      if (f > c) { x.v++; x.pts += PUNTOS_VICTORIA; }
+      else if (f === c) { x.e++; x.pts += PUNTOS_EMPATE; }
+      else x.d++;
+    }
+  };
+
+  for (const p of partidosGrupo(temporadaId, split).filter(jugado)) {
+    registrar(nombreClub, p.golesFavor!, p.rival, p.golesContra!);
+  }
+  for (const r of grupoDe(temporadaId, split)?.resultados ?? []) {
+    registrar(r.local, r.golesLocal, r.visitante, r.golesVisitante);
+  }
+
+  const lista = [...filas.values()];
+  lista.forEach((f) => (f.dif = f.gf - f.gc));
+  return lista.sort((a, b) => b.pts - a.pts || b.dif - a.dif || b.gf - a.gf || a.club.localeCompare(b.club));
+}
+
+export type PartidoJornada = {
+  local: string; visitante: string;
+  golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
+};
+
+/** Jornadas de la fase de grupos de un split, de la primera a la última. */
+export function jornadas(temporadaId: string, split: number) {
+  const mapa = new Map<number, PartidoJornada[]>();
+  const añadir = (n: number, m: Omit<PartidoJornada, 'nuestro'>) => {
+    if (!mapa.has(n)) mapa.set(n, []);
+    mapa.get(n)!.push({ ...m, nuestro: m.local === nombreClub || m.visitante === nombreClub });
+  };
+
+  for (const p of partidosGrupo(temporadaId, split).filter((p) => p.jornada)) {
+    const ok = jugado(p);
+    añadir(p.jornada!, {
+      local: p.local ? nombreClub : p.rival,
+      visitante: p.local ? p.rival : nombreClub,
+      golesLocal: ok ? (p.local ? p.golesFavor : p.golesContra) : null,
+      golesVisitante: ok ? (p.local ? p.golesContra : p.golesFavor) : null,
+    });
+  }
+  for (const r of (grupoDe(temporadaId, split)?.resultados ?? []).filter((r) => r.jornada)) {
+    añadir(r.jornada!, { local: r.local, visitante: r.visitante, golesLocal: r.golesLocal, golesVisitante: r.golesVisitante });
+  }
+
+  return [...mapa.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([numero, ps]) => ({ numero, partidos: ps.sort((a, b) => Number(b.nuestro) - Number(a.nuestro)) }));
+}
+
+export type EstadoPlayoff =
+  | { tipo: 'partido'; partido: Partido }   // hay partido de play-off (jugado o programado)
+  | { tipo: 'clasificado' }                 // entre los primeros, aún sin partido en los datos
+  | { tipo: 'no-clasificado' }
+  | { tipo: 'pendiente' };                  // la fase de grupos no ha terminado
+
+export function playoff(temporadaId: string, split: number): EstadoPlayoff {
+  const partido = partidosDe(temporadaId).find((p) => p.split === split && p.fase === 'playoff');
+  if (partido) return { tipo: 'partido', partido };
+  if (!grupoDe(temporadaId, split)?.grupoFinalizado) return { tipo: 'pendiente' };
+  const pos = clasificacion(temporadaId, split).findIndex((f) => f.nuestro) + 1;
+  return pos > 0 && pos <= PLAZAS_PLAYOFF ? { tipo: 'clasificado' } : { tipo: 'no-clasificado' };
+}
+
+export const portadaDe = (n: Noticia) => n.portada ?? n.fotos?.[0];
+export const fotoUrl = (n: Noticia, archivo: string) => url(`/noticias/${n.id}/${archivo}`);
+
+/** Noticias del carrusel: las marcadas como destacadas (máx. 5) o, si no hay ninguna, las 3 últimas. */
+export const destacadas = (max = 5) => {
+  const marcadas = noticias.filter((n) => n.destacada).slice(0, max);
+  return marcadas.length ? marcadas : noticias.slice(0, 3);
+};

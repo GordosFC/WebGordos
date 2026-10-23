@@ -1,7 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Partido from '../../components/Partido.astro';
-import { temporadas, partidosDe, balance, getJugador, statsJugador, url } from '../../lib/stats';
+import {
+  temporadas, partidosDe, balance, getJugador, statsJugador, url,
+  splitsDe, clasificacion, jornadas, playoff, PLAZAS_PLAYOFF,
+} from '../../lib/stats';
 
 export function getStaticPaths() {
   return temporadas.map((t) => ({ params: { id: t.id }, props: { t } }));
@@ -10,14 +13,86 @@ const { t } = Astro.props;
 const lista = partidosDe(t.id);
 const b = balance(lista);
 const plantilla = t.plantilla.map(getJugador);
+const splits = splitsDe(t.id);
 ---
 <Base titulo={t.nombre}>
   <h1>{t.nombre}</h1>
   <div class="cifras">
     <div class="cifra"><strong>{b.pj}</strong><span>Jugados</span></div>
     <div class="cifra"><strong>{b.v}-{b.e}-{b.d}</strong><span>V-E-D</span></div>
-    <div class="cifra"><strong>GF: {b.gf} – GC: {b.gc}</strong><span>Goles</span></div>
+    <div class="cifra"><strong>{b.gf}</strong><span>Goles a favor</span></div>
+    <div class="cifra"><strong>{b.gc}</strong><span>Goles en contra</span></div>
   </div>
+
+  {splits.map((s, i) => {
+    const tabla = clasificacion(t.id, s);
+    const js = jornadas(t.id, s).reverse();
+    const po = playoff(t.id, s);
+    return (
+      <details class="split" open={i === splits.length - 1}>
+        <summary>Split {s}</summary>
+
+        <h3>Fase de grupos</h3>
+        {tabla.length === 0 ? <p class="suave">Todavía no hay resultados.</p> : (
+          <>
+            <div class="tabla-wrap">
+              <table>
+                <thead><tr><th class="num">#</th><th>Club</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num">GF</th><th class="num">GC</th><th class="num">DIF</th><th class="num">PTS</th></tr></thead>
+                <tbody>
+                  {tabla.map((f, k) => (
+                    <tr class={`${f.nuestro ? 'nuestro' : ''} ${k < PLAZAS_PLAYOFF ? 'clasifica' : ''}`}>
+                      <td class="num">{k + 1}</td>
+                      <td>{f.club}</td>
+                      <td class="num">{f.pj}</td><td class="num">{f.v}</td><td class="num">{f.e}</td><td class="num">{f.d}</td>
+                      <td class="num">{f.gf}</td><td class="num">{f.gc}</td>
+                      <td class="num">{f.dif > 0 ? `+${f.dif}` : f.dif}</td>
+                      <td class="num"><strong>{f.pts}</strong></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="suave leyenda">Marca verde: puestos que clasifican para el play-off.</p>
+          </>
+        )}
+
+        {js.length > 0 && (
+          <>
+            <h3>Jornadas</h3>
+            {js.map((j, k) => (
+              <details class="jornada" open={k === 0}>
+                <summary>Jornada {j.numero}</summary>
+                <div class="tabla-wrap">
+                  <table>
+                    <tbody>
+                      {j.partidos.map((m) => (
+                        <tr class={m.nuestro ? 'nuestro' : ''}>
+                          <td class="der">{m.local}</td>
+                          <td class="marcador">{m.golesLocal ?? '–'} – {m.golesVisitante ?? '–'}</td>
+                          <td>{m.visitante}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            ))}
+          </>
+        )}
+
+        <h3>Play-off de ascenso</h3>
+        {po.tipo === 'partido' && (
+          <>
+            <Partido p={po.partido} />
+            {po.partido.nota && <p class="suave">{po.partido.nota}</p>}
+          </>
+        )}
+        {po.tipo === 'clasificado' && <p>Clasificados. El partido todavía no está programado.</p>}
+        {po.tipo === 'no-clasificado' && <p><strong>No clasificado</strong></p>}
+        {po.tipo === 'pendiente' && <p class="suave">Se decide al terminar la fase de grupos: clasifican los {PLAZAS_PLAYOFF} primeros.</p>}
+      </details>
+    );
+  })}
 
   <h2>Plantilla</h2>
   <div class="tabla-wrap">
@@ -25,14 +100,14 @@ const plantilla = t.plantilla.map(getJugador);
       <thead><tr><th class="num">#</th><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
         {plantilla.map((j) => {
-          const s = statsJugador(j.id, lista);
+          const st = statsJugador(j.id, lista);
           return (
             <tr>
               <td class="num">{j.dorsal}</td>
               <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
               <td>{j.posicion}</td>
-              <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
-              <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+              <td class="num">{st.pj}</td><td class="num">{st.goles}</td>
+              <td class="num">{st.asistencias}</td><td class="num">{st.mvp}</td>
             </tr>
           );
         })}
@@ -40,6 +115,19 @@ const plantilla = t.plantilla.map(getJugador);
     </table>
   </div>
 
-  <h2>Partidos</h2>
+  <h2>Todos los partidos</h2>
   <div>{[...lista].reverse().map((p) => <Partido p={p} />)}</div>
 </Base>
+
+<style>
+  details.split { margin: 1.5rem 0; border-top: 2px solid var(--cesped-claro); }
+  details.split > summary { cursor: pointer; font-size: 1.5rem; font-weight: 800; padding: 0.6rem 0; }
+  h3 { margin: 1.4rem 0 0.6rem; font-size: 1.1rem; }
+  details.jornada { margin-bottom: 0.5rem; }
+  details.jornada summary { cursor: pointer; font-weight: 700; padding: 0.4rem 0; }
+  td.der { text-align: right; }
+  td.marcador { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+  tr.nuestro td { background: color-mix(in srgb, var(--superficie) 80%, var(--amarilla)); font-weight: 600; }
+  tr.clasifica td:first-child { box-shadow: inset 4px 0 0 var(--cesped-claro); }
+  .leyenda { font-size: 0.85rem; margin: 0.4rem 0 0; }
+</style>

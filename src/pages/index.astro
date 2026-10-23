@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Partido from '../components/Partido.astro';
-import NoticiaItem from '../components/NoticiaItem.astro';
-import { partidos, balance, ranking, ultimosPartidos, proximoPartido, fecha, url, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
+import Carrusel from '../components/Carrusel.astro';
+import { partidos, balance, ranking, ultimosPartidos, proximoPartido, fecha, url, nombreClub, etiquetaPartido, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
 
 const b = balance(partidos);
 const proximo = proximoPartido();
@@ -10,14 +10,14 @@ const gala = galaAbierta();
 const goleadores = ranking('goles', partidos, 3);
 ---
 <Base>
-  <h1>Gordos FC</h1>
+  <h1>{nombreClub}</h1>
   <p class="suave">Resultados, plantillas y estadísticas de todas las temporadas.</p>
 
   {proximo && (
     <section class="proximo">
       <p>Próximo partido</p>
       <h2>{proximo.local ? 'Nosotros' : proximo.rival} vs {proximo.local ? proximo.rival : 'Nosotros'}</h2>
-      <p>{fecha(proximo.fecha)} · {proximo.competicion}</p>
+      <p>{fecha(proximo.fecha)} · {etiquetaPartido(proximo)}</p>
     </section>
   )}
 
@@ -27,8 +27,8 @@ const goleadores = ranking('goles', partidos, 3);
     </a>
   )}
 
-  <h2>Noticias recientes</h2>
-  <div>{noticias.slice(0, 3).map((n) => <NoticiaItem n={n} />)}</div>
+  <h2>Noticias destacadas</h2>
+  <Carrusel />
   <p><a href={url('/noticias/')}>Ver todas las noticias</a></p>
 
   <h2>Balance histórico</h2>

@@ -1,8 +1,7 @@
 ---
-import { url } from '../lib/stats';
+import { url, nombreClub } from '../lib/stats';
 interface Props { titulo?: string }
 const { titulo } = Astro.props;
-const nombreClub = 'Gordos FC';
 const nav = [
   ['Inicio', '/'],
   ['Noticias', '/noticias/'],
@@ -39,16 +38,16 @@ const nav = [
 
 <style is:global>
   :root {
-    --fondo: #f1f4f0;          /* fondo de la página */
-    --superficie: #ffffff;     /* tarjetas y tablas */
+    --fondo: #fdf5c5;          /* fondo de la página */
+    --superficie: #f2f1ea;     /* tarjetas y tablas */
     --texto: #17211b;
     --suave: #5d6b62;          /* texto secundario */
     --linea: #d5ddd6;          /* bordes */
-    --cesped: #fdf5c5;         /* cabecera y banner de próximo partido */
-    --enlaces: #f1f123;        /* enlaces */
+    --cesped: #211e12;         /* cabecera y banner de próximo partido */
+    --enlaces: #867108;        /* enlaces */
     --victoria: #49e913;        /* victorias */
     --destacado: #f1c40f;       /* acentos (gala, foco al navegar) */
-    --fichaje: #c16f17;        /* fichaje en inicio */
+    --cesped-claro: #3e3307;        /* fichaje en inicio */
     --derrota: #d43939;           /* derrotas */
     color-scheme: light dark;
   }
@@ -59,8 +58,8 @@ const nav = [
       --texto: #f0efea; 
       --suave: #a3a293;
       --linea: #37362a;
-      --cesped: #23241f;
-      --enlaces: #dab318;
+      --cesped: #252418;
+      --enlaces: #f1f123;
     }
   }
   * { box-sizing: border-box; }

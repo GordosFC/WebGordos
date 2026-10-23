@@ -1,11 +1,13 @@
 ---
-import { type Noticia, etiquetaTipo, fecha, url } from '../lib/stats';
+import { type Noticia, etiquetaTipo, fecha, url, portadaDe, fotoUrl } from '../lib/stats';
 interface Props { n: Noticia }
 const { n } = Astro.props;
+const portada = portadaDe(n);
 ---
 <a class="noticia" href={url(`/noticias/${n.id}/`)}>
-  <span class={`tipo ${n.tipo}`}>{etiquetaTipo[n.tipo]}</span>
+  {portada && <img src={fotoUrl(n, portada)} alt="" loading="lazy" />}
   <span class="cuerpo">
+    <span class={`tipo ${n.tipo}`}>{etiquetaTipo[n.tipo]}</span>
     <strong>{n.titulo}</strong>
     <span>{n.resumen}</span>
     <small>{fecha(n.fecha)}</small>
@@ -18,10 +20,12 @@ const { n } = Astro.props;
     padding: 0.8rem 0.9rem; background: var(--superficie); border: 1px solid var(--linea);
     color: inherit; text-decoration: none; margin-bottom: -1px;
   }
-  .noticia:hover { background: color-mix(in srgb, var(--superficie) 90%, var(--cesped-claro)); }
-  .cuerpo { display: flex; flex-direction: column; gap: 0.1rem; }
+  .noticia:hover { background: color-mix(in srgb, var(--superficie) 90%, var(--destacado)); }
+  img { width: 9rem; aspect-ratio: 3 / 2; object-fit: cover; flex-shrink: 0; background: var(--linea); }
+  @media (max-width: 30rem) { img { width: 6rem; } }
+  .cuerpo { display: flex; flex-direction: column; gap: 0.15rem; align-items: flex-start; min-width: 0; }
   small { color: var(--suave); }
-  .tipo { font-size: 0.8rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--linea); color: var(--texto); flex-shrink: 0; }
-  .tipo.fichaje { background: var(--fichaje); color: #fff; }
+  .tipo { font-size: 0.8rem; font-weight: 700; padding: 0.1rem 0.5rem; background: var(--linea); color: var(--texto); }
+  .tipo.fichaje { background: var(--cesped-claro); color: #fff; }
   .tipo.premio { background: var(--destacado); color: #17211b; }
 </style>

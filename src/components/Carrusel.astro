@@ -1,0 +1,99 @@
+---
+import { etiquetaTipo, url, portadaDe, fotoUrl, destacadas } from '../lib/stats';
+const lista = destacadas();
+---
+{lista.length > 0 && (
+  <section class="carrusel" data-carrusel aria-roledescription="carrusel" aria-label="Noticias destacadas">
+    <div class="pista" tabindex="0">
+      {lista.map((n, i) => {
+        const portada = portadaDe(n);
+        return (
+          <a class="slide" href={url(`/noticias/${n.id}/`)}>
+            {portada && <img src={fotoUrl(n, portada)} alt="" loading={i === 0 ? 'eager' : 'lazy'} />}
+            <span class="texto">
+              <span class={`tipo ${n.tipo}`}>{etiquetaTipo[n.tipo]}</span>
+              <strong class="titular">{n.titulo}</strong>
+              <span class="resumen">{n.resumen}</span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+    {lista.length > 1 && (
+      <>
+        <button type="button" class="flecha ant" aria-label="Noticia anterior">‹</button>
+        <button type="button" class="flecha sig" aria-label="Noticia siguiente">›</button>
+        <div class="puntos">
+          {lista.map((_, i) => <button type="button" class="punto" aria-label={`Ir a la noticia ${i + 1}`}></button>)}
+        </div>
+      </>
+    )}
+  </section>
+)}
+
+<style>
+  .carrusel { position: relative; background: var(--cesped); }
+  .pista {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .pista::-webkit-scrollbar { display: none; }
+  .slide {
+    position: relative; flex: 0 0 100%; scroll-snap-align: start;
+    height: clamp(15rem, 45vw, 26rem); display: block; color: #fff; text-decoration: none;
+    background: linear-gradient(135deg, var(--cesped), var(--cesped-claro));
+  }
+  .slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .texto {
+    position: absolute; inset: auto 0 0 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem;
+    padding: 3rem 1.2rem 1.6rem; padding-right: 5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+  }
+  .titular { font-size: clamp(1.25rem, 4vw, 2rem); line-height: 1.1; letter-spacing: -0.01em; }
+  .resumen { max-width: 46rem; opacity: 0.92; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .tipo { font-size: 0.8rem; font-weight: 700; padding: 0.1rem 0.5rem; background: #fff; color: #17211b; }
+  .tipo.fichaje { background: var(--cesped-claro); color: #fff; }
+  .tipo.premio { background: var(--destacado); color: #17211b; }
+
+  /* Flechas y puntos: solo se muestran si hay JavaScript (si no, se desliza con el dedo/rueda) */
+  .flecha, .puntos { display: none; }
+  .carrusel.js .flecha {
+    display: grid; place-items: center; position: absolute; top: 40%; transform: translateY(-50%);
+    width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%; cursor: pointer;
+    background: rgba(0, 0, 0, 0.5); color: #fff; font-size: 1.8rem; line-height: 1; padding: 0 0 0.2rem;
+  }
+  .flecha:hover { background: rgba(0, 0, 0, 0.8); }
+  .flecha.ant { left: 0.6rem; }
+  .flecha.sig { right: 0.6rem; }
+  .carrusel.js .puntos { display: flex; gap: 0.45rem; position: absolute; right: 1.1rem; bottom: 1.2rem; }
+  .punto { width: 0.65rem; height: 0.65rem; padding: 0; border: 0; border-radius: 50%; cursor: pointer; background: rgba(255, 255, 255, 0.5); }
+  .punto.activo { background: #fff; transform: scale(1.25); }
+  .flecha:focus-visible, .punto:focus-visible, .pista:focus-visible { outline: 3px solid var(--destacado); outline-offset: 2px; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carrusel]').forEach((root) => {
+    const pista = root.querySelector<HTMLElement>('.pista')!;
+    const total = pista.children.length;
+    const puntos = root.querySelectorAll<HTMLButtonElement>('.punto');
+    const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.classList.add('js');
+
+    const actual = () => Math.round(pista.scrollLeft / pista.clientWidth);
+    const ir = (i: number) =>
+      pista.scrollTo({ left: ((i + total) % total) * pista.clientWidth, behavior: reducir ? 'auto' : 'smooth' });
+    const marcar = () => {
+      const a = actual();
+      puntos.forEach((p, i) => p.classList.toggle('activo', i === a));
+    };
+
+    root.querySelector('.ant')?.addEventListener('click', () => ir(actual() - 1));
+    root.querySelector('.sig')?.addEventListener('click', () => ir(actual() + 1));
+    puntos.forEach((p, i) => p.addEventListener('click', () => ir(i)));
+    pista.addEventListener('scroll', () => requestAnimationFrame(marcar), { passive: true });
+    pista.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); ir(actual() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); ir(actual() - 1); }
+    });
+    marcar();
+  });
+</script>
