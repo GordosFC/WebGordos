@@ -1,6 +1,4 @@
 [
-  { "id": "2022-23", "nombre": "Temporada 2022/23", "plantilla": ["calle", "muelsa", "janto", "nivo"] },
-  { "id": "2024-25", "nombre": "Temporada 2024/25", "plantilla": ["calle", "muelsa", "janto", "nivo"] },
-  { "id": "2025-26", "nombre": "Temporada 2025/26", "plantilla": ["calle", "muelsa", "janto", "nivo", "alegre"] },
-  { "id": "2026-27", "nombre": "Temporada 2026/27", "plantilla": ["calle", "muelsa", "janto", "nivo"], "apoyo": ["alegre"], "splitActual": 1 }
+  { "id": "2022-23", "nombre": "Temporada 2022/23", "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "nacho", "jaime", "eloy", "barbas", "jivo", "puch", "tomas", "manu", "pomo", "fran", "nivo"], "apoyo": ["andres"] },
+  { "id": "2026-27", "nombre": "Temporada 2026/27", "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "alegre", "puch", "pipa", "delmo", "davo", "jivo", "pelayo", "llanty"], "splitActual": 1 }
 ]

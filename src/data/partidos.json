@@ -1,156 +1,123 @@
 [
   {
-    "id": "2024-25-01",
-    "temporada": "2024-25",
-    "split": 1,
-    "fase": "grupos",
-    "jornada": 1,
-    "fecha": "2024-10-05",
-    "rival": "Los Galácticos",
-    "local": true,
-    "golesFavor": 3,
-    "golesContra": 1,
-    "cronica": "Debut con victoria. Juan se marcó un doblete y Pablo no dejó pasar ni el aire.",
-    "apariciones": [
-      {
-        "jugador": "calle",
-        "goles": 2,
-        "mvp": true
-      },
-      {
-        "jugador": "nivo",
-        "goles": 1
-      },
-      {
-        "jugador": "janto",
-        "amarillas": 1
-      },
-      {
-        "jugador": "muelsa"
-      }
-    ]
-  },
-  {
-    "id": "2024-25-02",
-    "temporada": "2024-25",
-    "split": 1,
-    "fase": "grupos",
-    "jornada": 2,
-    "fecha": "2024-10-19",
-    "rival": "Deportivo Bar Paco",
-    "local": false,
-    "golesFavor": 1,
-    "golesContra": 1,
-    "apariciones": [
-      {
-        "jugador": "muelsa",
-        "goles": 1
-      },
-      {
-        "jugador": "calle",
-        "amarillas": 1
-      },
-      {
-        "jugador": "nivo"
-      },
-      {
-        "jugador": "janto",
-        "mvp": true
-      }
-    ]
-  },
-  {
-    "id": "2024-25-03",
-    "temporada": "2024-25",
-    "split": 1,
-    "fase": "playoff",
-    "fecha": "2024-11-09",
-    "rival": "Los Halcones",
-    "local": true,
-    "golesFavor": 2,
-    "golesContra": 1,
-    "nota": "Partido único de play-off de ascenso.",
-    "apariciones": [
-      {
-        "jugador": "nivo",
-        "goles": 1
-      },
-      {
-        "jugador": "muelsa",
-        "goles": 1
-      },
-      {
-        "jugador": "janto"
-      },
-      {
-        "jugador": "calle"
-      }
-    ]
-  },
-  {
-    "id": "2024-25-04",
-    "temporada": "2024-25",
+    "id": "2023-19-02",
+    "temporada": "2022-23",
     "split": 2,
     "fase": "grupos",
     "jornada": 1,
-    "fecha": "2025-01-18",
-    "rival": "Atlético Resaca",
+    "fecha": "2023-19-02",
+    "rival": "Marino",
     "local": true,
-    "golesFavor": 0,
-    "golesContra": 2,
-    "cronica": "Mala tarde. Lo mejor fue la cerveza de después.",
+    "golesFavor": 1,
+    "golesContra": 10,
+    "cronica": "Nos humilló Pupu en el debut de Gordos FC. Golazo de Loy el Leon (y único en su historia).",
     "apariciones": [
       {
-        "jugador": "nivo"
+        "jugador": "eloy",
+        "goles": 1,
+        "mvp": true
       },
-      {
-        "jugador": "calle"
-      },
-      {
-        "jugador": "muelsa"
-      },
-      {
-        "jugador": "janto"
-      }
+      {"jugador": "jivo"}, {"jugador": "calle"}, {"jugador": "jaime"}, {"jugador": "muelsa"}, {"jugador": "puch"}, {"jugador": "iyan"},
+      {"jugador": "alvaro"}, {"jugador": "nacho"}, {"jugador": "fran"}
     ]
   },
   {
-    "id": "2025-26-01",
-    "temporada": "2025-26",
-    "split": 1,
-    "fase": "grupos",
-    "jornada": 1,
-    "fecha": "2025-10-04",
-    "rival": "Atlético Resaca",
-    "local": true,
-    "golesFavor": 0,
-    "golesContra": 2,
-    "apariciones": [
-      {
-        "jugador": "janto"
-      },
-      {
-        "jugador": "nivo"
-      },
-      {
-        "jugador": "calle"
-      },
-      {
-        "jugador": "muelsa"
-      }
-    ]
-  },
-  {
-    "id": "2025-26-02",
-    "temporada": "2025-26",
-    "split": 1,
+    "id": "2023-26-02",
+    "temporada": "2022-23",
+    "split": 2,
     "fase": "grupos",
     "jornada": 2,
-    "fecha": "2026-01-10",
-    "rival": "Real Sofá",
-    "local": false,
+    "fecha": "2023-26-02",
+    "rival": "Nothingam Prisa",
+    "local": true,
     "golesFavor": 3,
     "golesContra": 2,
-    "apariciones": []
+    "cronica": "Primera victoria de la historia de Gordos con un partidazo muy ajustado",
+    "apariciones": [
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "nacho",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "alvaro"}, {"jugador": "pomo"}, {"jugador": "tomas"}, {"jugador": "puch"}, {"jugador": "jaime"}, {"jugador": "fran"},
+      {"jugador": "calle"}
+    ]
+  },
+  {
+    "id": "2023-19-03",
+    "temporada": "2022-23",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "2023-19-03",
+    "rival": "Max Center",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "manu",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "nivo"}, {"jugador": "pomo"}, {"jugador": "iyan"}, {"jugador": "fran"},
+      {"jugador": "muelsa"}, {"jugador": "andres"}, {"jugador": "janto"}
+    ]
+  },
+  {
+    "id": "2023-26-03",
+    "temporada": "2022-23",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "2023-26-03",
+    "rival": "FC Pelota",
+    "local": true,
+    "golesFavor": 18,
+    "golesContra": 1,
+    "apariciones": [
+      {
+        "jugador": "muelsa",
+        "goles": 4,
+        "mvp": true
+      },
+      {
+        "jugador": "iyan",
+        "goles": 3
+      },
+      {
+        "jugador": "fran",
+        "goles": 3
+      },
+      {
+        "jugador": "janto",
+        "goles": 3
+      },
+      {
+        "jugador": "manu",
+        "goles": 2
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "jivo",
+        "goles": 1
+      },
+      {
+        "jugador": "jaime",
+        "goles": 1
+      },
+      {"jugador": "nivo"}, {"jugador": "pomo"}, {"jugador": "tomas"}, {"jugador": "puch"}
+    ]
   }
 ]

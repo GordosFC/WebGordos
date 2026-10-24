@@ -1,6 +1,6 @@
 [
   { "id": "calle",   "nombre": "Calle Janolo",   "apodo": "Calle",  "dorsal": 9, "posicion": "Delantero" },
-  { "id": "muelsa",  "nombre": "Muelsa el Gitano",   "apodo": "Muelsa",  "dorsal": 69,  "posicion": "Defensa" },
+  { "id": "muelsa",  "nombre": "Muelsa el Gitano",   "apodo": "Muelsa",  "dorsal": 69,  "posicion": "Defensa/Delantero" },
   { "id": "janto", "nombre": "Toni el Flaco",  "apodo": "La bala Gonzalez",   "dorsal": 77,  "posicion": "Delantero" },
   { "id": "nivo",   "nombre": "Nivo el Pirata",   "apodo": "Potivo",    "dorsal": 3,  "posicion": "Mediocentro" },
   { "id": "iyan",   "nombre": "Iyán el de la India",   "apodo": "Iyanon",    "dorsal": 5,  "posicion": "Defensa" },
@@ -17,5 +17,11 @@
   { "id": "alvaro",   "nombre": "Vox el Facha",   "apodo": "Alvarovox",    "dorsal": 25,  "posicion": "Portero/Defensa" },
   { "id": "jaime",   "nombre": "Jaimoto la Moto",   "apodo": "Jaimoto",    "dorsal": 7,  "posicion": "Delantero" },
   { "id": "pipa",   "nombre": "Pipa el Pro",   "apodo": "Paip",    "dorsal": 1,  "posicion": "Portero" },
-  { "id": "alegre",   "nombre": "Alegre el Triste",   "apodo": "Alegrías",  "dorsal": 17, "posicion": "Delantero" }
+  { "id": "alegre",   "nombre": "Alegre el Triste",   "apodo": "Alegrías",  "dorsal": 17, "posicion": "Delantero" },
+  { "id": "nacho",   "nombre": "Nacho Pistacho",   "apodo": "Nacho",    "dorsal": 66,  "posicion": "Mediocentro" },
+  { "id": "manu",   "nombre": "Manu Cocodrilo",   "apodo": "Manufercal",    "dorsal": 11,  "posicion": "Delantero" },
+  { "id": "tomas",   "nombre": "Tomás el Petardo",   "apodo": "MiniPuch",  "dorsal": 28, "posicion": "Defensa/Portero" },
+  { "id": "andres",   "nombre": "Andrés el Lagarto",   "apodo": "Andrew",  "dorsal": 45, "posicion": "Defensa/Mediocentro" },
+  { "id": "eloy",   "nombre": "Loy el León",   "apodo": "Pajaloy",  "dorsal": 4, "posicion": "Banda" },
+  { "id": "barbas",   "nombre": "Plavo el Yonki",   "apodo": "Pableras/Barbas",  "dorsal": 97, "posicion": "No lo sabe ni el " }
 ]
