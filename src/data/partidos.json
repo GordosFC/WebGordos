@@ -13,21 +13,21 @@
     "cronica": "Debut con victoria. Juan se marcó un doblete y Pablo no dejó pasar ni el aire.",
     "apariciones": [
       {
-        "jugador": "juan",
+        "jugador": "calle",
         "goles": 2,
         "mvp": true
       },
       {
-        "jugador": "marcos",
+        "jugador": "nivo",
         "goles": 1,
         "asistencias": 1
       },
       {
-        "jugador": "pablo",
+        "jugador": "janto",
         "amarillas": 1
       },
       {
-        "jugador": "luis"
+        "jugador": "muelsa"
       }
     ]
   },
@@ -44,19 +44,19 @@
     "golesContra": 1,
     "apariciones": [
       {
-        "jugador": "juan",
+        "jugador": "muelsa",
         "goles": 1
       },
       {
-        "jugador": "marcos",
+        "jugador": "calle",
         "asistencias": 1,
         "amarillas": 1
       },
       {
-        "jugador": "pablo"
+        "jugador": "nivo"
       },
       {
-        "jugador": "luis",
+        "jugador": "janto",
         "mvp": true
       }
     ]
@@ -74,18 +74,18 @@
     "nota": "Partido único de play-off de ascenso.",
     "apariciones": [
       {
-        "jugador": "juan",
+        "jugador": "nivo",
         "goles": 1
       },
       {
-        "jugador": "marcos",
+        "jugador": "muelsa",
         "goles": 1
       },
       {
-        "jugador": "pablo"
+        "jugador": "janto"
       },
       {
-        "jugador": "luis"
+        "jugador": "calle"
       }
     ]
   },
@@ -103,17 +103,17 @@
     "cronica": "Mala tarde. Lo mejor fue la cerveza de después.",
     "apariciones": [
       {
-        "jugador": "juan"
+        "jugador": "nivo"
       },
       {
-        "jugador": "marcos"
+        "jugador": "calle"
       },
       {
-        "jugador": "pablo",
+        "jugador": "muelsa",
         "rojas": 1
       },
       {
-        "jugador": "luis"
+        "jugador": "janto"
       }
     ]
   },
@@ -130,16 +130,16 @@
     "golesContra": 2,
     "apariciones": [
       {
-        "jugador": "juan"
+        "jugador": "janto"
       },
       {
-        "jugador": "marcos"
+        "jugador": "nivo"
       },
       {
-        "jugador": "pablo"
+        "jugador": "calle"
       },
       {
-        "jugador": "luis"
+        "jugador": "muelsa"
       }
     ]
   },

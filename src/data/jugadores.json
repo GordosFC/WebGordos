@@ -1,6 +1,21 @@
 [
-  { "id": "juan",   "nombre": "Juan Pérez",   "apodo": "Juanito",  "dorsal": 10, "posicion": "Delantero" },
-  { "id": "pablo",  "nombre": "Pablo Ruiz",   "apodo": "El Muro",  "dorsal": 4,  "posicion": "Defensa" },
-  { "id": "marcos", "nombre": "Marcos Díaz",  "apodo": "Marqui",   "dorsal": 8,  "posicion": "Centrocampista" },
-  { "id": "luis",   "nombre": "Luis Gómez",   "apodo": "Lucho",    "dorsal": 1,  "posicion": "Portero" }
+  { "id": "calle",   "nombre": "Calle Janolo",   "apodo": "Calle",  "dorsal": 9, "posicion": "Delantero" },
+  { "id": "muelsa",  "nombre": "Muelsa el Gitano",   "apodo": "Muelsa",  "dorsal": 69,  "posicion": "Defensa" },
+  { "id": "janto", "nombre": "Toni el Flaco",  "apodo": "La bala Gonzalez",   "dorsal": 77,  "posicion": "Delantero" },
+  { "id": "nivo",   "nombre": "Nivo el Pirata",   "apodo": "Potivo",    "dorsal": 3,  "posicion": "Mediocentro" },
+  { "id": "iyan",   "nombre": "Iyán el de la India",   "apodo": "Iyanon",    "dorsal": 5,  "posicion": "Defensa" },
+  { "id": "fran",   "nombre": "Frán el de la India",   "apodo": "Franin",    "dorsal": 90,  "posicion": "Mediocentro" },
+  { "id": "jivo",   "nombre": "Jivo el Ladrón",   "apodo": "Ampeter",  "dorsal": 15, "posicion": "Delantero" },
+  { "id": "puch",  "nombre": "Puch la Bomba",   "apodo": "Pounch",  "dorsal": 14,  "posicion": "Defensa" },
+  { "id": "pelayo", "nombre": "Pelayo Caproco",  "apodo": "Pelayo",   "dorsal": 33,  "posicion": "Mediocentro" },
+  { "id": "chala",   "nombre": "Chala Boyón",   "apodo": "Gordo",    "dorsal": 10,  "posicion": "Defensa" },
+  { "id": "davo",   "nombre": "Davo el Bicicletero",   "apodo": "Davota",    "dorsal": 98,  "posicion": "Portero/Defensa" },
+  { "id": "delmo",   "nombre": "Delmo el Tiktoker",   "apodo": "Delmoral",    "dorsal": 11,  "posicion": "Delantero" },
+  { "id": "llanty",   "nombre": "Llanty Crack",   "apodo": "Llanty",  "dorsal": 16, "posicion": "Defensa" },
+  { "id": "pomo",  "nombre": "Pomo",   "apodo": "Pomo",  "dorsal": 0,  "posicion": "Portero" },
+  { "id": "sergio", "nombre": "Sergio Vallalodit",  "apodo": "Pucelano",   "dorsal": 21,  "posicion": "Defensa" },
+  { "id": "alvaro",   "nombre": "Vox el Facha",   "apodo": "Alvarovox",    "dorsal": 25,  "posicion": "Portero/Defensa" },
+  { "id": "jaime",   "nombre": "Jaimoto la Moto",   "apodo": "Jaimoto",    "dorsal": 7,  "posicion": "Delantero" },
+  { "id": "pipa",   "nombre": "Pipa el Pro",   "apodo": "Paip",    "dorsal": 1,  "posicion": "Portero" },
+  { "id": "alegre",   "nombre": "Alegre el Triste",   "apodo": "Alegrías",  "dorsal": 17, "posicion": "Delantero" }
 ]

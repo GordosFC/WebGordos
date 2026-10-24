@@ -3,31 +3,32 @@
     "temporada": "2024-25",
     "estado": "entregados",
     "categorias": [
-      { "id": "mejor-jugador", "nombre": "Mejor jugador",
-        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": "juan" },
-      { "id": "mejor-portero", "nombre": "Mejor portero",
-        "nominados": [{ "jugador": "luis" }], "ganador": "luis" },
-      { "id": "maximo-goleador", "nombre": "Máximo goleador",
-        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": "juan" },
-      { "id": "mejor-gol", "nombre": "Mejor gol",
+      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
+        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
+        { "jugador": "janto" }, { "jugador": "llanty" }, { "jugador": "pelayo" }, { "jugador": "delmo" }], "ganador": "iyan" },
+      { "id": "mejor-portero", "nombre": "Pizza de oro",
+        "nominados": [{ "jugador": "pomo" }, { "jugador": "alvaro" }], "ganador": "alvaro" },
+      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
+        "nominados": [], "ganador": "janto" },
+      { "id": "mejor-gol", "nombre": "Guindilla de oro",
         "nominados": [
-          { "jugador": "marcos", "detalle": "Disparo desde fuera del área ante Los Galácticos" },
-          { "jugador": "juan", "detalle": "Chilena en Bar Paco" }
-        ], "ganador": "marcos" }
+          { "jugador": "jivo", "detalle": "Control implacable y voleazo por la escuadra" }
+        ], "ganador": "jivo" }
     ]
   },
   {
     "temporada": "2025-26",
     "estado": "votaciones",
     "categorias": [
-      { "id": "mejor-jugador", "nombre": "Mejor jugador",
-        "nominados": [{ "jugador": "juan" }, { "jugador": "pablo" }, { "jugador": "marcos" }], "ganador": null },
-      { "id": "mejor-portero", "nombre": "Mejor portero",
-        "nominados": [{ "jugador": "luis" }], "ganador": null },
-      { "id": "maximo-goleador", "nombre": "Máximo goleador",
-        "nominados": [{ "jugador": "juan" }, { "jugador": "marcos" }], "ganador": null },
-      { "id": "mejor-gol", "nombre": "Mejor gol",
-        "nominados": [{ "jugador": "juan", "detalle": "Describe aquí el gol" }], "ganador": null }
+      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
+        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
+        { "jugador": "muelsa" }, { "jugador": "pipa" }, { "jugador": "pelayo" }, { "jugador": "sergio" }], "ganador": null },
+      { "id": "mejor-portero", "nombre": "Pizza de oro",
+        "nominados": [{ "jugador": "pomo" }, { "jugador": "pipa" }], "ganador": null },
+      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
+        "nominados": [], "ganador": null },
+      { "id": "mejor-gol", "nombre": "Guindilla de oro",
+        "nominados": [{ "jugador": "nivo" }, { "jugador": "calle" }, { "jugador": "janto" }], "ganador": null }
     ]
   }
 ]

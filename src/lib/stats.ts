@@ -121,7 +121,7 @@ export const galaAbierta = () => galas.find((g) => g.estado === 'votaciones');
 // ---------- Splits, grupos y play-off ----------
 import rawGrupos from '../data/grupos.json';
 
-export const nombreClub = 'Gordos FC';
+export const nombreClub = 'Gordos FC'
 export const PLAZAS_PLAYOFF = 2;              // clasifican los N primeros de cada grupo
 const PUNTOS_VICTORIA = 3;
 const PUNTOS_EMPATE = 1;
@@ -181,6 +181,7 @@ export function clasificacion(temporadaId: string, split: number): FilaClasifica
 export type PartidoJornada = {
   local: string; visitante: string;
   golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
+  goleadores?: { nombre: string; goles: number }[]; // solo en nuestros partidos
 };
 
 /** Jornadas de la fase de grupos de un split, de la primera a la última. */
@@ -198,6 +199,12 @@ export function jornadas(temporadaId: string, split: number) {
       visitante: p.local ? p.rival : nombreClub,
       golesLocal: ok ? (p.local ? p.golesFavor : p.golesContra) : null,
       golesVisitante: ok ? (p.local ? p.golesContra : p.golesFavor) : null,
+      goleadores: ok
+        ? p.apariciones
+            .filter((a) => (a.goles ?? 0) > 0)
+            .sort((a, b) => b.goles! - a.goles!)
+            .map((a) => ({ nombre: getJugador(a.jugador).nombre, goles: a.goles! }))
+        : [],
     });
   }
   for (const r of (grupoDe(temporadaId, split)?.resultados ?? []).filter((r) => r.jornada)) {
