@@ -19,8 +19,7 @@
       },
       {
         "jugador": "nivo",
-        "goles": 1,
-        "asistencias": 1
+        "goles": 1
       },
       {
         "jugador": "janto",
@@ -49,7 +48,6 @@
       },
       {
         "jugador": "calle",
-        "asistencias": 1,
         "amarillas": 1
       },
       {
@@ -109,8 +107,7 @@
         "jugador": "calle"
       },
       {
-        "jugador": "muelsa",
-        "rojas": 1
+        "jugador": "muelsa"
       },
       {
         "jugador": "janto"
@@ -149,11 +146,11 @@
     "split": 1,
     "fase": "grupos",
     "jornada": 2,
-    "fecha": "2027-01-10",
+    "fecha": "2026-01-10",
     "rival": "Real Sofá",
     "local": false,
-    "golesFavor": null,
-    "golesContra": null,
+    "golesFavor": 3,
+    "golesContra": 2,
     "apariciones": []
   }
 ]

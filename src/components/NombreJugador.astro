@@ -1,0 +1,17 @@
+---
+import { getJugador, rolDe, url } from '../lib/stats';
+interface Props { id: string; enlace?: boolean }
+const { id, enlace = true } = Astro.props;
+const j = getJugador(id);
+const rol = rolDe(id);
+---
+{enlace ? <a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a> : <span>{j.nombre}</span>}{rol && <abbr class={`brazalete ${rol}`} title={rol === 'capitan' ? 'Capitán' : 'Subcapitán'}>{rol === 'capitan' ? 'C' : 'SC'}</abbr>}
+
+<style>
+  .brazalete {
+    display: inline-block; margin-left: 0.4rem; padding: 0 0.35rem; vertical-align: middle;
+    font-size: 0.7rem; font-weight: 800; line-height: 1.4; text-decoration: none; cursor: help;
+    border: 1.5px solid var(--destacado); color: var(--texto);
+  }
+  .brazalete.capitan { background: var(--destacado); color: #17211b; }
+</style>

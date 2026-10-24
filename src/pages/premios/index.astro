@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { galas, getJugador, nombreTemporada, url } from '../../lib/stats';
+import NombreJugador from '../../components/NombreJugador.astro';
+import { galas, nombreTemporada, rankingPremio, statsJugador, partidosDe } from '../../lib/stats';
+
+const unidades = { puntos: ['punto', 'puntos'], goles: ['gol', 'goles'] } as const;
 ---
 <Base titulo="Premios">
   <h1>Gala de premios</h1>
@@ -11,26 +14,48 @@ import { galas, getJugador, nombreTemporada, url } from '../../lib/stats';
         {g.estado === 'votaciones' && <span class="abierta">Votaciones abiertas</span>}
       </h2>
       <div class="categorias">
-        {g.categorias.map((c) => (
-          <article class="categoria">
-            <h3>{c.nombre}</h3>
-            {c.ganador ? (
-              <p class="ganador">
-                🏆 <a href={url(`/jugadores/${c.ganador}/`)}>{getJugador(c.ganador).nombre}</a>
-              </p>
-            ) : (
-              <p class="suave">Ganador por decidir</p>
-            )}
-            <ul>
-              {c.nominados.map((nom) => (
-                <li class={nom.jugador === c.ganador ? 'gana' : ''}>
-                  <a href={url(`/jugadores/${nom.jugador}/`)}>{getJugador(nom.jugador).nombre}</a>
-                  {nom.detalle && <span class="suave"> — {nom.detalle}</span>}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        {g.categorias.map((c) => {
+          const rk = rankingPremio(g, c);
+          const golesGanador = c.id === 'maximo-goleador' && c.ganador ? statsJugador(c.ganador, partidosDe(g.temporada)).goles : null;
+          return (
+            <article class="categoria">
+              <h3>{c.nombre}</h3>
+              {c.ganador ? (
+                <p class="ganador">🏆 <NombreJugador id={c.ganador} />{golesGanador !== null && ` (${golesGanador} ${golesGanador === 1 ? 'gol' : 'goles'})`}</p>
+              ) : (
+                <p class="suave">Ganador por decidir</p>
+              )}
+
+              {c.nominados.length > 0 && (
+                <>
+                  <p class="etiqueta">Nominados:</p>
+                  <ul>
+                    {c.nominados.map((nom) => (
+                      <li class={nom.jugador === c.ganador ? 'gana' : ''}>
+                        <NombreJugador id={nom.jugador} />
+                        {nom.detalle && <span class="suave"> — {nom.detalle}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {rk && (
+                <>
+                  <p class="etiqueta">Ranking ({rk.unidad}):</p>
+                  <ol class="ranking">
+                    {rk.filas.map((f) => (
+                      <li class={f.jugador.id === c.ganador ? 'gana' : ''}>
+                        <NombreJugador id={f.jugador.id} />
+                        <span class="valor">{f.valor} {unidades[rk.unidad][f.valor === 1 ? 0 : 1]}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   ))}
@@ -41,6 +66,9 @@ import { galas, getJugador, nombreTemporada, url } from '../../lib/stats';
   .categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.75rem; }
   .categoria { background: var(--superficie); border: 1px solid var(--linea); padding: 0.9rem 1rem; }
   .ganador { font-size: 1.15rem; font-weight: 700; margin: 0.4rem 0; }
-  ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+  .etiqueta { margin: 0.9rem 0 0.2rem; font-weight: 700; font-size: 0.9rem; }
+  ul, ol { margin: 0.2rem 0 0; padding-left: 1.4rem; }
   li.gana { font-weight: 600; }
+  .ranking li { padding-right: 0; }
+  .valor { color: var(--suave); margin-left: 0.5rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 </style>

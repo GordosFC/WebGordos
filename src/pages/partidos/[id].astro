@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { partidos, jugado, resultado, getJugador, fecha, url } from '../../lib/stats';
+import NombreJugador from '../../components/NombreJugador.astro';
+import { partidos, jugado, resultado, fecha, etiquetaPartido, esApoyo } from '../../lib/stats';
 
 export function getStaticPaths() {
   return partidos.map((p) => ({ params: { id: p.id }, props: { p } }));
@@ -8,6 +9,10 @@ export function getStaticPaths() {
 const { p } = Astro.props;
 const r = resultado(p);
 const titulo = `${p.local ? 'Nosotros' : p.rival} vs ${p.local ? p.rival : 'Nosotros'}`;
+const titulares = p.apariciones.filter((a) => !esApoyo(p.temporada, a.jugador));
+const apoyo = p.apariciones.filter((a) => esApoyo(p.temporada, a.jugador));
+const ordenadas = [...titulares, ...apoyo];
+const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) => b.goles! - a.goles!);
 ---
 <Base titulo={titulo}>
   <h1>{titulo}</h1>
@@ -16,10 +21,26 @@ const titulo = `${p.local ? 'Nosotros' : p.rival} vs ${p.local ? p.rival : 'Noso
     {jugado(p)
       ? <strong> Resultado: {p.golesFavor}–{p.golesContra}</strong>
       : <strong> Pendiente de jugar</strong>}
-    <span class="suave"> · {fecha(p.fecha)} · {p.competicion} · {p.local ? 'En casa' : 'Fuera'}</span>
+    <span class="suave"> · {fecha(p.fecha)} · {etiquetaPartido(p)} · {p.local ? 'En casa' : 'Fuera'}</span>
   </p>
+  {p.nota && <p class="suave">{p.nota}</p>}
 
   {p.cronica && (<><h2>Crónica</h2><p>{p.cronica}</p></>)}
+
+  {jugado(p) && (
+    <>
+      <h2>Goleadores</h2>
+      {goleadores.length > 0 ? (
+        <p>⚽ {goleadores.map((a, i) => (
+          <>{i > 0 && ', '}<NombreJugador id={a.jugador} />{a.goles! > 1 && ` (${a.goles})`}</>
+        ))}</p>
+      ) : p.golesFavor === 0 ? (
+        <p class="suave">No hubo goleadores.</p>
+      ) : (
+        <p class="suave">Goleadores sin registrar.</p>
+      )}
+    </>
+  )}
 
   {p.apariciones.length > 0 && (
     <>
@@ -28,20 +49,26 @@ const titulo = `${p.local ? 'Nosotros' : p.rival} vs ${p.local ? p.rival : 'Noso
         <table>
           <thead><tr><th>Jugador</th><th class="num">G</th><th class="num">A</th><th class="num">🟨</th><th class="num">🟥</th><th>MVP</th></tr></thead>
           <tbody>
-            {p.apariciones.map((a) => {
-              const j = getJugador(a.jugador);
-              return (
+            {ordenadas.map((a, i) => (
+              <>
+                {apoyo.length > 0 && i === titulares.length && (
+                  <tr class="seccion"><td colspan="6">Jugadores de apoyo</td></tr>
+                )}
                 <tr>
-                  <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
+                  <td><NombreJugador id={a.jugador} /></td>
                   <td class="num">{a.goles ?? 0}</td><td class="num">{a.asistencias ?? 0}</td>
                   <td class="num">{a.amarillas ?? 0}</td><td class="num">{a.rojas ?? 0}</td>
                   <td>{a.mvp ? '⭐' : ''}</td>
                 </tr>
-              );
-            })}
+              </>
+            ))}
           </tbody>
         </table>
       </div>
     </>
   )}
 </Base>
+
+<style>
+  tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+</style>

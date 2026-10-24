@@ -1,19 +1,21 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { jugadores, temporadas, partidosDe, statsJugador, url } from '../../lib/stats';
+import { jugadores, temporadas, partidosDe, statsJugador, rolDe, esApoyo, url } from '../../lib/stats';
 
 export function getStaticPaths() {
   return jugadores.map((j) => ({ params: { id: j.id }, props: { j } }));
 }
 const { j } = Astro.props;
 const total = statsJugador(j.id);
+const rol = rolDe(j.id);
 const porTemporada = temporadas
-  .filter((t) => t.plantilla.includes(j.id))
+  .filter((t) => t.plantilla.includes(j.id) || esApoyo(t.id, j.id))
   .map((t) => ({ t, s: statsJugador(j.id, partidosDe(t.id)) }));
+const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApoyo(t.id, j.id));
 ---
 <Base titulo={j.nombre}>
   <h1>{j.nombre}</h1>
-  <p class="suave">#{j.dorsal} · {j.posicion}{j.apodo ? ` · «${j.apodo}»` : ''}</p>
+  <p class="suave">#{j.dorsal} · {j.posicion}{j.apodo ? ` · «${j.apodo}»` : ''}{rol === 'capitan' ? ' · Capitán' : rol === 'subcapitan' ? ' · Subcapitán' : ''}{soloApoyo ? ' · Jugador de apoyo' : ''}</p>
 
   <div class="cifras">
     <div class="cifra"><strong>{total.pj}</strong><span>Partidos</span></div>
@@ -30,7 +32,7 @@ const porTemporada = temporadas
       <tbody>
         {porTemporada.map(({ t, s }) => (
           <tr>
-            <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a></td>
+            <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a>{esApoyo(t.id, j.id) && <span class="suave"> (apoyo)</span>}</td>
             <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
             <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
           </tr>

@@ -11,7 +11,7 @@ export type Aparicion = {
   mvp?: boolean;
 };
 export type Jugador = { id: string; nombre: string; apodo?: string; dorsal: number; posicion: string };
-export type Temporada = { id: string; nombre: string; plantilla: string[] };
+export type Temporada = { id: string; nombre: string; plantilla: string[]; apoyo?: string[]; splitActual?: number };
 export type Partido = {
   id: string;
   temporada: string;
@@ -106,7 +106,7 @@ export type Noticia = {
   portada?: string;   // la foto principal; si no se pone, la primera de `fotos`
   destacada?: boolean; // las destacadas salen en el carrusel de la portada
 };
-export type Nominado = { jugador: string; detalle?: string };
+export type Nominado = { jugador: string; detalle?: string; puntos?: number };
 export type Categoria = { id: string; nombre: string; nominados: Nominado[]; ganador: string | null };
 export type Gala = { temporada: string; estado: 'votaciones' | 'entregados'; categorias: Categoria[] };
 
@@ -181,7 +181,9 @@ export function clasificacion(temporadaId: string, split: number): FilaClasifica
 export type PartidoJornada = {
   local: string; visitante: string;
   golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
-  goleadores?: { nombre: string; goles: number }[]; // solo en nuestros partidos
+  idPartido?: string;                                   // solo en nuestros partidos: para enlazar a su página
+  sinGoles?: boolean;                                   // nuestro partido jugado en el que no marcamos
+  goleadores?: { id: string; nombre: string; goles: number }[]; // solo en nuestros partidos
 };
 
 /** Jornadas de la fase de grupos de un split, de la primera a la última. */
@@ -195,6 +197,8 @@ export function jornadas(temporadaId: string, split: number) {
   for (const p of partidosGrupo(temporadaId, split).filter((p) => p.jornada)) {
     const ok = jugado(p);
     añadir(p.jornada!, {
+      idPartido: p.id,
+      sinGoles: ok && p.golesFavor === 0,
       local: p.local ? nombreClub : p.rival,
       visitante: p.local ? p.rival : nombreClub,
       golesLocal: ok ? (p.local ? p.golesFavor : p.golesContra) : null,
@@ -203,7 +207,7 @@ export function jornadas(temporadaId: string, split: number) {
         ? p.apariciones
             .filter((a) => (a.goles ?? 0) > 0)
             .sort((a, b) => b.goles! - a.goles!)
-            .map((a) => ({ nombre: getJugador(a.jugador).nombre, goles: a.goles! }))
+            .map((a) => ({ id: a.jugador, nombre: getJugador(a.jugador).nombre, goles: a.goles! }))
         : [],
     });
   }
@@ -237,4 +241,48 @@ export const fotoUrl = (n: Noticia, archivo: string) => url(`/noticias/${n.id}/$
 export const destacadas = (max = 5) => {
   const marcadas = noticias.filter((n) => n.destacada).slice(0, max);
   return marcadas.length ? marcadas : noticias.slice(0, 3);
+};
+
+// ---------- Capitán y subcapitanes ----------
+import rawCapitanes from '../data/capitanes.json';
+
+export type Rol = 'capitan' | 'subcapitan';
+export const rolDe = (id: string): Rol | null =>
+  rawCapitanes.capitan === id ? 'capitan' : rawCapitanes.subcapitanes.includes(id) ? 'subcapitan' : null;
+
+// ---------- Ranking de cada premio ----------
+const TOP_GOLEADORES = 5; // cuántos salen en el ranking del máximo goleador
+
+/** Mejor jugador y mejor portero: ranking por `puntos` de cada nominado (si los has puesto).
+ *  Máximo goleador: ranking automático por goles de esa temporada. El resto de premios no tiene ranking. */
+export function rankingPremio(g: Gala, c: Categoria): { unidad: 'puntos' | 'goles'; filas: { jugador: Jugador; valor: number }[] } | null {
+  if (c.id === 'maximo-goleador') {
+    const filas = ranking('goles', partidosDe(g.temporada), TOP_GOLEADORES);
+    return filas.length ? { unidad: 'goles', filas } : null;
+  }
+  if (c.id === 'mejor-jugador' || c.id === 'mejor-portero') {
+    const filas = c.nominados
+      .filter((n) => n.puntos !== undefined)
+      .map((n) => ({ jugador: getJugador(n.jugador), valor: n.puntos! }))
+      .sort((a, b) => b.valor - a.valor);
+    return filas.length ? { unidad: 'puntos', filas } : null;
+  }
+  return null;
+}
+
+/** La temporada más reciente de temporadas.json (la que "toca ahora"). */
+export const temporadaActual = () => [...temporadas].sort((a, b) => a.id.localeCompare(b.id)).pop();
+
+/** ¿Es este jugador de apoyo en esa temporada? (lista `apoyo` de temporadas.json) */
+export const esApoyo = (temporadaId: string, jugadorId: string) =>
+  temporadas.find((t) => t.id === temporadaId)?.apoyo?.includes(jugadorId) ?? false;
+
+/** Jugador que ha venido de apoyo alguna vez pero nunca ha estado en una plantilla. */
+export const esSoloApoyo = (jugadorId: string) =>
+  temporadas.some((t) => t.apoyo?.includes(jugadorId)) && !temporadas.some((t) => t.plantilla.includes(jugadorId));
+
+/** Estuvo en alguna plantilla, pero ya no está en la de la temporada actual (la más reciente). */
+export const esExjugador = (jugadorId: string) => {
+  const actual = temporadaActual();
+  return !!actual && temporadas.some((t) => t.plantilla.includes(jugadorId)) && !actual.plantilla.includes(jugadorId);
 };

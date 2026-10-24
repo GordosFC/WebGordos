@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Partido from '../components/Partido.astro';
 import Carrusel from '../components/Carrusel.astro';
-import { partidos, balance, ranking, ultimosPartidos, proximoPartido, fecha, url, nombreClub, etiquetaPartido, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
+import NombreJugador from '../components/NombreJugador.astro';
+import { partidos, balance, ranking, ultimosPartidos, proximoPartido, temporadaActual, fecha, url, nombreClub, etiquetaPartido, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
 
 const b = balance(partidos);
 const proximo = proximoPartido();
+const actual = temporadaActual();
 const gala = galaAbierta();
 const goleadores = ranking('goles', partidos, 3);
 ---
@@ -13,11 +15,17 @@ const goleadores = ranking('goles', partidos, 3);
   <h1>{nombreClub}</h1>
   <p class="suave">Resultados, plantillas y estadísticas de todas las temporadas.</p>
 
-  {proximo && (
+  {proximo ? (
     <section class="proximo">
       <p>Próximo partido</p>
       <h2>{proximo.local ? 'Nosotros' : proximo.rival} vs {proximo.local ? proximo.rival : 'Nosotros'}</h2>
       <p>{fecha(proximo.fecha)} · {etiquetaPartido(proximo)}</p>
+    </section>
+  ) : (
+    <section class="proximo">
+      <p>Próximo partido</p>
+      <h2>Por definir</h2>
+      <p>{actual ? `${actual.nombre}${actual.splitActual ? ` · Split ${actual.splitActual}` : ''} · ` : ''}Calendario por definir</p>
     </section>
   )}
 
@@ -47,7 +55,7 @@ const goleadores = ranking('goles', partidos, 3);
   <h2>Máximos goleadores</h2>
   <ol>
     {goleadores.map(({ jugador, valor }) => (
-      <li><a href={url(`/jugadores/${jugador.id}/`)}>{jugador.nombre}</a> — {valor} goles</li>
+      <li><NombreJugador id={jugador.id} /> — {valor} goles</li>
     ))}
   </ol>
 </Base>

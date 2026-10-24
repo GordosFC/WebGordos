@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import NombreJugador from '../components/NombreJugador.astro';
 import { ranking, url } from '../lib/stats';
 
 const tablas = [
@@ -26,7 +27,7 @@ const tablas = [
                 {filas.map(({ jugador, valor }, i) => (
                   <tr>
                     <td class="num">{i + 1}</td>
-                    <td><a href={url(`/jugadores/${jugador.id}/`)}>{jugador.nombre}</a></td>
+                    <td><NombreJugador id={jugador.id} /></td>
                     <td class="num"><strong>{valor}</strong></td>
                   </tr>
                 ))}

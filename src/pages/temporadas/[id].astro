@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Partido from '../../components/Partido.astro';
+import NombreJugador from '../../components/NombreJugador.astro';
 import {
   temporadas, partidosDe, balance, getJugador, statsJugador, url,
   splitsDe, clasificacion, jornadas, playoff, PLAZAS_PLAYOFF,
@@ -13,6 +14,8 @@ const { t } = Astro.props;
 const lista = partidosDe(t.id);
 const b = balance(lista);
 const plantilla = t.plantilla.map(getJugador);
+const apoyo = (t.apoyo ?? []).map(getJugador);
+const filasPlantilla = [...plantilla, ...apoyo];
 const splits = splitsDe(t.id);
 ---
 <Base titulo={t.nombre}>
@@ -71,10 +74,18 @@ const splits = splitsDe(t.id);
                             <td class="der">{m.local}</td>
                             <td class="marcador">{m.golesLocal ?? '–'} – {m.golesVisitante ?? '–'}</td>
                             <td>{m.visitante}</td>
+                            <td class="ver">{m.idPartido && <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a>}</td>
                           </tr>
                           {m.goleadores && m.goleadores.length > 0 && (
                             <tr class="nuestro goleadores">
-                              <td colspan="3">⚽ {m.goleadores.map((g) => (g.goles > 1 ? `${g.nombre} (${g.goles})` : g.nombre)).join(', ')}</td>
+                              <td colspan="4">⚽ {m.goleadores.map((g, i) => (
+                                <>{i > 0 && ', '}<NombreJugador id={g.id} />{g.goles > 1 && ` (${g.goles})`}</>
+                              ))}</td>
+                            </tr>
+                          )}
+                          {m.sinGoles && (
+                            <tr class="nuestro goleadores">
+                              <td colspan="4">⚽ No hubo goleadores</td>
                             </tr>
                           )}
                         </>
@@ -106,24 +117,26 @@ const splits = splitsDe(t.id);
     <table>
       <thead><tr><th class="num">#</th><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
-        {plantilla.map((j) => {
+        {filasPlantilla.map((j, i) => {
           const st = statsJugador(j.id, lista);
           return (
-            <tr>
-              <td class="num">{j.dorsal}</td>
-              <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
-              <td>{j.posicion}</td>
-              <td class="num">{st.pj}</td><td class="num">{st.goles}</td>
-              <td class="num">{st.asistencias}</td><td class="num">{st.mvp}</td>
-            </tr>
+            <>
+              {apoyo.length > 0 && i === plantilla.length && (
+                <tr class="seccion"><td colspan="7">Jugadores de apoyo</td></tr>
+              )}
+              <tr>
+                <td class="num">{j.dorsal}</td>
+                <td><NombreJugador id={j.id} /></td>
+                <td>{j.posicion}</td>
+                <td class="num">{st.pj}</td><td class="num">{st.goles}</td>
+                <td class="num">{st.asistencias}</td><td class="num">{st.mvp}</td>
+              </tr>
+            </>
           );
         })}
       </tbody>
     </table>
   </div>
-
-  <h2>Todos los partidos</h2>
-  <div>{[...lista].reverse().map((p) => <Partido p={p} />)}</div>
 </Base>
 
 <style>
@@ -134,8 +147,10 @@ const splits = splitsDe(t.id);
   details.jornada summary { cursor: pointer; font-weight: 700; padding: 0.4rem 0; }
   td.der { text-align: right; }
   td.marcador { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
-  tr.nuestro td { background: color-mix(in srgb, var(--superficie) 80%, var(--amarilla)); font-weight: 600; }
-  tr.clasifica td:first-child { box-shadow: inset 4px 0 0 var(--cesped-claro); }
+  tr.nuestro td { background: color-mix(in srgb, var(--superficie) 80%, var(--destacado)); font-weight: 600; }
+  tr.clasifica td:first-child { box-shadow: inset 4px 0 0 var(--victoria); }
+  tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  td.ver { font-size: 0.9rem; }
   tr.goleadores td { font-size: 0.9rem; font-weight: 400; white-space: normal; }
   .leyenda { font-size: 0.85rem; margin: 0.4rem 0 0; }
 </style>

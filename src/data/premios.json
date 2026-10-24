@@ -4,7 +4,7 @@
     "estado": "entregados",
     "categorias": [
       { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
-        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
+        "nominados": [{ "jugador": "calle", "puntos": 31 }, { "jugador": "iyan", "puntos": 46 }, { "jugador": "nivo" }, { "jugador": "chala" },
         { "jugador": "janto" }, { "jugador": "llanty" }, { "jugador": "pelayo" }, { "jugador": "delmo" }], "ganador": "iyan" },
       { "id": "mejor-portero", "nombre": "Pizza de oro",
         "nominados": [{ "jugador": "pomo" }, { "jugador": "alvaro" }], "ganador": "alvaro" },
@@ -26,7 +26,7 @@
       { "id": "mejor-portero", "nombre": "Pizza de oro",
         "nominados": [{ "jugador": "pomo" }, { "jugador": "pipa" }], "ganador": null },
       { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
-        "nominados": [], "ganador": null },
+        "nominados": [], "ganador": "janto" },
       { "id": "mejor-gol", "nombre": "Guindilla de oro",
         "nominados": [{ "jugador": "nivo" }, { "jugador": "calle" }, { "jugador": "janto" }], "ganador": null }
     ]

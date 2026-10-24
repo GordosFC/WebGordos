@@ -1,26 +1,42 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { jugadores, statsJugador, url } from '../../lib/stats';
+import NombreJugador from '../../components/NombreJugador.astro';
+import { jugadores, statsJugador, esSoloApoyo, esExjugador } from '../../lib/stats';
+
+const grupos = [
+  { titulo: null, lista: jugadores.filter((j) => !esSoloApoyo(j.id) && !esExjugador(j.id)) },
+  { titulo: 'Exjugadores', lista: jugadores.filter((j) => esExjugador(j.id)) },
+  { titulo: 'Jugadores de apoyo', lista: jugadores.filter((j) => esSoloApoyo(j.id)) },
+];
 ---
 <Base titulo="Jugadores">
-  <h1>Plantilla</h1>
+  <h1>Jugadores</h1>
   <p class="suave">Estadísticas acumuladas de todas las temporadas.</p>
   <div class="tabla-wrap">
     <table>
       <thead><tr><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
-        {jugadores.map((j) => {
-          const s = statsJugador(j.id);
-          return (
-            <tr>
-              <td><a href={url(`/jugadores/${j.id}/`)}>{j.nombre}</a></td>
-              <td>{j.posicion}</td>
-              <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
-              <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
-            </tr>
-          );
-        })}
+        {grupos.map((g) => g.lista.length > 0 && (
+          <>
+            {g.titulo && <tr class="seccion"><td colspan="6">{g.titulo}</td></tr>}
+            {g.lista.map((j) => {
+              const s = statsJugador(j.id);
+              return (
+                <tr>
+                  <td><NombreJugador id={j.id} /></td>
+                  <td>{j.posicion}</td>
+                  <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
+                  <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+                </tr>
+              );
+            })}
+          </>
+        ))}
       </tbody>
     </table>
   </div>
 </Base>
+
+<style>
+  tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+</style>
