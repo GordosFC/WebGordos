@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { jugadores, temporadas, partidosDe, statsJugador, rolDe, esApoyo, url } from '../../lib/stats';
+import NotaRegistro from '../../components/NotaRegistro.astro';
+import { jugadores, temporadas, partidos, hayAsistencias, partidosDe, statsJugador, rolDe, esApoyo, url } from '../../lib/stats';
 
 export function getStaticPaths() {
   return jugadores.map((j) => ({ params: { id: j.id }, props: { j } }));
@@ -10,7 +11,7 @@ const total = statsJugador(j.id);
 const rol = rolDe(j.id);
 const porTemporada = temporadas
   .filter((t) => t.plantilla.includes(j.id) || esApoyo(t.id, j.id))
-  .map((t) => ({ t, s: statsJugador(j.id, partidosDe(t.id)) }));
+  .map((t) => ({ t, s: statsJugador(j.id, partidosDe(t.id)), lista: partidosDe(t.id) }));
 const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApoyo(t.id, j.id));
 ---
 <Base titulo={j.nombre}>
@@ -20,7 +21,7 @@ const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApo
   <div class="cifras">
     <div class="cifra"><strong>{total.pj}</strong><span>Partidos</span></div>
     <div class="cifra"><strong>{total.goles}</strong><span>Goles</span></div>
-    <div class="cifra"><strong>{total.asistencias}</strong><span>Asistencias</span></div>
+    <div class="cifra"><strong>{partidos.some(hayAsistencias) ? total.asistencias : '–'}</strong><span>Asistencias</span></div>
     <div class="cifra"><strong>{total.mvp}</strong><span>MVP</span></div>
     <div class="cifra"><strong>{total.amarillas}/{total.rojas}</strong><span>Amarillas/Rojas</span></div>
   </div>
@@ -30,14 +31,15 @@ const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApo
     <table>
       <thead><tr><th>Temporada</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
-        {porTemporada.map(({ t, s }) => (
+        {porTemporada.map(({ t, s, lista }) => (
           <tr>
             <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a>{esApoyo(t.id, j.id) && <span class="suave"> (apoyo)</span>}</td>
             <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
-            <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+            <td class="num">{lista.some(hayAsistencias) ? s.asistencias : '–'}</td><td class="num">{s.mvp}</td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
+  <NotaRegistro />
 </Base>

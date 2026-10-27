@@ -15,7 +15,7 @@
   { "id": "pomo",  "nombre": "Pomo",   "apodo": "Pomo",  "dorsal": 0,  "posicion": "Portero" },
   { "id": "sergio", "nombre": "Sergio Vallalodit",  "apodo": "Pucelano",   "dorsal": 21,  "posicion": "Defensa" },
   { "id": "alvaro",   "nombre": "Vox el Facha",   "apodo": "Alvarovox",    "dorsal": 25,  "posicion": "Portero/Defensa" },
-  { "id": "jaime",   "nombre": "Jaimoto la Moto",   "apodo": "Jaimoto",    "dorsal": 7,  "posicion": "Delantero" },
+  { "id": "jaime",   "nombre": "Jaimoto la Moto",   "apodo": "Carretilla",    "dorsal": 7,  "posicion": "Delantero" },
   { "id": "pipa",   "nombre": "Pipa el Pro",   "apodo": "Paip",    "dorsal": 1,  "posicion": "Portero" },
   { "id": "alegre",   "nombre": "Alegre el Triste",   "apodo": "Alegrías",  "dorsal": 17, "posicion": "Delantero" },
   { "id": "nacho",   "nombre": "Nacho Pistacho",   "apodo": "Nacho",    "dorsal": 66,  "posicion": "Mediocentro" },
@@ -23,5 +23,8 @@
   { "id": "tomas",   "nombre": "Tomás el Petardo",   "apodo": "MiniPuch",  "dorsal": 28, "posicion": "Defensa/Portero" },
   { "id": "andres",   "nombre": "Andrés el Lagarto",   "apodo": "Andrew",  "dorsal": 45, "posicion": "Defensa/Mediocentro" },
   { "id": "eloy",   "nombre": "Loy el León",   "apodo": "Pajaloy",  "dorsal": 4, "posicion": "Banda" },
-  { "id": "barbas",   "nombre": "Plavo el Yonki",   "apodo": "Pableras/Barbas",  "dorsal": 97, "posicion": "No lo sabe ni el " }
+  { "id": "barbas",   "nombre": "Plavo el Yonki",   "apodo": "Pableras/Barbas",  "dorsal": 97, "posicion": "No lo sabe ni el" },
+  { "id": "divi",   "nombre": "Dif la Mula",   "apodo": "Yogui",  "dorsal": 12, "posicion": "Banda" },
+  { "id": "dani",   "nombre": "Dani Megalodon",   "apodo": "Dawni",  "dorsal": 13, "posicion": "Banda" },
+  { "id": "ciso",   "nombre": "Ciso",   "apodo": "Siso",  "dorsal": 2, "posicion": "Defensa" }
 ]

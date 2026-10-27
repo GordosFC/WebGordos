@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
-import { partidos, jugado, resultado, fecha, etiquetaPartido, esApoyo } from '../../lib/stats';
+import { partidos, jugado, resultado, fecha, etiquetaPartido, esApoyo, hayAsistencias } from '../../lib/stats';
 
 export function getStaticPaths() {
   return partidos.map((p) => ({ params: { id: p.id }, props: { p } }));
@@ -31,9 +31,11 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
     <>
       <h2>Goleadores</h2>
       {goleadores.length > 0 ? (
-        <p>⚽ {goleadores.map((a, i) => (
-          <>{i > 0 && ', '}<NombreJugador id={a.jugador} />{a.goles! > 1 && ` (${a.goles})`}</>
-        ))}</p>
+        <ul class="lista-goles">
+          {goleadores.map((a) => (
+            <li><NombreJugador id={a.jugador} /> {'⚽'.repeat(a.goles!)}</li>
+          ))}
+        </ul>
       ) : p.golesFavor === 0 ? (
         <p class="suave">No hubo goleadores.</p>
       ) : (
@@ -56,7 +58,7 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
                 )}
                 <tr>
                   <td><NombreJugador id={a.jugador} /></td>
-                  <td class="num">{a.goles ?? 0}</td><td class="num">{a.asistencias ?? 0}</td>
+                  <td class="num">{a.goles ?? 0}</td><td class="num">{hayAsistencias(p) ? (a.asistencias ?? 0) : '–'}</td>
                   <td class="num">{a.amarillas ?? 0}</td><td class="num">{a.rojas ?? 0}</td>
                   <td>{a.mvp ? '⭐' : ''}</td>
                 </tr>
@@ -70,5 +72,6 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
 </Base>
 
 <style>
+  ul.lista-goles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
   tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
 </style>

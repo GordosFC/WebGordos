@@ -30,14 +30,28 @@ export type Partido = {
 
 export const jugadores = rawJugadores as Jugador[];
 export const temporadas = rawTemporadas as Temporada[];
-export const partidos = [...(rawPartidos as Partido[])].sort((a, b) => a.fecha.localeCompare(b.fecha));
+/** Las fechas se escriben DD-MM-AAAA (también vale AAAA-MM-DD). Aquí se pasan a AAAA-MM-DD, que es lo que
+ *  permite ordenarlas y compararlas bien, y se avisa con claridad si alguna no es válida. */
+function normalizarFecha(valor: string, donde: string): string {
+  const dmy = /^(\d{2})-(\d{2})-(\d{4})$/.exec(valor);
+  const iso = dmy ? `${dmy[3]}-${dmy[2]}-${dmy[1]}` : valor;
+  const [, m, d] = iso.split('-').map(Number);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || m < 1 || m > 12 || d < 1 || d > 31) {
+    throw new Error(`Fecha no válida en ${donde}: "${valor}". El formato es DD-MM-AAAA, por ejemplo 19-02-2023.`);
+  }
+  return iso;
+}
+
+export const partidos = (rawPartidos as Partido[])
+  .map((p) => ({ ...p, fecha: normalizarFecha(p.fecha, `el partido "${p.id}"`) }))
+  .sort((a, b) => a.fecha.localeCompare(b.fecha));
 
 // Ruta con el `base` de GitHub Pages incluido
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (path: string) => base + path;
 
-export const fecha = (iso: string) =>
-  new Date(iso + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+/** Fecha para mostrar: DD-MM-AAAA */
+export const fecha = (f: string) => normalizarFecha(f, 'una fecha').split('-').reverse().join('-');
 
 export const jugado = (p: Partido) => p.golesFavor !== null && p.golesContra !== null;
 export const getJugador = (id: string) => jugadores.find((j) => j.id === id)!;
@@ -110,7 +124,9 @@ export type Nominado = { jugador: string; detalle?: string; puntos?: number };
 export type Categoria = { id: string; nombre: string; nominados: Nominado[]; ganador: string | null };
 export type Gala = { temporada: string; estado: 'votaciones' | 'entregados'; categorias: Categoria[] };
 
-export const noticias = [...(rawNoticias as Noticia[])].sort((a, b) => b.fecha.localeCompare(a.fecha));
+export const noticias = (rawNoticias as Noticia[])
+  .map((n) => ({ ...n, fecha: normalizarFecha(n.fecha, `la noticia "${n.id}"`) }))
+  .sort((a, b) => b.fecha.localeCompare(a.fecha));
 export const galas = [...(rawPremios as Gala[])].sort((a, b) => b.temporada.localeCompare(a.temporada));
 export const etiquetaTipo: Record<Noticia['tipo'], string> = {
   fichaje: 'Fichaje', premio: 'Premios', partido: 'Partido', general: 'Club',
@@ -126,9 +142,13 @@ export const PLAZAS_PLAYOFF = 2;              // clasifican los N primeros de ca
 const PUNTOS_VICTORIA = 3;
 const PUNTOS_EMPATE = 1;
 
-type ResultadoAjeno = { jornada?: number; local: string; visitante: string; golesLocal: number; golesVisitante: number };
-type Grupo = { temporada: string; split: number; grupoFinalizado?: boolean; resultados: ResultadoAjeno[] };
-const grupos = rawGrupos as Grupo[];
+type ResultadoAjeno = { jornada?: number; fecha?: string; local: string; visitante: string; golesLocal: number; golesVisitante: number };
+type Grupo = { temporada: string; split: number; grupoFinalizado?: boolean; clasificado?: boolean; resultados: ResultadoAjeno[] };
+const grupos = (rawGrupos as Grupo[]).map((g) => ({
+  ...g,
+  resultados: g.resultados.map((r) =>
+    r.fecha ? { ...r, fecha: normalizarFecha(r.fecha, `un resultado de ${g.temporada} (split ${g.split})`) } : r),
+}));
 const grupoDe = (temporadaId: string, split: number) =>
   grupos.find((g) => g.temporada === temporadaId && g.split === split);
 
@@ -175,8 +195,14 @@ export function clasificacion(temporadaId: string, split: number): FilaClasifica
 
   const lista = [...filas.values()];
   lista.forEach((f) => (f.dif = f.gf - f.gc));
-  return lista.sort((a, b) => b.pts - a.pts || b.dif - a.dif || b.gf - a.gf || a.club.localeCompare(b.club));
+  lista.sort((a, b) => b.pts - a.pts || b.dif - a.dif || b.gf - a.gf || a.club.localeCompare(b.club));
+  // Sin los resultados de los demás equipos la tabla no es fiable: solo mostramos nuestra fila.
+  return tablaCompleta(temporadaId, split) ? lista : lista.filter((f) => f.nuestro);
 }
+
+/** ¿Tenemos los resultados de los demás equipos de este grupo? (si no, la tabla solo muestra nuestros datos) */
+export const tablaCompleta = (temporadaId: string, split: number) =>
+  (grupoDe(temporadaId, split)?.resultados.length ?? 0) > 0;
 
 export type PartidoJornada = {
   local: string; visitante: string;
@@ -189,9 +215,11 @@ export type PartidoJornada = {
 /** Jornadas de la fase de grupos de un split, de la primera a la última. */
 export function jornadas(temporadaId: string, split: number) {
   const mapa = new Map<number, PartidoJornada[]>();
-  const añadir = (n: number, m: Omit<PartidoJornada, 'nuestro'>) => {
+  const fechas = new Map<number, string>(); // fecha de cada jornada (la más temprana de sus partidos)
+  const añadir = (n: number, m: Omit<PartidoJornada, 'nuestro'>, f?: string) => {
     if (!mapa.has(n)) mapa.set(n, []);
     mapa.get(n)!.push({ ...m, nuestro: m.local === nombreClub || m.visitante === nombreClub });
+    if (f && (!fechas.get(n) || f < fechas.get(n)!)) fechas.set(n, f);
   };
 
   for (const p of partidosGrupo(temporadaId, split).filter((p) => p.jornada)) {
@@ -209,29 +237,44 @@ export function jornadas(temporadaId: string, split: number) {
             .sort((a, b) => b.goles! - a.goles!)
             .map((a) => ({ id: a.jugador, nombre: getJugador(a.jugador).nombre, goles: a.goles! }))
         : [],
-    });
+    }, p.fecha);
   }
   for (const r of (grupoDe(temporadaId, split)?.resultados ?? []).filter((r) => r.jornada)) {
-    añadir(r.jornada!, { local: r.local, visitante: r.visitante, golesLocal: r.golesLocal, golesVisitante: r.golesVisitante });
+    añadir(r.jornada!, { local: r.local, visitante: r.visitante, golesLocal: r.golesLocal, golesVisitante: r.golesVisitante }, r.fecha);
   }
 
   return [...mapa.entries()]
     .sort((a, b) => a[0] - b[0])
-    .map(([numero, ps]) => ({ numero, partidos: ps.sort((a, b) => Number(b.nuestro) - Number(a.nuestro)) }));
+    .map(([numero, ps]) => ({ numero, fecha: fechas.get(numero), partidos: ps.sort((a, b) => Number(b.nuestro) - Number(a.nuestro)) }));
 }
 
 export type EstadoPlayoff =
   | { tipo: 'partido'; partido: Partido }   // hay partido de play-off (jugado o programado)
-  | { tipo: 'clasificado' }                 // entre los primeros, aún sin partido en los datos
+  | { tipo: 'clasificado'; terminado: boolean } // clasificados, aún sin partido en los datos
   | { tipo: 'no-clasificado' }
   | { tipo: 'pendiente' };                  // la fase de grupos no ha terminado
+
+/** ¿Ha terminado la fase de grupos de ese split? Lo dice grupos.json, o se deduce si ya hay un split o una temporada posterior. */
+function splitTerminado(temporadaId: string, split: number) {
+  if (grupoDe(temporadaId, split)?.grupoFinalizado) return true;
+  if (splitsDe(temporadaId).some((s) => s > split)) return true;
+  const t = temporadas.find((x) => x.id === temporadaId);
+  if (t?.splitActual && split < t.splitActual) return true;
+  return temporadas.some((x) => x.id > temporadaId);
+}
 
 export function playoff(temporadaId: string, split: number): EstadoPlayoff {
   const partido = partidosDe(temporadaId).find((p) => p.split === split && p.fase === 'playoff');
   if (partido) return { tipo: 'partido', partido };
-  if (!grupoDe(temporadaId, split)?.grupoFinalizado) return { tipo: 'pendiente' };
+
+  const terminado = splitTerminado(temporadaId, split);
+  const manual = grupoDe(temporadaId, split)?.clasificado; // opcional: forzar el resultado en grupos.json
+  if (manual !== undefined) return manual ? { tipo: 'clasificado', terminado } : { tipo: 'no-clasificado' };
+
+  if (!terminado) return { tipo: 'pendiente' };
+  if (!tablaCompleta(temporadaId, split)) return { tipo: 'no-clasificado' }; // sin tabla completa, solo cuenta si hay partido de play-off
   const pos = clasificacion(temporadaId, split).findIndex((f) => f.nuestro) + 1;
-  return pos > 0 && pos <= PLAZAS_PLAYOFF ? { tipo: 'clasificado' } : { tipo: 'no-clasificado' };
+  return pos > 0 && pos <= PLAZAS_PLAYOFF ? { tipo: 'clasificado', terminado } : { tipo: 'no-clasificado' };
 }
 
 export const portadaDe = (n: Noticia) => n.portada ?? n.fotos?.[0];
@@ -286,3 +329,13 @@ export const esExjugador = (jugadorId: string) => {
   const actual = temporadaActual();
   return !!actual && temporadas.some((t) => t.plantilla.includes(jugadorId)) && !actual.plantilla.includes(jugadorId);
 };
+
+// ---------- Asistencias: desde cuándo se apuntan (src/data/registro.json) ----------
+import rawRegistro from '../data/registro.json';
+
+const rawReg = rawRegistro as { asistenciasDesde: string | null };
+export const registro = {
+  asistenciasDesde: rawReg.asistenciasDesde ? normalizarFecha(rawReg.asistenciasDesde, '"asistenciasDesde" de registro.json') : null,
+};
+/** ¿Se apuntaron las asistencias de este partido? (null = siempre) */
+export const hayAsistencias = (p: Partido) => !registro.asistenciasDesde || p.fecha >= registro.asistenciasDesde;

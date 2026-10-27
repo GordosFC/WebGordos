@@ -1,0 +1,10 @@
+---
+import { registro, fecha } from '../lib/stats';
+---
+{registro.asistenciasDesde && (
+  <p class="nota">Las asistencias se empezaron a apuntar el {fecha(registro.asistenciasDesde)}; antes de esa fecha no hay datos.</p>
+)}
+
+<style>
+  .nota { font-size: 0.85rem; color: var(--suave); margin-top: 0.8rem; }
+</style>

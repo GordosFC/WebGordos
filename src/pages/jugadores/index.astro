@@ -1,8 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
-import { jugadores, statsJugador, esSoloApoyo, esExjugador } from '../../lib/stats';
+import NotaRegistro from '../../components/NotaRegistro.astro';
+import { jugadores, partidos, hayAsistencias, statsJugador, esSoloApoyo, esExjugador } from '../../lib/stats';
 
+const conAsist = partidos.some(hayAsistencias);
 const grupos = [
   { titulo: null, lista: jugadores.filter((j) => !esSoloApoyo(j.id) && !esExjugador(j.id)) },
   { titulo: 'Exjugadores', lista: jugadores.filter((j) => esExjugador(j.id)) },
@@ -26,7 +28,7 @@ const grupos = [
                   <td><NombreJugador id={j.id} /></td>
                   <td>{j.posicion}</td>
                   <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
-                  <td class="num">{s.asistencias}</td><td class="num">{s.mvp}</td>
+                  <td class="num">{conAsist ? s.asistencias : '–'}</td><td class="num">{s.mvp}</td>
                 </tr>
               );
             })}
@@ -35,6 +37,7 @@ const grupos = [
       </tbody>
     </table>
   </div>
+  <NotaRegistro />
 </Base>
 
 <style>

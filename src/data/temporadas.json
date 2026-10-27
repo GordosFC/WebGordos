@@ -1,4 +1,4 @@
 [
-  { "id": "2022-23", "nombre": "Temporada 2022/23", "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "nacho", "jaime", "eloy", "barbas", "jivo", "puch", "tomas", "manu", "pomo", "fran", "nivo"], "apoyo": ["andres"] },
+  { "id": "2022-23", "nombre": "Temporada 2022/23", "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "nacho", "jaime", "eloy", "barbas", "jivo", "puch", "tomas", "manu", "pomo", "fran", "nivo", "davo"], "apoyo": ["andres", "dani", "ciso", "chala"] },
   { "id": "2026-27", "nombre": "Temporada 2026/27", "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "alegre", "puch", "pipa", "delmo", "davo", "jivo", "pelayo", "llanty"], "splitActual": 1 }
 ]

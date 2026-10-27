@@ -2,9 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Partido from '../../components/Partido.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
+import NotaRegistro from '../../components/NotaRegistro.astro';
 import {
-  temporadas, partidosDe, balance, getJugador, statsJugador, url,
-  splitsDe, clasificacion, jornadas, playoff, PLAZAS_PLAYOFF,
+  temporadas, partidosDe, balance, getJugador, statsJugador, url, fecha, hayAsistencias,
+  splitsDe, clasificacion, tablaCompleta, jornadas, playoff, PLAZAS_PLAYOFF,
 } from '../../lib/stats';
 
 export function getStaticPaths() {
@@ -16,6 +17,7 @@ const b = balance(lista);
 const plantilla = t.plantilla.map(getJugador);
 const apoyo = (t.apoyo ?? []).map(getJugador);
 const filasPlantilla = [...plantilla, ...apoyo];
+const conAsist = lista.some(hayAsistencias); // ¿hay asistencias apuntadas en esta temporada?
 const splits = splitsDe(t.id);
 ---
 <Base titulo={t.nombre}>
@@ -29,6 +31,7 @@ const splits = splitsDe(t.id);
 
   {splits.map((s, i) => {
     const tabla = clasificacion(t.id, s);
+    const completa = tablaCompleta(t.id, s);
     const js = jornadas(t.id, s);
     const po = playoff(t.id, s);
     return (
@@ -43,8 +46,8 @@ const splits = splitsDe(t.id);
                 <thead><tr><th class="num">#</th><th>Club</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num">GF</th><th class="num">GC</th><th class="num">DIF</th><th class="num">PTS</th></tr></thead>
                 <tbody>
                   {tabla.map((f, k) => (
-                    <tr class={`${f.nuestro ? 'nuestro' : ''} ${k < PLAZAS_PLAYOFF ? 'clasifica' : ''}`}>
-                      <td class="num">{k + 1}</td>
+                    <tr class={`${f.nuestro ? 'nuestro' : ''} ${completa && k < PLAZAS_PLAYOFF ? 'clasifica' : ''}`}>
+                      <td class="num">{completa ? k + 1 : '–'}</td>
                       <td>{f.club}</td>
                       <td class="num">{f.pj}</td><td class="num">{f.v}</td><td class="num">{f.e}</td><td class="num">{f.d}</td>
                       <td class="num">{f.gf}</td><td class="num">{f.gc}</td>
@@ -55,7 +58,7 @@ const splits = splitsDe(t.id);
                 </tbody>
               </table>
             </div>
-            <p class="suave leyenda">Marca verde: puestos que clasifican para el play-off.</p>
+            <p class="suave leyenda">{completa ? 'Marca verde: puestos que clasifican para el play-off.' : 'Sin los resultados de los demás equipos: solo se muestran nuestros datos.'}</p>
           </>
         )}
 
@@ -64,7 +67,7 @@ const splits = splitsDe(t.id);
             <h3>Jornadas</h3>
             {js.map((j, k) => (
               <details class="jornada" open={k === js.length - 1}>
-                <summary>Jornada {j.numero}</summary>
+                <summary>Jornada {j.numero}{j.fecha && ` · ${fecha(j.fecha)}`}</summary>
                 <div class="tabla-wrap">
                   <table>
                     <tbody>
@@ -78,14 +81,18 @@ const splits = splitsDe(t.id);
                           </tr>
                           {m.goleadores && m.goleadores.length > 0 && (
                             <tr class="nuestro goleadores">
-                              <td colspan="4">⚽ {m.goleadores.map((g, i) => (
-                                <>{i > 0 && ', '}<NombreJugador id={g.id} />{g.goles > 1 && ` (${g.goles})`}</>
-                              ))}</td>
+                              <td colspan="4">
+                                <ul class="lista-goles">
+                                  {m.goleadores.map((g) => (
+                                    <li><NombreJugador id={g.id} /> {'⚽'.repeat(g.goles)}</li>
+                                  ))}
+                                </ul>
+                              </td>
                             </tr>
                           )}
                           {m.sinGoles && (
                             <tr class="nuestro goleadores">
-                              <td colspan="4">⚽ No hubo goleadores</td>
+                              <td colspan="4">No hubo goleadores</td>
                             </tr>
                           )}
                         </>
@@ -105,7 +112,7 @@ const splits = splitsDe(t.id);
             {po.partido.nota && <p class="suave">{po.partido.nota}</p>}
           </>
         )}
-        {po.tipo === 'clasificado' && <p>Clasificados. El partido todavía no está programado.</p>}
+        {po.tipo === 'clasificado' && <p>{po.terminado ? 'Clasificados para el play-off (partido sin registrar).' : 'Clasificados. El partido todavía no está programado.'}</p>}
         {po.tipo === 'no-clasificado' && <p><strong>No clasificado</strong></p>}
         {po.tipo === 'pendiente' && <p class="suave">Se decide al terminar la fase de grupos: clasifican los {PLAZAS_PLAYOFF} primeros.</p>}
       </details>
@@ -129,7 +136,7 @@ const splits = splitsDe(t.id);
                 <td><NombreJugador id={j.id} /></td>
                 <td>{j.posicion}</td>
                 <td class="num">{st.pj}</td><td class="num">{st.goles}</td>
-                <td class="num">{st.asistencias}</td><td class="num">{st.mvp}</td>
+                <td class="num">{conAsist ? st.asistencias : '–'}</td><td class="num">{st.mvp}</td>
               </tr>
             </>
           );
@@ -137,6 +144,7 @@ const splits = splitsDe(t.id);
       </tbody>
     </table>
   </div>
+  <NotaRegistro />
 </Base>
 
 <style>
@@ -151,6 +159,7 @@ const splits = splitsDe(t.id);
   tr.clasifica td:first-child { box-shadow: inset 4px 0 0 var(--victoria); }
   tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
   td.ver { font-size: 0.9rem; }
+  ul.lista-goles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
   tr.goleadores td { font-size: 0.9rem; font-weight: 400; white-space: normal; }
   .leyenda { font-size: 0.85rem; margin: 0.4rem 0 0; }
 </style>
