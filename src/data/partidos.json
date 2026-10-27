@@ -265,5 +265,200 @@
       },
       {"jugador": "tomas"}, {"jugador": "jivo"}, {"jugador": "alvaro"}
     ]
+  },
+
+
+  {
+    "id": "05-11-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "05-11-2023",
+    "rival": "El Quinto Pino",
+    "local": true,
+    "golesFavor": 5,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "fran",
+        "goles": 3,
+        "mvp":true
+      },
+      {
+        "jugador": "divi",
+        "goles": 1
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {"jugador": "jaime"}, {"jugador": "puch"}, {"jugador": "jivo"}, {"jugador": "pelayo"}, {"jugador": "muelsa"}, {"jugador": "janto"}, {"jugador": "davo"}
+    ]
+  },
+  {
+    "id": "12-11-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "12-11-2023",
+    "rival": "UD Chingón",
+    "local": true,
+    "golesFavor": 6,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "nivo",
+        "goles": 2,
+        "mvp":true
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "chala",
+        "goles": 1
+      },
+      {"jugador": "jivo"}, {"jugador": "puch"}, {"jugador": "tomas"}, {"jugador": "davo"}, {"jugador": "fran"}
+    ]
+  },
+  {
+    "id": "19-11-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "19-11-2023",
+    "rival": "Estamos tos Aqui",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 1,
+    "apariciones": [
+      {
+        "jugador": "divi",
+        "goles": 2
+      },
+      {
+        "jugador": "chala",
+        "goles": 1,
+        "mvp":true
+      },
+      {
+        "jugador": "pelayo",
+        "goles": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "jaime"}, {"jugador": "calle"}, {"jugador": "jivo"}, {"jugador": "sergio"}, {"jugador": "davo"}, {"jugador": "janto"}
+    ]
+  },
+  {
+    "id": "26-11-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "26-11-2023",
+    "rival": "Alfa Jores FC",
+    "local": true,
+    "golesFavor": 7,
+    "golesContra": 1,
+    "apariciones": [
+      {
+        "jugador": "pelayo",
+        "goles": 2,
+        "mvp":true
+      },
+      {
+        "jugador": "hermanoPelayo",
+        "goles": 2
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "chala",
+        "goles": 1
+      },
+      {
+        "jugador": "aron",
+        "goles": 1
+      },
+      {"jugador": "puch"}, {"jugador": "jivo"}, {"jugador": "pilo"}, {"jugador": "pomo"}
+    ]
+  },
+  {
+    "id": "10-12-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 5,
+    "fecha": "10-12-2023",
+    "rival": "Club Norte",
+    "local": true,
+    "golesFavor": 7,
+    "golesContra": 5,
+    "apariciones": [
+      {
+        "jugador": "fran",
+        "goles": 2
+      },
+      {
+        "jugador": "sergio",
+        "goles": 1
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "davo",
+        "goles": 1
+      },
+      {
+        "jugador": "puch",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "divi",
+        "goles": 1
+      },
+      {"jugador": "calle"}, {"jugador": "alvaro"}, {"jugador": "nivo"}
+    ]
+  },
+  {
+    "id": "17-12-2023",
+    "temporada": "2023-24",
+    "split": 1,
+    "fase": "playoff",
+    "jornada": 5,
+    "fecha": "17-12-2023",
+    "rival": "Chopoland",
+    "local": true,
+    "golesFavor": 1,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "fran",
+        "goles": 1
+      },
+      {
+        "jugador": "alvaro",
+        "mvp": true
+      },
+      {"jugador": "pelayo"}, {"jugador": "calle"}, {"jugador": "puch"}, {"jugador": "muelsa"}, {"jugador": "iyan"}, {"jugador": "davo"}, 
+      {"jugador": "nivo"}, {"jugador": "janto"}
+    ]
   }
+
 ]

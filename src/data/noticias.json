@@ -1,37 +1,47 @@
 [
   {
-    "id": "fichaje-ejemplo",
-    "fecha": "2025-09-01",
-    "tipo": "fichaje",
-    "titulo": "Marcos se incorpora a la plantilla",
-    "resumen": "El centrocampista llega para reforzar el medio campo esta temporada.",
-    "cuerpo": "Texto completo de la noticia. Puedes escribir varios párrafos separándolos con una línea en blanco.\n\nSegundo párrafo de ejemplo.",
+    "id": "empieza-aha",
+    "fecha": "19-02-2023",
+    "tipo": "general",
+    "titulo": "Comienza El Abierto Hasta el Amanecer para Gordos FC",
+    "resumen": "Gordos FC se inscribe por primera vez en una liga real de futbol 7 en mareo.",
+    "cuerpo": "Después de la reunion de la directiva del club, se toma la decisión de que Gordos está para más que jugar en la liga de comida.",
     "fotos": [
-      "ejemplo-1.svg",
-      "ejemplo-2.svg",
-      "ejemplo-3.svg"
+      "aha.jpg"
     ],
-    "portada": "ejemplo-2.svg",
+    "portada": "aha.jpg"
+  },
+  {
+    "id": "cancion-cada-vez-mas-gordos",
+    "fecha": "22-06-2023",
+    "tipo": "general",
+    "titulo": "Cada vez más Gordos ya disponible",
+    "resumen": "Sale después de mucho trabajo la primer canción de Gordos FC",
+    "cuerpo": "Calle Janolo y Manu Cocodrilo se reunen para grabar la primera canción de Gordos de la historia. Acaba de salir y está publicada en youtube: https://youtu.be/vwWs5t19pUk?si=gKVt2F1IPgTvrWuc",
+    "fotos": [
+      "cancion-cada-vez-mas-gordos.png"
+    ],
+    "portada": "cancion-cada-vez-mas-gordos.png",
     "destacada": true
   },
   {
-    "id": "gala-votaciones-2025-26",
-    "fecha": "2026-10-15",
+    "id": "gala-hdo-2025-26",
+    "fecha": "22-10-2026",
     "tipo": "premio",
-    "titulo": "Abiertas las votaciones de la gala 2025/26",
-    "resumen": "Ya están los nominados a mejor jugador, mejor portero, máximo goleador y mejor gol.",
-    "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios.",
+    "titulo": "Nominados para la Hamburguesa de Oro 2025/26",
+    "resumen": "Ya están los nominados a mejor jugador, mejor portero, máximo goleador y mejor gol de la temporada.",
+    "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios. La gala se celabrará el día 31 de octubre.",
     "destacada": true,
     "fotos": [
-      "portada.svg"
-    ]
-  },
-  {
-    "id": "gala-ganadores-2024-25",
-    "fecha": "2025-07-10",
-    "tipo": "premio",
-    "titulo": "Ganadores de la gala 2024/25",
-    "resumen": "Juan, Luis y Marcos se llevan los premios de la temporada.",
-    "cuerpo": "Resumen de la gala. Todos los ganadores están en la página de premios."
+      "calle.jpg",
+      "chala.jpg",
+      "nivo.jpg",
+      "iyan.jpg",
+      "sergio.jpg",
+      "muelsa.jpg",
+      "pelayo.jpg",
+      "pipa.jpg"
+    ],
+    "portada": "logo.jpg"
   }
 ]

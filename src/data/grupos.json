@@ -1,7 +1,7 @@
 [
   {
-    "temporada": "2024-25",
-    "split": 1,
+    "temporada": "2021-22",
+    "split": 2,
     "grupoFinalizado": true,
     "resultados": [
       {
@@ -17,34 +17,6 @@
         "visitante": "Atlético Resaca",
         "golesLocal": 1,
         "golesVisitante": 0
-      }
-    ]
-  },
-  {
-    "temporada": "2024-25",
-    "split": 2,
-    "grupoFinalizado": true,
-    "resultados": [
-      {
-        "jornada": 1,
-        "local": "Los Galácticos",
-        "visitante": "Deportivo Bar Paco",
-        "golesLocal": 3,
-        "golesVisitante": 0
-      }
-    ]
-  },
-  {
-    "temporada": "2025-26",
-    "split": 1,
-    "grupoFinalizado": false,
-    "resultados": [
-      {
-        "jornada": 1,
-        "local": "Real Sofá",
-        "visitante": "Deportivo Bar Paco",
-        "golesLocal": 3,
-        "golesVisitante": 1
       }
     ]
   }
