@@ -16,7 +16,7 @@
     "fecha": "22-06-2023",
     "tipo": "general",
     "titulo": "Cada vez más Gordos ya disponible",
-    "resumen": "Sale después de mucho trabajo la primer canción de Gordos FC",
+    "resumen": "Sale después de mucho trabajo la primera canción de Gordos FC",
     "cuerpo": "Calle Janolo y Manu Cocodrilo se reunen para grabar la primera canción de Gordos de la historia. Acaba de salir y está publicada en youtube: https://youtu.be/vwWs5t19pUk?si=gKVt2F1IPgTvrWuc",
     "fotos": [
       "cancion-cada-vez-mas-gordos.png"
@@ -52,6 +52,16 @@
       "vox.jpg"
     ],
     "portada": "iyan.jpg"
+  },
+  {
+    "id": "continuar-aha",
+    "fecha": "05-10-2026",
+    "tipo": "general",
+    "titulo": "Confirmado. Otra temporada más en el AHA",
+    "resumen": "Gordos volverá una temporada más a la liga del Abierto Hasta el Amanecer en mareo.",
+    "cuerpo": "Después de la temporada pasada con pocos goles y con pocas victorias, volvemos con más ganas que nunca y confiados en que este año conseguiremos cosas grandes. Además, algunos de nuestros jugadores que no estuvieron disponibles este úlitmo año por Erasmus vuelven mejor entrenados que nunca. Los jugadores son: Push la Bomba, Delmo el Tiktoker y Davo el Bicicletero.",
+    "destacada": true,
+    "portada": "foto.jpg"
   },
   {
     "id": "gala-hdo-2025-26",
