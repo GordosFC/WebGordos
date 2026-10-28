@@ -4,8 +4,8 @@
     "estado": "entregados",
     "categorias": [
       { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
-        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
-        { "jugador": "llanty" }, { "jugador": "fran" }, { "jugador": "davo" }, { "jugador": "pelayo" }], "ganador": "chala" },
+        "nominados": [{ "jugador": "calle", "puntos": 25 }, { "jugador": "iyan", "puntos": 33 }, { "jugador": "nivo", "puntos": 28 }, { "jugador": "chala", "puntos": 35 },
+        { "jugador": "llanty", "puntos": 25 }, { "jugador": "fran", "puntos": 26 }, { "jugador": "davo", "puntos": 22 }, { "jugador": "pelayo", "puntos": 31 }], "ganador": "chala" },
       { "id": "mejor-portero", "nombre": "Pizza de oro",
         "nominados": [{ "jugador": "pomo", "puntos": 0}, { "jugador": "alvaro", "puntos": 7 }, { "jugador": "tomas", "puntos": 2 },
         { "jugador": "delmo", "puntos": 0}, { "jugador": "nivo", "puntos": 2 }, { "jugador": "davo", "puntos": 0}], "ganador": "alvaro" },
@@ -23,8 +23,8 @@
     "estado": "entregados",
     "categorias": [
       { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
-        "nominados": [{ "jugador": "calle", "puntos": 31 }, { "jugador": "iyan", "puntos": 56 }, { "jugador": "nivo" }, { "jugador": "chala", "puntos": 26 },
-        { "jugador": "janto", "puntos": 35 }, { "jugador": "llanty" }, { "jugador": "pelayo" }, { "jugador": "delmo", "puntos": 24 }], "ganador": "iyan" },
+        "nominados": [{ "jugador": "calle", "puntos": 31 }, { "jugador": "iyan", "puntos": 56 }, { "jugador": "nivo", "puntos": 19 }, { "jugador": "chala", "puntos": 26 },
+        { "jugador": "janto", "puntos": 35 }, { "jugador": "llanty", "puntos": 20 }, { "jugador": "alvaro", "puntos": 16 }, { "jugador": "delmo", "puntos": 24 }], "ganador": "iyan" },
       { "id": "mejor-portero", "nombre": "Pizza de oro",
         "nominados": [{ "jugador": "pomo", "puntos": 6 }, { "jugador": "alvaro", "puntos": 7 },
          { "jugador": "muelsa", "puntos": 1 }, { "jugador": "puch", "puntos": 0 }], "ganador": "alvaro" },
@@ -48,7 +48,11 @@
       { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
         "nominados": [], "ganador": "janto" },
       { "id": "mejor-gol", "nombre": "Guindilla de oro",
-        "nominados": [{ "jugador": "nivo" }, { "jugador": "calle" }, { "jugador": "janto" }], "ganador": null }
+        "nominados": [
+          { "jugador": "nivo", "detalle": "Tiro imparable para el portero." },
+          { "jugador": "calle", "detalle": "Cruzada, rasa y fuerte donde no llega el portero." },
+          { "jugador": "andres", "detalle": "Se va de uno tira y gol imparable." }
+        ], "ganador": null }
     ]
   }
 ]
