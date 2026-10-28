@@ -248,7 +248,7 @@
       },
       {
         "jugador": "calle",
-        "goles": 3
+        "goles": 1
       },
       {
         "jugador": "chala",
@@ -256,12 +256,12 @@
       },
       {
         "jugador": "nacho",
-        "goles": 3,
+        "goles": 2,
         "mvp": true
       },
       {
         "jugador": "davo",
-        "goles": 10
+        "goles": 1
       },
       {"jugador": "tomas"}, {"jugador": "jivo"}, {"jugador": "alvaro"}
     ]
@@ -339,7 +339,7 @@
     "fase": "grupos",
     "jornada": 3,
     "fecha": "19-11-2023",
-    "rival": "Estamos tos Aqui",
+    "rival": "Estamos Tos Aqui",
     "local": true,
     "golesFavor": 4,
     "golesContra": 1,
@@ -459,6 +459,607 @@
       {"jugador": "pelayo"}, {"jugador": "calle"}, {"jugador": "puch"}, {"jugador": "muelsa"}, {"jugador": "iyan"}, {"jugador": "davo"}, 
       {"jugador": "nivo"}, {"jugador": "janto"}
     ]
-  }
+  },
+  {
+    "id": "11-02-2024",
+    "temporada": "2023-24",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "11-02-2023",
+    "rival": "FC Verguenza",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 5,
+    "apariciones": [
+      {
+        "jugador": "calle",
+        "goles": 2,
+        "mvp": true
+      },
+      {
+        "jugador": "pelayo",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "jaime",
+        "goles": 1
+      },
+      {"jugador": "puch"}, {"jugador": "delmo"}, {"jugador": "chala"}, {"jugador": "davo"}, {"jugador": "muelsa"}, {"jugador": "jivo"}
+    ]
+  },
+  {
+    "id": "18-02-2024",
+    "temporada": "2023-24",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "18-02-2023",
+    "rival": "Chopoland",
+    "local": true,
+    "golesFavor": 1,
+    "golesContra": 6,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "tomas",
+        "mvp": true
+      },
+      {"jugador": "llanty"}, {"jugador": "jaime"}, {"jugador": "puch"}, {"jugador": "pelayo"}, {"jugador": "muelsa"}, {"jugador": "sergio"}
+    ]
+  },
+  {
+    "id": "25-02-2024",
+    "temporada": "2023-24",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "25-02-2023",
+    "rival": "Manobicho",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 9,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "llanty",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "calle",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "muelsa"}, {"jugador": "pelayo"}, {"jugador": "hermanoPelayo"}, {"jugador": "divi"}, {"jugador": "nivo"}, {"jugador": "davo"}
+    ]
+  },
+  {
+    "id": "02-03-2024",
+    "temporada": "2023-24",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "02-03-2023",
+    "rival": "Escaleta FC",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 5,
+    "incomparecencia": "nosotros",
+    "apariciones": []
+  },
+  {
+    "id": "17-03-2024",
+    "temporada": "2023-24",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 5,
+    "fecha": "17-03-2023",
+    "rival": "Subatoques",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 5,
+    "apariciones": [
+      {"jugador": "muelsa"}, {"jugador": "llanty"}, {"jugador": "calle"}, {"jugador": "iyan"}, {"jugador": "janto"}, {"jugador": "davo"}, {"jugador": "pomo"}
+    ]
+  },
+  {
+    "id": "12-05-2024",
+    "temporada": "2023-24",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "12-05-2023",
+    "rival": "Estamos Tos Aqui",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 2,
+    "apariciones": [
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "llanty",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "chala",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "calle"}, {"jugador": "iyan"}, {"jugador": "fran"}, {"jugador": "andres"}, {"jugador": "alvaro"}
+    ]
+  },
+  {
+    "id": "19-05-2024",
+    "temporada": "2023-24",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "19-05-2023",
+    "rival": "Moris y Costales",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 5,
+    "incomparecencia": "nosotros",
+    "apariciones": []
+  },
+  {
+    "id": "02-06-2024",
+    "temporada": "2023-24",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "02-06-2023",
+    "rival": "Laviada Team",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 6,
+    "apariciones": [
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "muelsa"}, {"jugador": "llanty"}, {"jugador": "jivo"}, {"jugador": "fran"}, {"jugador": "alegre"}, {"jugador": "pelayo"}, 
+      {"jugador": "nivo"}, {"jugador": "nachols"}
+    ]
+  },
+  {
+    "id": "09-06-2024-a",
+    "temporada": "2023-24",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "09-06-2023",
+    "rival": "Dkclub",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "fran",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "nivo",
+        "goles": 1
+      },
+      {"jugador": "calle"}, {"jugador": "iyan"}, {"jugador": "davo"}, {"jugador": "jivo"}, {"jugador": "janto"}, {"jugador": "alvaro"}, 
+      {"jugador": "pelayo"}, {"jugador": "muelsa"}
+    ]
+  },
+  {
+    "id": "09-06-2024",
+    "temporada": "2023-24",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 5,
+    "fecha": "09-06-2023",
+    "rival": "Piso Orito",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 9,
+    "apariciones": [
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "nivo",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "calle"}, {"jugador": "iyan"}, {"jugador": "davo"}, {"jugador": "janto"}, {"jugador": "alvaro"}, 
+      {"jugador": "pelayo"}, {"jugador": "muelsa"}
+    ]
+  },
 
+
+  {
+    "id": "03-11-2024",
+    "temporada": "2024-25",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "03-11-2024",
+    "rival": "Club Norte",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "llanty",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "davo"}, {"jugador": "iyan"}, {"jugador": "muelsa"}, {"jugador": "torpas"}, {"jugador": "chala"}, {"jugador": "fran"}, {"jugador": "nivo"}
+    ]
+  },
+  {
+    "id": "10-11-2024",
+    "temporada": "2024-25",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "10-11-2024",
+    "rival": "Durin Blinders",
+    "local": true,
+    "golesFavor": 7,
+    "golesContra": 0,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 3,
+        "mvp": true
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 2
+      },
+      {
+        "jugador": "llanty",
+        "goles": 1
+      },
+      {
+        "jugador": "sergio",
+        "goles": 1
+      },
+      {"jugador": "nivo"}, {"jugador": "puch"}, {"jugador": "chala"}, {"jugador": "calle"}, {"jugador": "iyan"}
+    ]
+  },
+  {
+    "id": "24-11-2024",
+    "temporada": "2024-25",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "24-11-2024",
+    "rival": "Teterus CF",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 5,
+    "apariciones": [
+      {
+        "jugador": "calle",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "nivo",
+        "goles": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "puch"}, {"jugador": "delmo"}, {"jugador": "jivo"}
+    ]
+  },
+  {
+    "id": "08-12-2024",
+    "temporada": "2024-25",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "08-12-2024",
+    "rival": "CD Panzas",
+    "local": true,
+    "golesFavor": 6,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "jivo",
+        "goles": 2,
+        "mvp": true
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "fran",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "pelayo"}, {"jugador": "alvaro"}, {"jugador": "llanty"}, {"jugador": "sergio"}
+    ]
+  },
+  {
+    "id": "15-12-2024",
+    "temporada": "2024-25",
+    "split": 1,
+    "fase": "playoff",
+    "jornada": 4,
+    "fecha": "15-12-2024",
+    "rival": "Moris y Costales",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 2,
+    "apariciones": [
+      {
+        "jugador": "delmo",
+        "mvp": true
+      },
+      {"jugador": "muelsa"}, {"jugador": "jivo"}, {"jugador": "sergio"}, {"jugador": "iyan"}, {"jugador": "alvaro"}, {"jugador": "puch"}, {"jugador": "janto"}
+    ]
+  },
+  {
+    "id": "16-02-2025",
+    "temporada": "2024-25",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "16-02-2025",
+    "rival": "Durin Blinders",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 4,
+    "apariciones": [
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "fran",
+        "goles": 1
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "alvaro",
+        "mvp": true
+      },
+      {"jugador": "jivo"}, {"jugador": "calle"}, {"jugador": "janto"}, {"jugador": "pelayo"}, {"jugador": "nivo"}
+    ]
+  },
+  {
+    "id": "02-03-2025",
+    "temporada": "2024-25",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "02-03-2025",
+    "rival": "Lion King",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 5,
+    "incomparecencia": "nosotros",
+    "apariciones": []
+  },
+  {
+    "id": "09-03-2025",
+    "temporada": "2024-25",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "09-03-2025",
+    "rival": "UD Chingón",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 4,
+    "apariciones": [
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "nivo",
+        "goles": 1
+      },
+      {
+        "jugador": "chala",
+        "goles": 1,
+        "mvp": true
+      },
+      {"jugador": "delmo"}, {"jugador": "calle"}, {"jugador": "davo"}
+    ]
+  },
+  {
+    "id": "16-03-2025",
+    "temporada": "2024-25",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "16-03-2025",
+    "rival": "Ultimate Calzada",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 4,
+    "apariciones": [
+      {
+        "jugador": "iyan",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {"jugador": "pelayo"}, {"jugador": "davo"}, {"jugador": "calle"}, {"jugador": "puch"}, {"jugador": "nivo"}, {"jugador": "jivo"}, {"jugador": "sergio"}
+    ]
+  },
+  {
+    "id": "11-05-2025",
+    "temporada": "2024-25",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "11-05-2025",
+    "rival": "Lion King",
+    "local": true,
+    "golesFavor": 6,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 3,
+        "mvp": true
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "nivo",
+        "goles": 1
+      },
+      {"jugador": "pomo"}, {"jugador": "puch"}, {"jugador": "jivo"}, {"jugador": "iyan"}
+    ]
+  },
+  {
+    "id": "18-05-2025",
+    "temporada": "2024-25",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "18-05-2025",
+    "rival": "Estamos Tos Aqui",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "nivo",
+        "goles": 2,
+        "mvp": true
+      },
+      {
+        "jugador": "chala",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {"jugador": "pomo"}, {"jugador": "iyan"}, {"jugador": "llanty"}, {"jugador": "muelsa"}, {"jugador": "janto"}, {"jugador": "jivo"}
+    ]
+  },
+  {
+    "id": "25-05-2025",
+    "temporada": "2024-25",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "25-05-2025",
+    "rival": "Teterus CF",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 5,
+    "apariciones": [
+      {
+        "jugador": "delmo",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {"jugador": "pomo"}, {"jugador": "muelsa"}, {"jugador": "iyan"}, {"jugador": "calle"}, {"jugador": "nivo"}, {"jugador": "fran"}
+    ]
+  },
+  {
+    "id": "01-06-2025",
+    "temporada": "2024-25",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "01-06-2025",
+    "rival": "Ultimate Calzada",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 6,
+    "apariciones": [
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "muelsa",
+        "goles": 1
+      },
+      {
+        "jugador": "chala",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "delmo",
+        "mvp": true
+      },
+      {"jugador": "pomo"}, {"jugador": "jivo"}, {"jugador": "nivo"}, {"jugador": "puch"}, {"jugador": "sergio"}
+    ]
+  }
 ]

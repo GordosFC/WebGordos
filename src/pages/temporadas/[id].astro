@@ -4,7 +4,7 @@ import Partido from '../../components/Partido.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
 import NotaRegistro from '../../components/NotaRegistro.astro';
 import {
-  temporadas, partidosDe, balance, getJugador, statsJugador, url, fecha, hayAsistencias,
+  temporadas, partidosDe, balance, getJugador, statsJugador, url, fecha, hayAsistencias, divisionDe, textoIncomparecencia,
   splitsDe, clasificacion, tablaCompleta, jornadas, playoff, PLAZAS_PLAYOFF,
 } from '../../lib/stats';
 
@@ -36,7 +36,7 @@ const splits = splitsDe(t.id);
     const po = playoff(t.id, s);
     return (
       <details class="split" open={i === splits.length - 1}>
-        <summary>Split {s}</summary>
+        <summary>Split {s}{divisionDe(t.id, s) && ` · ${divisionDe(t.id, s)}ª división`}</summary>
 
         <h3>Fase de grupos</h3>
         {tabla.length === 0 ? <p class="suave">Todavía no hay resultados.</p> : (
@@ -77,7 +77,7 @@ const splits = splitsDe(t.id);
                             <td class="der">{m.local}</td>
                             <td class="marcador">{m.golesLocal ?? '–'} – {m.golesVisitante ?? '–'}</td>
                             <td>{m.visitante}</td>
-                            <td class="ver">{m.idPartido && <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a>}</td>
+                            <td class="ver">{m.idPartido ? <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a> : m.incomparecencia ? <span class="suave">Incomparecencia</span> : null}</td>
                           </tr>
                           {m.goleadores && m.goleadores.length > 0 && (
                             <tr class="nuestro goleadores">
@@ -93,6 +93,11 @@ const splits = splitsDe(t.id);
                           {m.sinGoles && (
                             <tr class="nuestro goleadores">
                               <td colspan="4">No hubo goleadores</td>
+                            </tr>
+                          )}
+                          {m.nuestro && m.incomparecencia && (
+                            <tr class="nuestro goleadores">
+                              <td colspan="4">{textoIncomparecencia(m.incomparecencia)} (resultado por reglamento)</td>
                             </tr>
                           )}
                         </>

@@ -11,7 +11,7 @@ export type Aparicion = {
   mvp?: boolean;
 };
 export type Jugador = { id: string; nombre: string; apodo?: string; dorsal: number; posicion: string };
-export type Temporada = { id: string; nombre: string; plantilla: string[]; apoyo?: string[]; splitActual?: number };
+export type Temporada = { id: string; nombre: string; plantilla: string[]; apoyo?: string[]; splitActual?: number; divisiones?: Record<string, number> };
 export type Partido = {
   id: string;
   temporada: string;
@@ -22,6 +22,7 @@ export type Partido = {
   fase: 'grupos' | 'playoff';
   jornada?: number;              // solo en fase de grupos
   nota?: string;                 // p. ej. "Ganamos en los penaltis"
+  incomparecencia?: 'rival' | 'nosotros'; // quién no se presentó (resultado por reglamento, sin alineación ni goles)
   golesFavor: number | null;
   golesContra: number | null;
   cronica?: string;
@@ -142,7 +143,7 @@ export const PLAZAS_PLAYOFF = 2;              // clasifican los N primeros de ca
 const PUNTOS_VICTORIA = 3;
 const PUNTOS_EMPATE = 1;
 
-type ResultadoAjeno = { jornada?: number; fecha?: string; local: string; visitante: string; golesLocal: number; golesVisitante: number };
+type ResultadoAjeno = { incomparecencia?: boolean; jornada?: number; fecha?: string; local: string; visitante: string; golesLocal: number; golesVisitante: number };
 type Grupo = { temporada: string; split: number; grupoFinalizado?: boolean; clasificado?: boolean; resultados: ResultadoAjeno[] };
 const grupos = (rawGrupos as Grupo[]).map((g) => ({
   ...g,
@@ -208,6 +209,7 @@ export type PartidoJornada = {
   local: string; visitante: string;
   golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
   idPartido?: string;                                   // solo en nuestros partidos: para enlazar a su página
+  incomparecencia?: 'rival' | 'nosotros' | 'otro';       // partido dado por incomparecencia ('otro' = entre otros equipos)
   sinGoles?: boolean;                                   // nuestro partido jugado en el que no marcamos
   goleadores?: { id: string; nombre: string; goles: number }[]; // solo en nuestros partidos
 };
@@ -226,7 +228,8 @@ export function jornadas(temporadaId: string, split: number) {
     const ok = jugado(p);
     añadir(p.jornada!, {
       idPartido: p.id,
-      sinGoles: ok && p.golesFavor === 0,
+      incomparecencia: p.incomparecencia,
+      sinGoles: ok && p.golesFavor === 0 && !p.incomparecencia,
       local: p.local ? nombreClub : p.rival,
       visitante: p.local ? p.rival : nombreClub,
       golesLocal: ok ? (p.local ? p.golesFavor : p.golesContra) : null,
@@ -240,7 +243,7 @@ export function jornadas(temporadaId: string, split: number) {
     }, p.fecha);
   }
   for (const r of (grupoDe(temporadaId, split)?.resultados ?? []).filter((r) => r.jornada)) {
-    añadir(r.jornada!, { local: r.local, visitante: r.visitante, golesLocal: r.golesLocal, golesVisitante: r.golesVisitante }, r.fecha);
+    añadir(r.jornada!, { local: r.local, visitante: r.visitante, golesLocal: r.golesLocal, golesVisitante: r.golesVisitante, incomparecencia: r.incomparecencia ? 'otro' : undefined }, r.fecha);
   }
 
   return [...mapa.entries()]
@@ -339,3 +342,10 @@ export const registro = {
 };
 /** ¿Se apuntaron las asistencias de este partido? (null = siempre) */
 export const hayAsistencias = (p: Partido) => !registro.asistenciasDesde || p.fecha >= registro.asistenciasDesde;
+
+/** División en la que estábamos en un split (3 = 3ª, 2 = 2ª, 1 = 1ª), según `divisiones` en temporadas.json. */
+export const divisionDe = (temporadaId: string, split: number): number | undefined =>
+  temporadas.find((t) => t.id === temporadaId)?.divisiones?.[String(split)];
+
+export const textoIncomparecencia = (i?: 'rival' | 'nosotros' | 'otro') =>
+  i === 'rival' ? 'Incomparecencia del rival' : i === 'nosotros' ? 'Incomparecencia nuestra' : i ? 'Incomparecencia' : '';

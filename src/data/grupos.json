@@ -1,23 +1,79 @@
 [
   {
-    "temporada": "2021-22",
-    "split": 2,
-    "grupoFinalizado": true,
-    "resultados": [
-      {
-        "jornada": 1,
-        "local": "Deportivo Bar Paco",
-        "visitante": "Atlético Resaca",
-        "golesLocal": 2,
-        "golesVisitante": 2
-      },
-      {
-        "jornada": 2,
-        "local": "Los Galácticos",
-        "visitante": "Atlético Resaca",
-        "golesLocal": 1,
-        "golesVisitante": 0
-      }
-    ]
-  }
+  "temporada": "2023-24",
+  "split": 1,
+  "grupoFinalizado": true,
+  "resultados": [
+    {
+      "jornada": 1,
+      "local": "Club Norte",
+      "visitante": "Alfa Jores FC",
+      "golesLocal": 3,
+      "golesVisitante": 2
+    },
+    {
+      "jornada": 1,
+      "local": "UD Chingón",
+      "visitante": "Estamos Tos Aqui",
+      "golesLocal": 2,
+      "golesVisitante": 0
+    },
+    {
+      "jornada": 2,
+      "local": "Club Norte",
+      "visitante": "El Quinto Pino",
+      "golesLocal": 5,
+      "golesVisitante": 1
+    },
+    {
+      "jornada": 2,
+      "local": "Alfa Jores FC",
+      "visitante": "Estamos Tos Aqui",
+      "golesLocal": 2,
+      "golesVisitante": 2
+    },
+    {
+      "jornada": 3,
+      "local": "Club Norte",
+      "visitante": "UD Chingón",
+      "golesLocal": 4,
+      "golesVisitante": 2
+    },
+    {
+      "jornada": 3,
+      "local": "Alfa Jores FC",
+      "visitante": "El Quinto Pino",
+      "golesLocal": 5,
+      "golesVisitante": 1
+    },
+    {
+      "jornada": 4,
+      "local": "Club Norte",
+      "visitante": "Estamos Tos Aqui",
+      "golesLocal": 4,
+      "golesVisitante": 1
+    },
+    {
+      "jornada": 4,
+      "local": "UD Chingón",
+      "visitante": "El Quinto Pino",
+      "golesLocal": 5,
+      "golesVisitante": 0
+    },
+    {
+      "jornada": 5,
+      "local": "Alfa Jores FC",
+      "visitante": "UD Chingón",
+      "golesLocal": 5,
+      "golesVisitante": 4
+    },
+    {
+      "jornada": 5,
+      "local": "El Quinto Pino",
+      "visitante": "Estamos Tos Aqui",
+      "golesLocal": 5,
+      "golesVisitante": 4
+    }
+  ]
+}
 ]

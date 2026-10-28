@@ -24,10 +24,12 @@
   { "id": "andres",   "nombre": "Andrés el Lagarto",   "apodo": "Andrew",  "dorsal": 45, "posicion": "Defensa/Mediocentro" },
   { "id": "eloy",   "nombre": "Loy el León",   "apodo": "Pajaloy",  "dorsal": 4, "posicion": "Banda" },
   { "id": "barbas",   "nombre": "Plavo el Yonki",   "apodo": "Pableras/Barbas",  "dorsal": 97, "posicion": "No lo sabe ni el" },
-  { "id": "divi",   "nombre": "Dif la Mula",   "apodo": "Yogui",  "dorsal": 12, "posicion": "Banda" },
+  { "id": "divi",   "nombre": "Dif la Mula",   "apodo": "Yogui",  "dorsal": 12, "posicion": "Delantero" },
   { "id": "dani",   "nombre": "Dani Megalodon",   "apodo": "Dawni",  "dorsal": 13, "posicion": "Banda" },
   { "id": "ciso",   "nombre": "Ciso",   "apodo": "Siso",  "dorsal": 2, "posicion": "Defensa" },
   { "id": "hermanoPelayo",   "nombre": "Alvaro (hermano de Pelayo)",   "apodo": "Alvarito",  "dorsal": 11, "posicion": "Banda" },
   { "id": "aron",   "nombre": "Aron (UD Cena)",   "apodo": "Aron",  "dorsal": 60, "posicion": "Delantero" },
-  { "id": "pilo",   "nombre": "Pilo (UD Cena)",   "apodo": "Pilo",  "dorsal": 40, "posicion": "Defensa" }
+  { "id": "pilo",   "nombre": "Pilo (UD Cena)",   "apodo": "Pilo",  "dorsal": 40, "posicion": "Defensa" },
+  { "id": "nachols",   "nombre": "Nachols",   "apodo": "Nachete",  "dorsal": 67, "posicion": "Banda" },
+  { "id": "torpas",   "nombre": "Tropas el Clasico",   "apodo": "Pastor",  "dorsal": 11, "posicion": "Delantero" }
 ]

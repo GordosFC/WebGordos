@@ -1,5 +1,17 @@
 [
-  { "id": "2022-23", "nombre": "Temporada 2022/23", "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "nacho", "jaime", "eloy", "barbas", "jivo", "puch", "tomas", "manu", "pomo", "fran", "nivo", "davo"], "apoyo": ["andres", "dani", "ciso", "chala"] },
-  { "id": "2023-24", "nombre": "Temporada 2023/24", "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "jaime", "jivo", "puch", "tomas", "pomo", "fran", "nivo", "davo", "chala", "pelayo", "sergio"], "apoyo":["hermanoPelayo", "aron", "pilo"] },
-  { "id": "2026-27", "nombre": "Temporada 2026/27", "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "alegre", "puch", "pipa", "delmo", "davo", "jivo", "pelayo", "llanty"], "splitActual": 1 }
+  { "id": "2022-23", "nombre": "Temporada 2022/23", 
+  "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "nacho", "jaime", "eloy", "barbas", "jivo", "puch", "tomas", "manu", "pomo", "fran", "nivo", "davo"], 
+  "apoyo": ["andres", "dani", "ciso", "chala"],
+  "divisiones": { "2": 3, "3": 3 } },
+  { "id": "2023-24", "nombre": "Temporada 2023/24",
+  "plantilla": ["calle", "muelsa", "janto", "iyan", "alvaro", "jaime", "jivo", "puch", "tomas", "pomo", "fran", "nivo", "davo", "chala", "pelayo", "sergio", "delmo", "llanty"],
+  "apoyo":["hermanoPelayo", "aron", "pilo", "andres", "nachols", "alegre"],
+  "divisiones": { "1": 3, "2": 2, "3": 3 } },
+  { "id": "2024-25", "nombre": "Temporada 2024/25",
+  "plantilla": ["calle", "muelsa", "janto", "iyan", "llanty", "davo", "nivo", "chala", "fran", "sergio", "pomo", "alvaro", "jivo", "puch", "delmo", "pelayo"],
+  "apoyo":["torpas"],
+  "divisiones": { "1": 3, "2": 3, "3": 3 } },
+  { "id": "2026-27", "nombre": "Temporada 2026/27",
+  "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "alegre", "puch", "pipa", "delmo", "davo", "jivo", "pelayo", "llanty"],
+  "splitActual": 1 }
 ]

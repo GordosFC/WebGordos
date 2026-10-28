@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
-import { partidos, jugado, resultado, fecha, etiquetaPartido, esApoyo, hayAsistencias } from '../../lib/stats';
+import { partidos, jugado, resultado, fecha, etiquetaPartido, textoIncomparecencia, esApoyo, hayAsistencias } from '../../lib/stats';
 
 export function getStaticPaths() {
   return partidos.map((p) => ({ params: { id: p.id }, props: { p } }));
@@ -24,10 +24,13 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
     <span class="suave"> · {fecha(p.fecha)} · {etiquetaPartido(p)} · {p.local ? 'En casa' : 'Fuera'}</span>
   </p>
   {p.nota && <p class="suave">{p.nota}</p>}
+  {p.incomparecencia && (
+    <p><strong>{textoIncomparecencia(p.incomparecencia)}.</strong> <span class="suave">El resultado se da por reglamento: no hay alineación ni goleadores.</span></p>
+  )}
 
   {p.cronica && (<><h2>Crónica</h2><p>{p.cronica}</p></>)}
 
-  {jugado(p) && (
+  {jugado(p) && !p.incomparecencia && (
     <>
       <h2>Goleadores</h2>
       {goleadores.length > 0 ? (

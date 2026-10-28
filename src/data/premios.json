@@ -1,5 +1,24 @@
 [
   {
+    "temporada": "2023-24",
+    "estado": "entregados",
+    "categorias": [
+      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
+        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
+        { "jugador": "llanty" }, { "jugador": "fran" }, { "jugador": "davo" }, { "jugador": "pelayo" }], "ganador": "chala" },
+      { "id": "mejor-portero", "nombre": "Pizza de oro",
+        "nominados": [{ "jugador": "pomo", "puntos": 0}, { "jugador": "alvaro", "puntos": 7 }, { "jugador": "tomas", "puntos": 2 },
+        { "jugador": "delmo", "puntos": 0}, { "jugador": "nivo", "puntos": 2 }, { "jugador": "davo", "puntos": 0}], "ganador": "alvaro" },
+      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
+        "nominados": [], "ganador": "fran" },
+      { "id": "mejor-gol", "nombre": "Guindilla de oro",
+        "nominados": [
+          { "jugador": "davo", "detalle": "Tiro desde el medio campo por encima del portero." },
+          { "jugador": "llanty", "detalle": "De falta con el exterior y por toda la escuadra." }
+        ], "ganador": "llanty" }
+    ]
+  },
+  {
     "temporada": "2024-25",
     "estado": "entregados",
     "categorias": [

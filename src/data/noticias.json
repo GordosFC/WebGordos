@@ -21,8 +21,37 @@
     "fotos": [
       "cancion-cada-vez-mas-gordos.png"
     ],
-    "portada": "cancion-cada-vez-mas-gordos.png",
-    "destacada": true
+    "portada": "cancion-cada-vez-mas-gordos.png"
+  },
+  {
+    "id": "ganadores-24",
+    "fecha": "27-10-2024",
+    "tipo": "premio",
+    "titulo": "La Hamburguesa de Oro 2024 ya ha sido entregada",
+    "resumen": "Chala se convierte en el mejor jugador de la temporada 23/24 de Gordos FC.",
+    "cuerpo": "Tras concluir las votaciones de la gala de premios de Gordos, Chala sale elegido como mejor jugador de la temporda recibiendo la hamburguesa de oro. Además Vox el Facha consigue el premio al mejor portero, Llanty Crack al mejor gol y Fran el de la India al máximo goleador tras sus fantasticos 7 goles.",
+    "fotos": [
+      "chala.jpg",
+      "llanty.png",
+      "fran.png",
+      "vox.png"
+    ],
+    "portada": "chala.jpg"
+  },
+  {
+    "id": "ganadores-25",
+    "fecha": "31-10-2025",
+    "tipo": "premio",
+    "titulo": "La Hamburguesa de Oro 2025 tiene dueño",
+    "resumen": "Iyán se convierte en el mejor jugador de la temporada 24/25 de Gordos FC.",
+    "cuerpo": "Iyan consigue levantar la Hamburguesa de Oro 2025 tras un gran año en el club. El máximo goleador se lo lleva Toni el flaco con sus 11 golazos. El mejor gol es para la volea imparable de Jivo el Ladrón. Y por último, el mejor portero de la temporada, Vox el Facha, aunque también se menciona a Pomo, que ha tenido una temporada espectacular.",
+    "fotos": [
+      "iyan.jpg",
+      "jivo.jpg",
+      "janto.jpg",
+      "vox.jpg"
+    ],
+    "portada": "iyan.jpg"
   },
   {
     "id": "gala-hdo-2025-26",
