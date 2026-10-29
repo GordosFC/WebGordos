@@ -29,6 +29,7 @@ const nav = [
         {nav.map(([texto, ruta]) => <a href={url(ruta)}>{texto}</a>)}
       </nav>
     </header>
+    <slot name="hero" />
     <main>
       <slot />
     </main>

@@ -6,6 +6,7 @@ export type Aparicion = {
   jugador: string;
   goles?: number;
   asistencias?: number;
+  propia?: number;      // goles en propia puerta de este jugador (suman al rival)
   amarillas?: number;
   rojas?: number;
   mvp?: boolean;
@@ -22,6 +23,7 @@ export type Partido = {
   fase: 'grupos' | 'playoff';
   jornada?: number;              // solo en fase de grupos
   nota?: string;                 // p. ej. "Ganamos en los penaltis"
+  propiaRival?: number;          // goles a nuestro favor marcados en propia puerta por el rival
   incomparecencia?: 'rival' | 'nosotros'; // quién no se presentó (resultado por reglamento, sin alineación ni goles)
   golesFavor: number | null;
   golesContra: number | null;
@@ -78,12 +80,13 @@ export function balance(lista: Partido[]) {
 }
 
 export type StatsJugador = {
+  propias: number;
   pj: number; goles: number; asistencias: number; amarillas: number; rojas: number; mvp: number;
 };
 
 /** Estadísticas de un jugador. Si pasas `lista`, solo cuenta esos partidos (p. ej. una temporada). */
 export function statsJugador(id: string, lista: Partido[] = partidos): StatsJugador {
-  const s: StatsJugador = { pj: 0, goles: 0, asistencias: 0, amarillas: 0, rojas: 0, mvp: 0 };
+  const s: StatsJugador = { propias: 0, pj: 0, goles: 0, asistencias: 0, amarillas: 0, rojas: 0, mvp: 0 };
   for (const p of lista.filter(jugado)) {
     const a = p.apariciones.find((x) => x.jugador === id);
     if (!a) continue;
@@ -92,6 +95,7 @@ export function statsJugador(id: string, lista: Partido[] = partidos): StatsJuga
     s.asistencias += a.asistencias ?? 0;
     s.amarillas += a.amarillas ?? 0;
     s.rojas += a.rojas ?? 0;
+    s.propias += a.propia ?? 0;
     if (a.mvp) s.mvp++;
   }
   return s;
@@ -212,6 +216,8 @@ export type PartidoJornada = {
   incomparecencia?: 'rival' | 'nosotros' | 'otro';       // partido dado por incomparecencia ('otro' = entre otros equipos)
   sinGoles?: boolean;                                   // nuestro partido jugado en el que no marcamos
   goleadores?: { id: string; nombre: string; goles: number }[]; // solo en nuestros partidos
+  propiaRival?: number;                                  // goles nuestros en propia puerta del rival
+  enPropia?: { id: string; goles: number }[];            // nuestros jugadores que marcaron en propia
 };
 
 /** Jornadas de la fase de grupos de un split, de la primera a la última. */
@@ -240,6 +246,8 @@ export function jornadas(temporadaId: string, split: number) {
             .sort((a, b) => b.goles! - a.goles!)
             .map((a) => ({ id: a.jugador, nombre: getJugador(a.jugador).nombre, goles: a.goles! }))
         : [],
+      propiaRival: ok ? (p.propiaRival ?? 0) : 0,
+      enPropia: ok ? p.apariciones.filter((a) => (a.propia ?? 0) > 0).map((a) => ({ id: a.jugador, goles: a.propia! })) : [],
     }, p.fecha);
   }
   for (const r of (grupoDe(temporadaId, split)?.resultados ?? []).filter((r) => r.jornada)) {

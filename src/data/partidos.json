@@ -427,6 +427,7 @@
       {
         "jugador": "puch",
         "goles": 1,
+        "propia": 1,
         "mvp": true
       },
       {
@@ -780,7 +781,11 @@
         "jugador": "nivo",
         "goles": 1
       },
-      {"jugador": "muelsa"}, {"jugador": "puch"}, {"jugador": "delmo"}, {"jugador": "jivo"}
+      {
+        "jugador": "puch",
+        "propia": 2
+      },
+      {"jugador": "muelsa"}, {"jugador": "delmo"}, {"jugador": "jivo"}
     ]
   },
   {
@@ -848,6 +853,7 @@
     "rival": "Durin Blinders",
     "local": true,
     "golesFavor": 4,
+    "propiaRival": 1,
     "golesContra": 4,
     "apariciones": [
       {

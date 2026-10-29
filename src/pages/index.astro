@@ -12,8 +12,13 @@ const gala = galaAbierta();
 const goleadores = ranking('goles', partidos, 3);
 ---
 <Base>
-  <h1>{nombreClub}</h1>
-  <p class="suave">Resultados, plantillas y estadísticas de todas las temporadas.</p>
+  <section class="hero" slot="hero">
+    <img class="hero-foto" src={url('/portada.jpg')} alt="" fetchpriority="high" onerror="this.style.display='none'" />
+    <div class="hero-contenido">
+      <h1>{nombreClub}</h1>
+      <p>Resultados, plantillas y estadísticas de todas las temporadas.</p>
+    </div>
+  </section>
 
   {proximo ? (
     <section class="proximo">
@@ -61,6 +66,24 @@ const goleadores = ranking('goles', partidos, 3);
 </Base>
 
 <style>
+  /* Portada: la foto es public/portada.jpg; el degradado del color del club va encima para que se lea el texto */
+  .hero {
+    position: relative; display: flex; align-items: flex-end; overflow: hidden; color: #fff;
+    min-height: clamp(16rem, 46vw, 27rem);
+    background: var(--cesped); /* si no hay foto, se ve este color */
+    border-bottom: 0.3rem solid var(--destacado);
+  }
+  .hero-foto {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: center 10%; /* sube o baja la foto: 0% = parte de arriba, 100% = parte de abajo */
+  }
+  .hero::after { /* degradado: más oscuro abajo (donde va el texto) y casi transparente arriba */
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, var(--cesped) 0%, transparent 75%); opacity: 0.92;
+  }
+  .hero-contenido { position: relative; z-index: 1; width: 100%; max-width: 56rem; margin: 0 auto; padding: 2rem 1rem 1.6rem; }
+  .hero h1 { margin: 0; font-size: clamp(2.6rem, 9vw, 5rem); line-height: 0.95; letter-spacing: -0.03em; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+  .hero p { margin: 0.6rem 0 0; max-width: 34rem; color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); }
   .gala { display: block; background: var(--destacado); color: #17211b; padding: 0.8rem 1.1rem; font-weight: 600; text-decoration: none; margin-bottom: 1rem; }
   .proximo { background: var(--cesped); color: #fff; padding: 1.2rem 1.4rem; margin: 1.5rem 0; }
   .proximo h2 { margin: 0.2rem 0 0.4rem; font-size: 1.8rem; }

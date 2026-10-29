@@ -23,6 +23,7 @@ const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApo
     <div class="cifra"><strong>{total.goles}</strong><span>Goles</span></div>
     <div class="cifra"><strong>{partidos.some(hayAsistencias) ? total.asistencias : '–'}</strong><span>Asistencias</span></div>
     <div class="cifra"><strong>{total.mvp}</strong><span>MVP</span></div>
+    {total.propias > 0 && <div class="cifra"><strong>{total.propias}</strong><span>En propia</span></div>}
     <div class="cifra"><strong>{total.amarillas}/{total.rojas}</strong><span>Amarillas/Rojas</span></div>
   </div>
 

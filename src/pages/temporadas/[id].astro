@@ -79,18 +79,22 @@ const splits = splitsDe(t.id);
                             <td>{m.visitante}</td>
                             <td class="ver">{m.idPartido ? <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a> : m.incomparecencia ? <span class="suave">Incomparecencia</span> : null}</td>
                           </tr>
-                          {m.goleadores && m.goleadores.length > 0 && (
+                          {m.goleadores && (m.goleadores.length > 0 || !!m.propiaRival || (m.enPropia?.length ?? 0) > 0) && (
                             <tr class="nuestro goleadores">
                               <td colspan="4">
                                 <ul class="lista-goles">
                                   {m.goleadores.map((g) => (
                                     <li><NombreJugador id={g.id} /> {'⚽'.repeat(g.goles)}</li>
                                   ))}
+                                  {!!m.propiaRival && <li>En propia (del rival) {'⚽'.repeat(m.propiaRival)}</li>}
+                                  {m.enPropia?.map((g) => (
+                                    <li><NombreJugador id={g.id} /> <span class="suave">en propia{g.goles > 1 ? ` (${g.goles})` : ''}</span></li>
+                                  ))}
                                 </ul>
                               </td>
                             </tr>
                           )}
-                          {m.sinGoles && (
+                          {m.sinGoles && !m.enPropia?.length && (
                             <tr class="nuestro goleadores">
                               <td colspan="4">No hubo goleadores</td>
                             </tr>

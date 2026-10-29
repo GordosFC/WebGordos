@@ -12,6 +12,8 @@ const titulo = `${p.local ? 'Nosotros' : p.rival} vs ${p.local ? p.rival : 'Noso
 const titulares = p.apariciones.filter((a) => !esApoyo(p.temporada, a.jugador));
 const apoyo = p.apariciones.filter((a) => esApoyo(p.temporada, a.jugador));
 const ordenadas = [...titulares, ...apoyo];
+const propiaRival = p.propiaRival ?? 0;
+const enPropia = p.apariciones.filter((a) => (a.propia ?? 0) > 0);
 const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) => b.goles! - a.goles!);
 ---
 <Base titulo={titulo}>
@@ -33,16 +35,24 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
   {jugado(p) && !p.incomparecencia && (
     <>
       <h2>Goleadores</h2>
-      {goleadores.length > 0 ? (
+      {goleadores.length > 0 || propiaRival > 0 ? (
         <ul class="lista-goles">
           {goleadores.map((a) => (
             <li><NombreJugador id={a.jugador} /> {'⚽'.repeat(a.goles!)}</li>
           ))}
+          {propiaRival > 0 && <li>En propia (del rival) {'⚽'.repeat(propiaRival)}</li>}
         </ul>
       ) : p.golesFavor === 0 ? (
         <p class="suave">No hubo goleadores.</p>
       ) : (
         <p class="suave">Goleadores sin registrar.</p>
+      )}
+      {enPropia.length > 0 && (
+        <p class="suave">
+          En propia puerta (gol para el rival): {enPropia.map((a, i) => (
+            <>{i > 0 && ', '}<NombreJugador id={a.jugador} />{a.propia! > 1 && ` (${a.propia})`}</>
+          ))}
+        </p>
       )}
     </>
   )}

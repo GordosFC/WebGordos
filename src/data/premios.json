@@ -46,7 +46,8 @@
       { "id": "mejor-portero", "nombre": "Pizza de oro",
         "nominados": [{ "jugador": "pomo" }, { "jugador": "pipa" }], "ganador": null },
       { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
-        "nominados": [], "ganador": "janto" },
+        "nominados": [{ "jugador": "iyan" }, { "jugador": "calle" },{ "jugador": "janto" }, { "jugador": "fran" }, { "jugador": "nivo"} ],
+           "ganador": null },
       { "id": "mejor-gol", "nombre": "Guindilla de oro",
         "nominados": [
           { "jugador": "nivo", "detalle": "Tiro imparable para el portero." },
