@@ -31,5 +31,7 @@
   { "id": "aron",   "nombre": "Aron (UD Cena)",   "apodo": "Aron",  "dorsal": 60, "posicion": "Delantero" },
   { "id": "pilo",   "nombre": "Pilo (UD Cena)",   "apodo": "Pilo",  "dorsal": 40, "posicion": "Defensa" },
   { "id": "nachols",   "nombre": "Nachols",   "apodo": "Nachete",  "dorsal": 67, "posicion": "Banda" },
-  { "id": "torpas",   "nombre": "Tropas el Clasico",   "apodo": "Pastor",  "dorsal": 11, "posicion": "Delantero" }
+  { "id": "torpas",   "nombre": "Tropas el Clasico",   "apodo": "Pastor",  "dorsal": 11, "posicion": "Delantero" },
+  { "id": "alberto",   "nombre": "Alberto (compañero de uni de Samuel)",   "apodo": "Alberto",  "dorsal": 4, "posicion": "Defensa" },
+  { "id": "fita",   "nombre": "Fita (compañero de uni de Samuel)",   "apodo": "Rafita",  "dorsal": 10, "posicion": "Delantero" }
 ]

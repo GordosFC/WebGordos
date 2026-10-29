@@ -13,9 +13,12 @@
   "divisiones": { "1": 3, "2": 3, "3": 3 } },
   { "id": "2025-26", "nombre": "Temporada 2025/26",
   "plantilla": ["calle", "muelsa", "janto", "iyan", "llanty", "nivo", "chala", "fran", "sergio", "pomo", "jivo", "pelayo"],
-  "apoyo":[""],
+  "apoyo":["dani", "nachols", "alberto", "fita", "alegre", "pipa", "andres"],
   "divisiones": { "1": 3, "2": 3, "3": 3 } },
+
+
+
   { "id": "2026-27", "nombre": "Temporada 2026/27",
   "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "alegre", "puch", "pipa", "delmo", "davo", "jivo", "pelayo", "llanty"],
-  "splitActual": 1 }
+  "splitActual": 1, "divisiones": { "1": 3 }}
 ]

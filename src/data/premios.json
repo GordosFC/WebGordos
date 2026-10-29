@@ -22,15 +22,15 @@
     "temporada": "2024-25",
     "estado": "entregados",
     "categorias": [
-      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
+      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro", "fotoGanador": "mejor-jugador.jpg",
         "nominados": [{ "jugador": "calle", "puntos": 31 }, { "jugador": "iyan", "puntos": 56 }, { "jugador": "nivo", "puntos": 19 }, { "jugador": "chala", "puntos": 26 },
         { "jugador": "janto", "puntos": 35 }, { "jugador": "llanty", "puntos": 20 }, { "jugador": "alvaro", "puntos": 16 }, { "jugador": "delmo", "puntos": 24 }], "ganador": "iyan" },
-      { "id": "mejor-portero", "nombre": "Pizza de oro",
+      { "id": "mejor-portero", "nombre": "Pizza de oro", "fotoGanador": "mejor-portero.jpg",
         "nominados": [{ "jugador": "pomo", "puntos": 6 }, { "jugador": "alvaro", "puntos": 7 },
          { "jugador": "muelsa", "puntos": 1 }, { "jugador": "puch", "puntos": 0 }], "ganador": "alvaro" },
-      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
+      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro", "fotoGanador": "maximo-goleador.jpg",
         "nominados": [], "ganador": "janto" },
-      { "id": "mejor-gol", "nombre": "Guindilla de oro",
+      { "id": "mejor-gol", "nombre": "Guindilla de oro", "fotoGanador": "mejor-gol.jpg",
         "nominados": [
           { "jugador": "jivo", "detalle": "Control implacable y voleazo por la escuadra" }
         ], "ganador": "jivo" }
@@ -40,19 +40,18 @@
     "temporada": "2025-26",
     "estado": "votaciones",
     "categorias": [
-      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro",
+      { "id": "mejor-jugador", "nombre": "Hamburguesa de oro", "fotoGanador": "mejor-jugador.jpg",
         "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
         { "jugador": "muelsa" }, { "jugador": "pipa" }, { "jugador": "pelayo" }, { "jugador": "sergio" }], "ganador": null },
-      { "id": "mejor-portero", "nombre": "Pizza de oro",
+      { "id": "mejor-portero", "nombre": "Pizza de oro", "fotoGanador": "mejor-portero.jpg",
         "nominados": [{ "jugador": "pomo" }, { "jugador": "pipa" }], "ganador": null },
-      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro",
-        "nominados": [{ "jugador": "iyan" }, { "jugador": "calle" },{ "jugador": "janto" }, { "jugador": "fran" }, { "jugador": "nivo"} ],
-           "ganador": null },
-      { "id": "mejor-gol", "nombre": "Guindilla de oro",
+      { "id": "maximo-goleador", "nombre": "Perrito caliente de oro", "fotoGanador": "maximo-goleador.jpg",
+        "nominados": [], "ganador": null },
+      { "id": "mejor-gol", "nombre": "Guindilla de oro", "fotoGanador": "mejor-gol.jpg",
         "nominados": [
-          { "jugador": "nivo", "detalle": "Tiro imparable para el portero." },
+          { "jugador": "nivo", "detalle": "Tiro imparable para el portero, consiguiendo un hat trick." },
           { "jugador": "calle", "detalle": "Cruzada, rasa y fuerte donde no llega el portero." },
-          { "jugador": "andres", "detalle": "Se va de uno tira y gol imparable." }
+          { "jugador": "janto", "detalle": "Presión alta, se la quita al portero y gol." }
         ], "ganador": null }
     ]
   }

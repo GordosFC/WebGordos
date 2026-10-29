@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
-import { partidos, jugado, resultado, fecha, etiquetaPartido, textoIncomparecencia, esApoyo, hayAsistencias } from '../../lib/stats';
+import { partidos, jugado, resultado, fecha, etiquetaPartido, nombreClub, textoIncomparecencia, esApoyo, hayAsistencias } from '../../lib/stats';
 
 export function getStaticPaths() {
   return partidos.map((p) => ({ params: { id: p.id }, props: { p } }));
 }
 const { p } = Astro.props;
 const r = resultado(p);
-const titulo = `${p.local ? 'Nosotros' : p.rival} vs ${p.local ? p.rival : 'Nosotros'}`;
+const titulo = `${p.local ? nombreClub : p.rival} vs ${p.local ? p.rival : nombreClub}`;
 const titulares = p.apariciones.filter((a) => !esApoyo(p.temporada, a.jugador));
 const apoyo = p.apariciones.filter((a) => esApoyo(p.temporada, a.jugador));
 const ordenadas = [...titulares, ...apoyo];

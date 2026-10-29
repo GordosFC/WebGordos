@@ -1,74 +1,182 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
-import { galas, nombreTemporada, rankingPremio, statsJugador, partidosDe } from '../../lib/stats';
+import { galas, getJugador, nombreTemporada, rankingPremio, statsJugador, partidosDe, url } from '../../lib/stats';
 
 const unidades = { puntos: ['punto', 'puntos'], goles: ['gol', 'goles'] } as const;
+
+// Orden en que salen los premios, el texto gris de debajo del nombre y el emoji que se ve mientras no hay foto
+const premios: Record<string, { orden: number; subtitulo: string; emoji: string }> = {
+  'mejor-jugador':   { orden: 1, subtitulo: 'Mejor jugador',   emoji: '🍔' },
+  'maximo-goleador': { orden: 2, subtitulo: 'Máximo goleador', emoji: '🌭' },
+  'mejor-portero':   { orden: 3, subtitulo: 'Mejor portero',   emoji: '🍕' },
+  'mejor-gol':       { orden: 4, subtitulo: 'Mejor gol',       emoji: '🌶️' },
+};
+const info = (id: string) => premios[id] ?? { orden: 99, subtitulo: '', emoji: '🏆' };
+const iniciales = (id: string) => {
+  const p = getJugador(id).nombre.split(' ');
+  return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
+};
+// "Temporada 2025/26" (si la temporada no está en temporadas.json, se construye a partir de su id)
+const titulo = (id: string) => { const n = nombreTemporada(id); return n === id ? `Temporada ${id.replace('-', '/')}` : n; };
 ---
 <Base titulo="Premios">
-  <h1>Gala de premios</h1>
-  {galas.map((g) => (
-    <section>
-      <h2>
-        {nombreTemporada(g.temporada)}
-        {g.estado === 'votaciones' && <span class="abierta">Votaciones abiertas</span>}
-      </h2>
-      <div class="categorias">
-        {g.categorias.map((c) => {
-          const rk = rankingPremio(g, c);
-          const golesGanador = c.id === 'maximo-goleador' && c.ganador ? statsJugador(c.ganador, partidosDe(g.temporada)).goles : null;
-          return (
-            <article class="categoria">
-              <h3>{c.nombre}</h3>
-              {c.ganador ? (
-                <p class="ganador">🏆 <NombreJugador id={c.ganador} />{golesGanador !== null && ` (${golesGanador} ${golesGanador === 1 ? 'gol' : 'goles'})`}</p>
-              ) : (
-                <p class="suave">Ganador por decidir</p>
-              )}
+  <h1 class="solo-lectores">Gala de premios</h1>
 
-              {c.nominados.length > 0 && (
-                <>
-                  <p class="etiqueta">Nominados:</p>
-                  <ul>
-                    {c.nominados.map((nom) => (
-                      <li class={nom.jugador === c.ganador ? 'gana' : ''}>
-                        <NombreJugador id={nom.jugador} />
-                        {nom.detalle && <span class="suave"> — {nom.detalle}</span>}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
+  {galas.map((g) => {
+    const lista = [...g.categorias].sort((a, b) => info(a.id).orden - info(b.id).orden);
+    return (
+      <section class="temporada">
+        <header class="portada">
+          <p class="kicker">★ Gala de premios ★</p>
+          <h2>{titulo(g.temporada)}</h2>
+          {g.estado === 'votaciones' && <span class="abierta">Votaciones abiertas</span>}
+        </header>
 
-              {rk && (
-                <>
-                  <p class="etiqueta">Ranking ({rk.unidad}):</p>
-                  <ol class="ranking">
-                    {rk.filas.map((f) => (
-                      <li class={f.jugador.id === c.ganador ? 'gana' : ''}>
-                        <NombreJugador id={f.jugador.id} />
-                        <span class="valor">{f.valor} {unidades[rk.unidad][f.valor === 1 ? 0 : 1]}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </>
-              )}
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  ))}
+        <div class="lista">
+          {lista.map((cat) => {
+            // `foto` (trofeo) y `fotoGanador` son opcionales en premios.json
+            const c = cat as typeof cat & { foto?: string; fotoGanador?: string };
+            const i = info(c.id);
+            // El ranking de goleadores solo se muestra cuando ya hay ganador
+            const rk = c.id === 'maximo-goleador' && !c.ganador ? null : rankingPremio(g, c);
+            const max = rk ? Math.max(...rk.filas.map((f) => f.valor), 1) : 1;
+            const golesGanador = c.id === 'maximo-goleador' && c.ganador ? statsJugador(c.ganador, partidosDe(g.temporada)).goles : null;
+            return (
+              <article class={`premio ${c.ganador ? 'entregado' : ''}`}>
+                <div class="trofeo">
+                  <img src={url(`/premios/${c.foto ?? `${c.id}.png`}`)} alt={c.nombre} loading="lazy"
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+                  <span class="emoji" aria-hidden="true">{i.emoji}</span>
+                </div>
+
+                <div class="info">
+                  <h3>{c.nombre}</h3>
+                  {i.subtitulo && <p class="subtitulo">{i.subtitulo}</p>}
+
+                  {c.ganador ? (
+                    <>
+                      <p class="etiqueta">Ganador</p>
+                      <p class="nombre-ganador">🏆 <NombreJugador id={c.ganador} />{golesGanador !== null && <span class="goles"> ({golesGanador} {golesGanador === 1 ? 'gol' : 'goles'})</span>}</p>
+                    </>
+                  ) : (
+                    <p class="pendiente">Ganador por decidir</p>
+                  )}
+
+                  {c.nominados.length > 0 && (
+                    <>
+                      <p class="etiqueta">Nominados:</p>
+                      <ul class="chips">
+                        {c.nominados.map((nom) => (
+                          <li class={nom.jugador === c.ganador ? 'gana' : ''}>
+                            <NombreJugador id={nom.jugador} />{nom.detalle && <span class="det"> — {nom.detalle}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+
+                  {rk && (
+                    <>
+                      <p class="etiqueta">Ranking ({rk.unidad}):</p>
+                      <ol class="ranking">
+                        {rk.filas.map((f, k) => (
+                          <li class={f.jugador.id === c.ganador ? 'gana' : ''} style={`--p: ${Math.round((f.valor / max) * 100)}%`}>
+                            <span class="barra"></span>
+                            <span class="pos">{k + 1}</span>
+                            <NombreJugador id={f.jugador.id} />
+                            <span class="valor">{f.valor} {unidades[rk.unidad][f.valor === 1 ? 0 : 1]}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  )}
+                </div>
+
+                <div class="retrato">
+                  {c.ganador ? (
+                    <>
+                      <span class="monograma">{iniciales(c.ganador)}</span>
+                      {c.fotoGanador && (
+                        <img src={url(`/premios/${g.temporada}/${c.fotoGanador}`)} alt={`${getJugador(c.ganador).nombre}, ${c.nombre}`}
+                             loading="lazy" onerror="this.style.display='none'" />
+                      )}
+                    </>
+                  ) : (
+                    <span class="interrogante">?</span>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    );
+  })}
 </Base>
 
 <style>
-  .abierta { font-size: 0.8rem; font-weight: 700; background: var(--destacado); color: #17211b; padding: 0.15rem 0.5rem; margin-left: 0.6rem; vertical-align: middle; }
-  .categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.75rem; }
-  .categoria { background: var(--superficie); border: 1px solid var(--linea); padding: 0.9rem 1rem; }
-  .ganador { font-size: 1.15rem; font-weight: 700; margin: 0.4rem 0; }
-  .etiqueta { margin: 0.9rem 0 0.2rem; font-weight: 700; font-size: 0.9rem; }
-  ul, ol { margin: 0.2rem 0 0; padding-left: 1.4rem; }
-  li.gana { font-weight: 600; }
-  .ranking li { padding-right: 0; }
-  .valor { color: var(--suave); margin-left: 0.5rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .temporada { margin: 0 0 3.5rem; }
+
+  /* Cabecera grande de cada temporada */
+  .portada {
+    text-align: center; color: #fff; padding: 2.4rem 1rem 2rem;
+    background: radial-gradient(ellipse at top, #4d3f08 0%, var(--cesped) 70%);
+    border-bottom: 0.3rem solid var(--destacado);
+  }
+  .kicker { margin: 0 auto; max-width: none; color: var(--destacado); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; }
+  .portada h2 { margin: 0.3rem 0 0; font-size: clamp(2.3rem, 8vw, 4.4rem); line-height: 1; letter-spacing: -0.02em; }
+  .abierta { display: inline-block; margin-top: 1rem; padding: 0.2rem 0.8rem; background: var(--destacado); color: #17211b; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Un premio por fila, a todo lo ancho */
+  .lista { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.9rem; }
+  .premio {
+    display: grid; grid-template-columns: 10.5rem 1fr 10rem; gap: 1.4rem; align-items: center;
+    padding: 1.4rem; color: #fff; background: var(--cesped); border-left: 0.35rem solid var(--destacado);
+  }
+  .premio :global(a) { color: var(--destacado); }
+  .premio :global(.brazalete:not(.capitan)) { color: #fff; }
+
+  .trofeo { position: relative; aspect-ratio: 1; display: grid; place-items: center; background: radial-gradient(circle, rgba(241, 196, 15, 0.35) 0%, rgba(241, 196, 15, 0) 68%); }
+  .trofeo img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0.6rem 1rem rgba(0, 0, 0, 0.6)); }
+  .emoji { display: none; font-size: 6rem; line-height: 1; filter: drop-shadow(0 0.5rem 0.8rem rgba(0, 0, 0, 0.5)); }
+
+  h3 { margin: 0; font-size: clamp(1.5rem, 4.5vw, 2.1rem); line-height: 1.05; letter-spacing: -0.01em; }
+  .subtitulo { margin: 0.25rem 0 0; color: rgba(255, 255, 255, 0.55); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .etiqueta { margin: 1.1rem 0 0.35rem; max-width: none; color: rgba(255, 255, 255, 0.55); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nombre-ganador { margin: 0; max-width: none; font-size: 1.6rem; font-weight: 800; color: var(--destacado); }
+  .goles { font-size: 1.05rem; font-weight: 600; color: rgba(255, 255, 255, 0.75); }
+  .pendiente { margin: 1.1rem 0 0; color: rgba(255, 255, 255, 0.55); }
+
+  ul.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  ul.chips li { padding: 0.2rem 0.65rem; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.92rem; }
+  ul.chips li.gana { background: rgba(241, 196, 15, 0.18); border-color: var(--destacado); font-weight: 600; }
+  .det { color: rgba(255, 255, 255, 0.6); }
+
+  ol.ranking { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; max-width: 28rem; }
+  ol.ranking li { position: relative; display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0.7rem; background: rgba(255, 255, 255, 0.06); }
+  ol.ranking li.gana { font-weight: 700; }
+  .barra { position: absolute; inset: 0 auto 0 0; width: var(--p); background: rgba(241, 196, 15, 0.24); }
+  .pos { position: relative; width: 1.1rem; color: rgba(255, 255, 255, 0.55); font-variant-numeric: tabular-nums; }
+  ol.ranking li > :global(*:not(.barra)) { position: relative; }
+  ol.ranking li > :global(a) { min-width: 0; }
+  .valor { margin-left: auto; color: rgba(255, 255, 255, 0.75); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* Foto del ganador (o un "?" mientras no se sabe) */
+  .retrato { position: relative; aspect-ratio: 3 / 4; display: grid; place-items: center; overflow: hidden; border: 0.2rem solid var(--destacado); background: linear-gradient(160deg, #3d3409, #15130a); box-shadow: 0 0 0 0.25rem rgba(241, 196, 15, 0.15); }
+  .retrato img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .premio:not(.entregado) .retrato { border-style: dashed; box-shadow: none; }
+  .monograma { font-size: 3rem; font-weight: 800; color: var(--destacado); }
+  .interrogante { font-size: 5rem; font-weight: 800; color: rgba(241, 196, 15, 0.45); }
+
+  .info { min-width: 0; }
+
+  @media (max-width: 46rem) { /* en el móvil: trofeo arriba, información a todo el ancho y foto del ganador debajo */
+    .premio { grid-template-columns: 1fr; gap: 1rem; padding: 1.2rem 1rem; }
+    .trofeo { width: 8.5rem; justify-self: center; }
+    .emoji { font-size: 4.5rem; }
+    .retrato { width: min(13rem, 100%); justify-self: center; }
+    .nombre-ganador { font-size: 1.4rem; }
+  }
 </style>

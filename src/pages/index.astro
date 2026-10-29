@@ -23,7 +23,7 @@ const goleadores = ranking('goles', partidos, 3);
   {proximo ? (
     <section class="proximo">
       <p>Próximo partido</p>
-      <h2>{proximo.local ? 'Nosotros' : proximo.rival} vs {proximo.local ? proximo.rival : 'Nosotros'}</h2>
+      <h2>{proximo.local ? nombreClub : proximo.rival} vs {proximo.local ? proximo.rival : nombreClub}</h2>
       <p>{fecha(proximo.fecha)} · {etiquetaPartido(proximo)}</p>
     </section>
   ) : (

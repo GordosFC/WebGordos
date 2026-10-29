@@ -467,7 +467,7 @@
     "split": 2,
     "fase": "grupos",
     "jornada": 1,
-    "fecha": "11-02-2023",
+    "fecha": "11-02-2024",
     "rival": "FC Verguenza",
     "local": true,
     "golesFavor": 4,
@@ -496,7 +496,7 @@
     "split": 2,
     "fase": "grupos",
     "jornada": 2,
-    "fecha": "18-02-2023",
+    "fecha": "18-02-2024",
     "rival": "Chopoland",
     "local": true,
     "golesFavor": 1,
@@ -519,7 +519,7 @@
     "split": 2,
     "fase": "grupos",
     "jornada": 3,
-    "fecha": "25-02-2023",
+    "fecha": "25-02-2024",
     "rival": "Manobicho",
     "local": true,
     "golesFavor": 3,
@@ -548,7 +548,7 @@
     "split": 2,
     "fase": "grupos",
     "jornada": 4,
-    "fecha": "02-03-2023",
+    "fecha": "02-03-2024",
     "rival": "Escaleta FC",
     "local": true,
     "golesFavor": 0,
@@ -562,13 +562,22 @@
     "split": 2,
     "fase": "grupos",
     "jornada": 5,
-    "fecha": "17-03-2023",
+    "fecha": "17-03-2024",
     "rival": "Subatoques",
     "local": true,
-    "golesFavor": 0,
-    "golesContra": 5,
+    "golesFavor": 3,
+    "golesContra": 6,
     "apariciones": [
-      {"jugador": "muelsa"}, {"jugador": "llanty"}, {"jugador": "calle"}, {"jugador": "iyan"}, {"jugador": "janto"}, {"jugador": "davo"}, {"jugador": "pomo"}
+      {
+        "jugador": "davo",
+        "goles": 2,
+        "mvp": true
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "llanty"}, {"jugador": "calle"}, {"jugador": "janto"}, {"jugador": "pomo"}
     ]
   },
   {
@@ -577,7 +586,7 @@
     "split": 3,
     "fase": "grupos",
     "jornada": 1,
-    "fecha": "12-05-2023",
+    "fecha": "12-05-2024",
     "rival": "Estamos Tos Aqui",
     "local": true,
     "golesFavor": 3,
@@ -606,7 +615,7 @@
     "split": 3,
     "fase": "grupos",
     "jornada": 2,
-    "fecha": "19-05-2023",
+    "fecha": "19-05-2024",
     "rival": "Moris y Costales",
     "local": true,
     "golesFavor": 0,
@@ -620,7 +629,7 @@
     "split": 3,
     "fase": "grupos",
     "jornada": 4,
-    "fecha": "02-06-2023",
+    "fecha": "02-06-2024",
     "rival": "Laviada Team",
     "local": true,
     "golesFavor": 2,
@@ -645,7 +654,7 @@
     "split": 3,
     "fase": "grupos",
     "jornada": 3,
-    "fecha": "09-06-2023",
+    "fecha": "09-06-2024",
     "rival": "Dkclub",
     "local": true,
     "golesFavor": 2,
@@ -670,7 +679,7 @@
     "split": 3,
     "fase": "grupos",
     "jornada": 5,
-    "fecha": "09-06-2023",
+    "fecha": "09-06-2024",
     "rival": "Piso Orito",
     "local": true,
     "golesFavor": 2,
@@ -882,7 +891,7 @@
     "fase": "grupos",
     "jornada": 2,
     "fecha": "02-03-2025",
-    "rival": "Lion King",
+    "rival": "Lion Kings",
     "local": true,
     "golesFavor": 0,
     "golesContra": 5,
@@ -956,7 +965,7 @@
     "fase": "grupos",
     "jornada": 1,
     "fecha": "11-05-2025",
-    "rival": "Lion King",
+    "rival": "Lion Kings",
     "local": true,
     "golesFavor": 6,
     "golesContra": 3,
@@ -1066,6 +1075,376 @@
         "mvp": true
       },
       {"jugador": "pomo"}, {"jugador": "jivo"}, {"jugador": "nivo"}, {"jugador": "puch"}, {"jugador": "sergio"}
+    ]
+  },
+
+  {
+    "id": "16-11-2025",
+    "temporada": "2025-26",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "16-11-2025",
+    "rival": "Fuera de Cuota",
+    "local": true,
+    "golesFavor": 1,
+    "golesContra": 2,
+    "apariciones": [
+      {
+        "jugador": "jivo",
+        "goles": 1
+      },
+      {
+        "jugador": "pelayo",
+        "mvp": true
+      },
+      {"jugador": "pomo"}, {"jugador": "nivo"}, {"jugador": "iyan"}, {"jugador": "calle"}, {"jugador": "sergio"}, {"jugador": "muelsa"},
+      {"jugador": "janto"}
+    ]
+  },
+  {
+    "id": "23-11-2025",
+    "temporada": "2025-26",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "23-11-2025",
+    "rival": "Maccabi de Levantar",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 2,
+    "apariciones": [
+      {
+        "jugador": "fran",
+        "goles": 2
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "mvp": true
+      },
+      {"jugador": "pomo"}, {"jugador": "nivo"}, {"jugador": "iyan"}, {"jugador": "llanty"}, {"jugador": "jivo"}, {"jugador": "muelsa"}
+    ]
+  },
+  {
+    "id": "07-12-2025",
+    "temporada": "2025-26",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "07-12-2025",
+    "rival": "Jager Gang Gijón",
+    "local": true,
+    "golesFavor": 3,
+    "golesContra": 7,
+    "apariciones": [
+      {
+        "jugador": "janto",
+        "goles": 2
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "sergio",
+        "mvp": true
+      },
+      {"jugador": "pomo"}, {"jugador": "nivo"}, {"jugador": "calle"}, {"jugador": "jivo"}, {"jugador": "muelsa"}, {"jugador": "fran"}
+    ]
+  },
+  {
+    "id": "14-12-2025",
+    "temporada": "2025-26",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "14-12-2025",
+    "rival": "Moris y Costales",
+    "local": true,
+    "golesFavor": 7,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "nivo",
+        "goles": 3,
+        "mvp": true
+      },
+      {
+        "jugador": "iyan",
+        "goles": 1
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "pomo",
+        "goles": 1
+      },
+      {"jugador": "jivo"}, {"jugador": "muelsa"}
+    ]
+  },
+  {
+    "id": "08-02-2026",
+    "temporada": "2025-26",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "08-02-2026",
+    "rival": "Lion Kings",
+    "local": true,
+    "golesFavor": 5,
+    "golesContra": 0,
+    "incomparecencia": "rival",
+    "apariciones": []
+  },
+  {
+    "id": "22-02-2026",
+    "temporada": "2025-26",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "22-02-2026",
+    "rival": "Maccabi de Levantar",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 11,
+    "apariciones": [
+      {
+        "jugador": "fita",
+        "goles": 3,
+        "mvp": true
+      },
+      {
+        "jugador": "janto",
+        "goles": 1
+      },
+      {
+        "jugador": "muelsa",
+        "mvp": true
+      },
+      {"jugador": "alberto"}, {"jugador": "nachols"}, {"jugador": "dani"}
+    ]
+  },
+  {
+    "id": "01-03-2026",
+    "temporada": "2025-26",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "01-03-2026",
+    "rival": "Paquetinha",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "chala",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "jivo"}, {"jugador": "alegre"}, {"jugador": "llanty"}, {"jugador": "nivo"}, {"jugador": "pipa"},
+      {"jugador": "pelayo"}
+    ]
+  },
+  {
+    "id": "01-03-2026-a",
+    "temporada": "2025-26",
+    "split": 2,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "01-03-2026",
+    "rival": "Recreativo de Cuevas",
+    "local": true,
+    "golesFavor": 5,
+    "golesContra": 0,
+    "incomparecencia": "rival",
+    "apariciones": []
+  },
+  {
+    "id": "10-05-2026",
+    "temporada": "2025-26",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "10-05-2026",
+    "rival": "Kamaroneta",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "chala",
+        "goles": 1
+      },
+      {
+        "jugador": "jivo",
+        "goles": 1
+      },
+      {
+        "jugador": "pipa",
+        "mvp": true
+      },
+      {"jugador": "muelsa"}, {"jugador": "calle"}, {"jugador": "alegre"}, {"jugador": "llanty"}, {"jugador": "janto"}
+    ]
+  },
+  {
+    "id": "17-05-2026",
+    "temporada": "2025-26",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "17-05-2026",
+    "rival": "Moris y Costales",
+    "local": true,
+    "golesFavor": 0,
+    "golesContra": 5,
+    "incomparecencia": "nosotros",
+    "apariciones": []
+  },
+  {
+    "id": "07-06-2026-a",
+    "temporada": "2025-26",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "07-06-2026",
+    "rival": "Panitas",
+    "local": true,
+    "golesFavor": 2,
+    "golesContra": 3,
+    "apariciones": [
+      {
+        "jugador": "divi",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {"jugador": "pipa"}, {"jugador": "chala"}, {"jugador": "jivo"}, {"jugador": "andres"}, {"jugador": "muelsa"}
+    ]
+  },
+  {
+    "id": "07-06-2026",
+    "temporada": "2025-26",
+    "split": 3,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "07-06-2026",
+    "rival": "Cyberpapis",
+    "local": true,
+    "golesFavor": 4,
+    "golesContra": 1,
+    "apariciones": [
+      {
+        "jugador": "andres",
+        "goles": 1,
+        "mvp": true
+      },
+      {
+        "jugador": "calle",
+        "goles": 1
+      },
+      {
+        "jugador": "divi",
+        "goles": 1
+      },
+      {
+        "jugador": "jivo",
+        "goles": 1
+      },
+      {"jugador": "pipa"}, {"jugador": "chala"}, {"jugador": "muelsa"}
+    ]
+  },
+
+
+  {
+    "id": "08-11-2026",
+    "temporada": "2026-27",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 1,
+    "fecha": "08-11-2026",
+    "rival": "Real Hiroshing de Gijón",
+    "local": true,
+    "golesFavor": null,
+    "golesContra": null,
+    "apariciones": [
+
+    ]
+  },
+  {
+    "id": "15-11-2026",
+    "temporada": "2026-27",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 2,
+    "fecha": "15-11-2026",
+    "rival": "Jager Gang Gijón",
+    "local": true,
+    "golesFavor": null,
+    "golesContra": null,
+    "apariciones": [
+      
+    ]
+  },
+  {
+    "id": "06-12-2026",
+    "temporada": "2026-27",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 3,
+    "fecha": "06-12-2026",
+    "rival": "Team Cremas",
+    "local": true,
+    "golesFavor": null,
+    "golesContra": null,
+    "apariciones": [
+      
+    ]
+  },
+  {
+    "id": "13-12-2026",
+    "temporada": "2026-27",
+    "split": 1,
+    "fase": "grupos",
+    "jornada": 4,
+    "fecha": "13-12-2026",
+    "rival": "UP Las Vegas",
+    "local": true,
+    "golesFavor": null,
+    "golesContra": null,
+    "apariciones": [
+      
+    ]
+  },
+  {
+    "id": "20-12-2026",
+    "temporada": "2026-27",
+    "split": 1,
+    "fase": "playoff",
+    "jornada": 4,
+    "fecha": "20-12-2026",
+    "rival": "por definir",
+    "local": true,
+    "golesFavor": null,
+    "golesContra": null,
+    "apariciones": [
+      
     ]
   }
 ]
