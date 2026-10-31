@@ -4,7 +4,7 @@ import Partido from '../../components/Partido.astro';
 import NombreJugador from '../../components/NombreJugador.astro';
 import NotaRegistro from '../../components/NotaRegistro.astro';
 import {
-  temporadas, partidosDe, balance, getJugador, statsJugador, url, fecha, hayAsistencias, divisionDe, textoIncomparecencia,
+  temporadas, partidosDe, balance, getJugador, statsJugador, golesPorPartido, url, fecha, hayAsistencias, divisionDe, textoIncomparecencia,
   splitsDe, clasificacion, tablaCompleta, jornadas, playoff, PLAZAS_PLAYOFF,
 } from '../../lib/stats';
 
@@ -131,20 +131,20 @@ const splits = splitsDe(t.id);
   <h2>Plantilla</h2>
   <div class="tabla-wrap">
     <table>
-      <thead><tr><th class="num">#</th><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
+      <thead><tr><th class="num">#</th><th>Jugador</th><th>Posición</th><th class="num">PJ</th><th class="num">G</th><th class="num">G/P</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
         {filasPlantilla.map((j, i) => {
           const st = statsJugador(j.id, lista);
           return (
             <>
               {apoyo.length > 0 && i === plantilla.length && (
-                <tr class="seccion"><td colspan="7">Jugadores de apoyo</td></tr>
+                <tr class="seccion"><td colspan="8">Jugadores de apoyo</td></tr>
               )}
               <tr>
                 <td class="num">{j.dorsal}</td>
                 <td><NombreJugador id={j.id} /></td>
                 <td>{j.posicion}</td>
-                <td class="num">{st.pj}</td><td class="num">{st.goles}</td>
+                <td class="num">{st.pj}</td><td class="num">{st.goles}</td><td class="num">{golesPorPartido(st)}</td>
                 <td class="num">{conAsist ? st.asistencias : '–'}</td><td class="num">{st.mvp}</td>
               </tr>
             </>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NotaRegistro from '../../components/NotaRegistro.astro';
-import { jugadores, temporadas, partidos, hayAsistencias, partidosDe, statsJugador, rolDe, esApoyo, url } from '../../lib/stats';
+import { jugadores, temporadas, partidos, hayAsistencias, partidosDe, statsJugador, rolDe, esApoyo, golesPorPartido, url } from '../../lib/stats';
 
 export function getStaticPaths() {
   return jugadores.map((j) => ({ params: { id: j.id }, props: { j } }));
@@ -27,6 +27,7 @@ const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.len
   <div class="cifras">
     <div class="cifra"><strong>{total.pj}</strong><span>Partidos</span></div>
     <div class="cifra"><strong>{total.goles}</strong><span>Goles</span></div>
+    <div class="cifra"><strong>{golesPorPartido(total)}</strong><span>Goles/partido</span></div>
     <div class="cifra"><strong>{partidos.some(hayAsistencias) ? total.asistencias : '–'}</strong><span>Asistencias</span></div>
     <div class="cifra"><strong>{total.mvp}</strong><span>MVP</span></div>
     {total.propias > 0 && <div class="cifra"><strong>{total.propias}</strong><span>En propia</span></div>}
@@ -43,12 +44,12 @@ const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.len
   <h2>Por temporada</h2>
   <div class="tabla-wrap">
     <table>
-      <thead><tr><th>Temporada</th><th class="num">PJ</th><th class="num">G</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
+      <thead><tr><th>Temporada</th><th class="num">PJ</th><th class="num">G</th><th class="num">G/P</th><th class="num">A</th><th class="num">MVP</th></tr></thead>
       <tbody>
         {porTemporada.map(({ t, s, lista }) => (
           <tr>
             <td><a href={url(`/temporadas/${t.id}/`)}>{t.nombre}</a>{esApoyo(t.id, j.id) && <span class="suave"> (apoyo)</span>}</td>
-            <td class="num">{s.pj}</td><td class="num">{s.goles}</td>
+            <td class="num">{s.pj}</td><td class="num">{s.goles}</td><td class="num">{golesPorPartido(s)}</td>
             <td class="num">{lista.some(hayAsistencias) ? s.asistencias : '–'}</td><td class="num">{s.mvp}</td>
           </tr>
         ))}
@@ -67,6 +68,10 @@ const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.len
   }
   .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
   .monograma { font-size: 2.6rem; font-weight: 800; color: var(--destacado); }
+
+  /* cifras algo más compactas para que quepan junto a la foto */
+  .datos :global(.cifras) { gap: 0.5rem; }
+  .datos :global(.cifra) { padding: 0.5rem 0.75rem; min-width: 0; }
 
   @media (max-width: 40rem) { /* en el móvil la foto va arriba */
     .cabecera-ficha { grid-template-columns: 1fr; }

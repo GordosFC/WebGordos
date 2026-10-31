@@ -1,43 +1,52 @@
 ---
 import Base from '../layouts/Base.astro';
-import NombreJugador from '../components/NombreJugador.astro';
 import NotaRegistro from '../components/NotaRegistro.astro';
-import { ranking, url } from '../lib/stats';
+import TablaRanking from '../components/TablaRanking.astro';
+import { ranking, rankingPromedioGoles, partidos, MIN_PARTIDOS_PROMEDIO } from '../lib/stats';
+
+const VISIBLES = 10; // cuántos salen siempre; el resto, con "Ver todos"
+
+const normal = (campo: Parameters<typeof ranking>[0]) =>
+  ranking(campo, partidos, Infinity).map(({ jugador, valor }) => ({ jugador, valor }));
+const promedio = rankingPromedioGoles().map(({ jugador, valor, goles, pj }) => ({
+  jugador, valor: valor.toFixed(2).replace('.', ','), extra: `(${goles} en ${pj})`,
+}));
 
 const tablas = [
-  { titulo: 'Goleadores', campo: 'goles' },
-  { titulo: 'Asistentes', campo: 'asistencias' },
-  { titulo: 'Más partidos', campo: 'pj' },
-  { titulo: 'MVP', campo: 'mvp' },
-  { titulo: 'Tarjetas amarillas', campo: 'amarillas' },
-  { titulo: 'Tarjetas rojas', campo: 'rojas' },
-] as const;
+  { titulo: 'Goleadores', filas: normal('goles') },
+  { titulo: 'Mejor promedio de goles', filas: promedio, nota: `Goles por partido jugado. Mínimo ${MIN_PARTIDOS_PROMEDIO} partidos.` },
+  { titulo: 'Asistentes', filas: normal('asistencias') },
+  { titulo: 'Más partidos', filas: normal('pj') },
+  { titulo: 'MVP', filas: normal('mvp') },
+  { titulo: 'Tarjetas amarillas', filas: normal('amarillas') },
+  { titulo: 'Tarjetas rojas', filas: normal('rojas') },
+];
 ---
 <Base titulo="Clasificaciones">
   <h1>Clasificaciones</h1>
   <p class="suave">Acumulado de todas las temporadas.</p>
   <NotaRegistro />
-  {tablas.map(({ titulo, campo }) => {
-    const filas = ranking(campo);
-    return (
-      <>
-        <h2>{titulo}</h2>
-        {filas.length === 0 ? <p class="suave">Todavía nadie.</p> : (
-          <div class="tabla-wrap">
-            <table>
-              <tbody>
-                {filas.map(({ jugador, valor }, i) => (
-                  <tr>
-                    <td class="num">{i + 1}</td>
-                    <td><NombreJugador id={jugador.id} /></td>
-                    <td class="num"><strong>{valor}</strong></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </>
-    );
-  })}
+  {tablas.map(({ titulo, filas, nota }) => (
+    <>
+      <h2>{titulo}</h2>
+      {nota && <p class="suave">{nota}</p>}
+      {filas.length === 0 ? <p class="suave">Todavía nadie.</p> : (
+        <>
+          <TablaRanking filas={filas.slice(0, VISIBLES)} />
+          {filas.length > VISIBLES && (
+            <details class="todos">
+              <summary><span class="abrir">Ver todos ({filas.length})</span><span class="cerrar">Ver menos</span></summary>
+              <TablaRanking filas={filas.slice(VISIBLES)} desde={VISIBLES + 1} />
+            </details>
+          )}
+        </>
+      )}
+    </>
+  ))}
 </Base>
+
+<style>
+  details.todos { margin-top: 0.4rem; }
+  details.todos > summary { cursor: pointer; padding: 0.45rem 0.1rem; font-weight: 700; color: var(--enlaces, inherit); }
+  details.todos:not([open]) .cerrar, details.todos[open] .abrir { display: none; }
+</style>

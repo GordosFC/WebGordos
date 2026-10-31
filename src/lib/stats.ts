@@ -376,3 +376,20 @@ export const textoIncomparecencia = (i?: 'rival' | 'nosotros' | 'otro') =>
 
 /** "20:30 h" mientras el partido no se ha jugado (si ya tiene resultado, no se muestra la hora). */
 export const horaPartido = (p: Partido) => (!jugado(p) && p.hora ? `${p.hora} h` : '');
+
+// ---------- Goles por partido ----------
+export const MIN_PARTIDOS_PROMEDIO = 10; // partidos jugados que hacen falta para entrar en el ranking de promedio
+
+/** "0,54" (o "–" si no ha jugado ningún partido) */
+export const golesPorPartido = (s: StatsJugador) => (s.pj > 0 ? (s.goles / s.pj).toFixed(2).replace('.', ',') : '–');
+
+/** Ranking de goles por partido; solo entran jugadores con un mínimo de partidos jugados. */
+export function rankingPromedioGoles(lista: Partido[] = partidos, minPartidos = MIN_PARTIDOS_PROMEDIO) {
+  return jugadores
+    .map((j) => {
+      const s = statsJugador(j.id, lista);
+      return { jugador: j, goles: s.goles, pj: s.pj, valor: s.pj > 0 ? s.goles / s.pj : 0 };
+    })
+    .filter((x) => x.pj >= minPartidos && x.valor > 0)
+    .sort((a, b) => b.valor - a.valor || b.pj - a.pj);
+}

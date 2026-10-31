@@ -1,0 +1,30 @@
+---
+import NombreJugador from './NombreJugador.astro';
+interface Fila { jugador: { id: string }; valor: string | number; extra?: string }
+interface Props { filas: Fila[]; desde?: number }
+const { filas, desde = 1 } = Astro.props;
+---
+<div class="tabla-wrap">
+  <table>
+    <colgroup><col class="c-pos" /><col /><col class="c-valor" /></colgroup>
+    <tbody>
+      {filas.map((f, i) => (
+        <tr>
+          <td class="num">{desde + i}</td>
+          <td><NombreJugador id={f.jugador.id} /></td>
+          <td class="num"><strong>{f.valor}</strong>{f.extra && <span class="suave"> {f.extra}</span>}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  /* columnas de ancho fijo para que la tabla de los 10 primeros y la de "Ver todos" queden alineadas */
+  table { table-layout: fixed; }
+  .c-pos { width: 3.5rem; }
+  .c-valor { width: 11rem; }
+  @media (max-width: 30rem) { .c-pos { width: 2.5rem; } .c-valor { width: 10rem; } }
+  td { overflow-wrap: anywhere; white-space: normal; }
+  td.num { white-space: nowrap; }
+</style>
