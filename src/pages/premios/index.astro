@@ -97,10 +97,8 @@ const titulo = (id: string) => { const n = nombreTemporada(id); return n === id 
                   {c.ganador ? (
                     <>
                       <span class="monograma">{iniciales(c.ganador)}</span>
-                      {c.fotoGanador && (
-                        <img src={url(`/premios/${g.temporada}/${c.fotoGanador}`)} alt={`${getJugador(c.ganador).nombre}, ${c.nombre}`}
-                             loading="lazy" onerror="this.style.display='none'" />
-                      )}
+                      <img src={url(`/premios/${g.temporada}/${c.fotoGanador ?? `${c.id}.jpg`}`)} alt={`${getJugador(c.ganador).nombre}, ${c.nombre}`}
+                           loading="lazy" onerror="this.style.display='none'" />
                     </>
                   ) : (
                     <span class="interrogante">?</span>

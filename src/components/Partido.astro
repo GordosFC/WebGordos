@@ -1,5 +1,5 @@
 ---
-import { type Partido, jugado, resultado, fecha, etiquetaPartido, nombreClub, textoIncomparecencia, url } from '../lib/stats';
+import { type Partido, jugado, resultado, fecha, horaPartido, etiquetaPartido, nombreClub, textoIncomparecencia, url } from '../lib/stats';
 interface Props { p: Partido }
 const { p } = Astro.props;
 const r = resultado(p);
@@ -11,7 +11,7 @@ const marcador = jugado(p)
   <span class={`res ${r ?? 'P'}`}>{r ?? '–'}</span>
   <span class="info">
     <strong>{p.local ? nombreClub : p.rival} {marcador} {p.local ? p.rival : nombreClub}</strong>
-    <small>{fecha(p.fecha)} · {etiquetaPartido(p)}{p.incomparecencia && ` · ${textoIncomparecencia(p.incomparecencia)}`}</small>
+    <small>{fecha(p.fecha)}{horaPartido(p) && ` · ${horaPartido(p)}`} · {etiquetaPartido(p)}{p.incomparecencia && ` · ${textoIncomparecencia(p.incomparecencia)}`}</small>
   </span>
 </a>
 

@@ -23,6 +23,7 @@ export type Partido = {
   fase: 'grupos' | 'playoff';
   jornada?: number;              // solo en fase de grupos
   nota?: string;                 // p. ej. "Ganamos en los penaltis"
+  hora?: string;                 // "20:30": solo se muestra mientras el partido no se ha jugado
   propiaRival?: number;          // goles a nuestro favor marcados en propia puerta por el rival
   incomparecencia?: 'rival' | 'nosotros'; // quién no se presentó (resultado por reglamento, sin alineación ni goles)
   golesFavor: number | null;
@@ -45,8 +46,21 @@ function normalizarFecha(valor: string, donde: string): string {
   return iso;
 }
 
+/** La hora se escribe HH:MM (por ejemplo 20:30). */
+function normalizarHora(valor: string, donde: string): string {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(valor.trim());
+  if (!m || Number(m[1]) > 23 || Number(m[2]) > 59) {
+    throw new Error(`Hora no válida en ${donde}: "${valor}". El formato es HH:MM, por ejemplo 20:30.`);
+  }
+  return `${m[1].padStart(2, '0')}:${m[2]}`;
+}
+
 export const partidos = (rawPartidos as Partido[])
-  .map((p) => ({ ...p, fecha: normalizarFecha(p.fecha, `el partido "${p.id}"`) }))
+  .map((p) => ({
+    ...p,
+    fecha: normalizarFecha(p.fecha, `el partido "${p.id}"`),
+    hora: p.hora ? normalizarHora(p.hora, `el partido "${p.id}"`) : undefined,
+  }))
   .sort((a, b) => a.fecha.localeCompare(b.fecha));
 
 // Ruta con el `base` de GitHub Pages incluido
@@ -213,6 +227,7 @@ export type PartidoJornada = {
   local: string; visitante: string;
   golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
   idPartido?: string;                                   // solo en nuestros partidos: para enlazar a su página
+  hora?: string;                                         // hora del partido, si aún no se ha jugado
   incomparecencia?: 'rival' | 'nosotros' | 'otro';       // partido dado por incomparecencia ('otro' = entre otros equipos)
   sinGoles?: boolean;                                   // nuestro partido jugado en el que no marcamos
   goleadores?: { id: string; nombre: string; goles: number }[]; // solo en nuestros partidos
@@ -234,6 +249,7 @@ export function jornadas(temporadaId: string, split: number) {
     const ok = jugado(p);
     añadir(p.jornada!, {
       idPartido: p.id,
+      hora: ok ? undefined : p.hora,
       incomparecencia: p.incomparecencia,
       sinGoles: ok && p.golesFavor === 0 && !p.incomparecencia,
       local: p.local ? nombreClub : p.rival,
@@ -357,3 +373,6 @@ export const divisionDe = (temporadaId: string, split: number): number | undefin
 
 export const textoIncomparecencia = (i?: 'rival' | 'nosotros' | 'otro') =>
   i === 'rival' ? 'Incomparecencia del rival' : i === 'nosotros' ? 'Incomparecencia nuestra' : i ? 'Incomparecencia' : '';
+
+/** "20:30 h" mientras el partido no se ha jugado (si ya tiene resultado, no se muestra la hora). */
+export const horaPartido = (p: Partido) => (!jugado(p) && p.hora ? `${p.hora} h` : '');

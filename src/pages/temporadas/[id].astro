@@ -75,7 +75,7 @@ const splits = splitsDe(t.id);
                         <>
                           <tr class={m.nuestro ? 'nuestro' : ''}>
                             <td class="der">{m.local}</td>
-                            <td class="marcador">{m.golesLocal ?? '–'} – {m.golesVisitante ?? '–'}</td>
+                            <td class="marcador">{m.golesLocal === null && m.hora ? `${m.hora} h` : `${m.golesLocal ?? '–'} – ${m.golesVisitante ?? '–'}`}</td>
                             <td>{m.visitante}</td>
                             <td class="ver">{m.idPartido ? <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a> : m.incomparecencia ? <span class="suave">Incomparecencia</span> : null}</td>
                           </tr>

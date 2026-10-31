@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Partido from '../components/Partido.astro';
 import Carrusel from '../components/Carrusel.astro';
 import NombreJugador from '../components/NombreJugador.astro';
-import { partidos, balance, ranking, ultimosPartidos, proximoPartido, temporadaActual, fecha, url, nombreClub, etiquetaPartido, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
+import { partidos, balance, ranking, ultimosPartidos, proximoPartido, temporadaActual, fecha, horaPartido, url, nombreClub, etiquetaPartido, noticias, galaAbierta, nombreTemporada } from '../lib/stats';
 
 const b = balance(partidos);
 const proximo = proximoPartido();
@@ -24,7 +24,7 @@ const goleadores = ranking('goles', partidos, 3);
     <section class="proximo">
       <p>Próximo partido</p>
       <h2>{proximo.local ? nombreClub : proximo.rival} vs {proximo.local ? proximo.rival : nombreClub}</h2>
-      <p>{fecha(proximo.fecha)} · {etiquetaPartido(proximo)}</p>
+      <p>{fecha(proximo.fecha)}{horaPartido(proximo) && ` · ${horaPartido(proximo)}`} · {etiquetaPartido(proximo)}</p>
     </section>
   ) : (
     <section class="proximo">
