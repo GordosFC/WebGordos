@@ -81,7 +81,7 @@
     "tipo": "general",
     "titulo": "Confirmado el calendario del 1er split de la temporada 2026/27",
     "resumen": "Ya está disponible el calendario del primer split de esta nueva temporada.",
-    "cuerpo": "Los partidos se podrán ver en el apartado de temporada, clickando en la temporada actual. El partido que esté más cerca se podrá ver en el inicio de la web, tanto el rival, como la fecha.",
+    "cuerpo": "Los partidos se podrán ver en el apartado de [temporada](/temporadas/2026-27/). El partido que esté más cerca se podrá ver en el inicio de la web, tanto el rival, como la fecha. Abajo se puede ver una foto con todos los grupos, el nuestro el el D de 3ª división.",
     "destacada": true,
     "fotos": [
       "grupos.png"
@@ -94,7 +94,8 @@
     "tipo": "premio",
     "titulo": "La Hamburguesa de Oro 2026 ya tiene dueño",
     "resumen": "Calle Janolo consigue el galardón a mejor jugador de la temporada.",
-    "cuerpo": "Después de la gala de premios correspondientes a la temporada 25/26, ya conocemos que Calle Jnaolo, nuestro capitán, sale elegido como mejor jugador. Además el mejor gol se lo lleva Nivo el pirata, el premio al mejor portero Pipa el Pro, que ha sido jugador de apoyo esta temporada, y como máximo goleador tenemos a Toni el Flaco, con nada más que 5 goles, temporada poco goleadora del equipo en genral.",
+    "cuerpo": "Después de la gala de premios correspondientes a la temporada 25/26, ya conocemos que [Calle Janolo](/jugadores/calle/), nuestro capitán, sale elegido como mejor jugador. Además el mejor gol se lo lleva [Nivo el Pirata](/jugadores/nivo/), el premio al mejor portero [Pipa el Pro](/jugadores/pipa/), que ha sido jugador de apoyo esta temporada, y como máximo goleador tenemos a [Toni el Flaco](/jugadores/janto/), con nada más que 5 goles, temporada poco goleadora del equipo en genral.",
+    "enlace": { "texto": "Ver resultados", "url": "/premios/" },
     "destacada": true,
     "fotos":[
       "janto.jpg",

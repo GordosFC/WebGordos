@@ -7,6 +7,24 @@ export function getStaticPaths() {
 }
 const { n } = Astro.props;
 const parrafos = (n.cuerpo ?? n.resumen).split(/\n\s*\n/);
+// Botón opcional al final de la noticia: "enlace": { "texto": "Ver el calendario", "url": "/temporadas/2026-27/" }
+const boton = (n as typeof n & { enlace?: { texto: string; url: string } }).enlace;
+
+// Enlaces dentro del texto: [texto del enlace](/ruta/de/la/web/)  o  [texto](https://otra-web.com)
+type Trozo = { texto: string; href?: string; externo?: boolean };
+const destino = (d: string) => (/^https?:\/\//.test(d) ? d : url(d.startsWith('/') ? d : `/${d}`));
+function trozos(parrafo: string): Trozo[] {
+  const res: Trozo[] = [];
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let ultimo = 0;
+  for (const m of parrafo.matchAll(re)) {
+    if (m.index! > ultimo) res.push({ texto: parrafo.slice(ultimo, m.index) });
+    res.push({ texto: m[1], href: destino(m[2]), externo: /^https?:\/\//.test(m[2]) });
+    ultimo = m.index! + m[0].length;
+  }
+  if (ultimo < parrafo.length) res.push({ texto: parrafo.slice(ultimo) });
+  return res;
+}
 const portada = portadaDe(n);
 const resto = (n.fotos ?? []).filter((f) => f !== portada);
 ---
@@ -14,7 +32,12 @@ const resto = (n.fotos ?? []).filter((f) => f !== portada);
   <p class="suave">{etiquetaTipo[n.tipo]} · {fecha(n.fecha)}</p>
   <h1>{n.titulo}</h1>
   {portada && <img class="portada" src={fotoUrl(n, portada)} alt={n.titulo} />}
-  {parrafos.map((p) => <p>{p}</p>)}
+  {parrafos.map((p) => (
+    <p>{trozos(p).map((t) => t.href
+      ? <a href={t.href} {...(t.externo ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{t.texto}</a>
+      : t.texto)}</p>
+  ))}
+  {boton && <p><a class="boton" href={destino(boton.url)} {...(/^https?:\/\//.test(boton.url) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{boton.texto} →</a></p>}
 
   {resto.length > 0 && (
     <>
@@ -33,6 +56,8 @@ const resto = (n.fotos ?? []).filter((f) => f !== portada);
 </Base>
 
 <style>
+  .boton { display: inline-block; padding: 0.6rem 1.1rem; background: var(--destacado); color: #17211b; font-weight: 700; text-decoration: none; }
+  .boton:hover { filter: brightness(1.08); text-decoration: underline; }
   .portada { display: block; width: 100%; max-height: 28rem; object-fit: cover; margin: 0 0 1.2rem; background: var(--linea); }
   .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 0.6rem; }
   .galeria img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: var(--linea); }
