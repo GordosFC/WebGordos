@@ -1,5 +1,6 @@
 ---
 import { url, nombreClub } from '../lib/stats';
+import Patrocinadores from '../components/Patrocinadores.astro';
 interface Props { titulo?: string }
 const { titulo } = Astro.props;
 const nav = [
@@ -33,6 +34,7 @@ const nav = [
     <main>
       <slot />
     </main>
+    <Patrocinadores />
     <footer class="pie">#vamosgordos</footer>
   </body>
 </html>

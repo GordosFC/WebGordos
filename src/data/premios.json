@@ -38,21 +38,21 @@
   },
   {
     "temporada": "2025-26",
-    "estado": "votaciones",
+    "estado": "entregados",
     "categorias": [
       { "id": "mejor-jugador", "nombre": "Hamburguesa de oro", "fotoGanador": "mejor-jugador.jpg",
-        "nominados": [{ "jugador": "calle" }, { "jugador": "iyan" }, { "jugador": "nivo" }, { "jugador": "chala" },
-        { "jugador": "muelsa" }, { "jugador": "pipa" }, { "jugador": "pelayo" }, { "jugador": "sergio" }], "ganador": null },
+        "nominados": [{ "jugador": "calle", "puntos": 21 }, { "jugador": "iyan", "puntos": 16 }, { "jugador": "nivo", "puntos": 14 }, { "jugador": "chala", "puntos": 19 },
+        { "jugador": "muelsa", "puntos": 13 }, { "jugador": "pipa", "puntos": 19 }, { "jugador": "pelayo", "puntos": 14 }, { "jugador": "sergio", "puntos": 9 }], "ganador": "calle" },
       { "id": "mejor-portero", "nombre": "Pizza de oro", "fotoGanador": "mejor-portero.jpg",
-        "nominados": [{ "jugador": "pomo" }, { "jugador": "pipa" }], "ganador": null },
+        "nominados": [{ "jugador": "pomo", "puntos": 4 }, { "jugador": "pipa", "puntos": 5 }], "ganador": "pipa" },
       { "id": "maximo-goleador", "nombre": "Perrito caliente de oro", "fotoGanador": "maximo-goleador.jpg",
-        "nominados": [], "ganador": null },
+        "nominados": [], "ganador": "janto" },
       { "id": "mejor-gol", "nombre": "Guindilla de oro", "fotoGanador": "mejor-gol.jpg",
         "nominados": [
           { "jugador": "nivo", "detalle": "Tiro imparable para el portero, consiguiendo un hat trick." },
           { "jugador": "calle", "detalle": "Cruzada, rasa y fuerte donde no llega el portero." },
           { "jugador": "janto", "detalle": "Presión alta, se la quita al portero y gol." }
-        ], "ganador": null }
+        ], "ganador": "nivo" }
     ]
   }
 ]

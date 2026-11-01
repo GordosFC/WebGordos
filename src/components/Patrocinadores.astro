@@ -1,0 +1,42 @@
+---
+import patrocinadores from '../data/patrocinadores.json';
+import { url } from '../lib/stats';
+
+type Patrocinador = { nombre: string; logo?: string; web?: string };
+const lista = patrocinadores as Patrocinador[];
+---
+{lista.length > 0 && (
+  <section class="patrocinadores" aria-label="Patrocinadores">
+    <p class="titulo">Patrocinadores</p>
+    <ul>
+      {lista.map((p) => {
+        const Etiqueta = p.web ? 'a' : 'span';
+        const enlace = p.web ? { href: p.web, target: '_blank', rel: 'noopener noreferrer sponsored' } : {};
+        return (
+          <li>
+            <Etiqueta class="chip" title={p.nombre} {...enlace}>
+              {p.logo && (
+                <img src={url(`/patrocinadores/${p.logo}`)} alt={p.nombre} loading="lazy"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" />
+              )}
+              <span class="nombre" style={p.logo ? 'display:none' : ''}>{p.nombre}</span>
+            </Etiqueta>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+)}
+
+<style>
+  .patrocinadores { border-top: 1px solid var(--linea); padding: 1.6rem 1rem 0.6rem; text-align: center; }
+  .titulo { margin: 0 auto 0.9rem; max-width: none; color: var(--suave); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem 1.2rem; }
+  .chip {
+    display: flex; align-items: center; justify-content: center; height: 3.4rem; padding: 0.45rem 1rem;
+    background: #fff; border: 1px solid var(--linea); color: #17211b; font-weight: 700; text-decoration: none;
+  }
+  .chip img { height: 100%; width: auto; max-width: 9rem; object-fit: contain; }
+  /* Para logos en blanco y negro hasta pasar el ratón por encima, añade: filter: grayscale(1); opacity: 0.8; */
+  a.chip:hover { border-color: var(--destacado); }
+</style>

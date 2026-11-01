@@ -54,7 +54,6 @@
     "titulo": "Confirmado. Otra temporada más en el AHA",
     "resumen": "Gordos volverá una temporada más a la liga del Abierto Hasta el Amanecer en mareo.",
     "cuerpo": "Después de la temporada pasada con pocos goles y con pocas victorias, volvemos con más ganas que nunca y confiados en que este año conseguiremos cosas grandes. Además, algunos de nuestros jugadores que no estuvieron disponibles este úlitmo año por Erasmus vuelven mejor entrenados que nunca. Los jugadores son: Push la Bomba, Delmo el Tiktoker y Davo el Bicicletero.",
-    "destacada": true,
     "portada": "foto.jpg"
   },
   {
@@ -64,7 +63,6 @@
     "titulo": "Nominados para la Hamburguesa de Oro 2025/26",
     "resumen": "Ya están los nominados a mejor jugador, mejor portero, máximo goleador y mejor gol de la temporada.",
     "cuerpo": "Las votaciones están abiertas. Consulta los nominados en la página de premios. La gala se celabrará el día 31 de octubre.",
-    "destacada": true,
     "fotos": [
       "calle.jpg",
       "chala.jpg",
@@ -89,5 +87,30 @@
       "grupos.png"
     ],
     "portada": "portada-split1.jpg"
+  },
+  {
+    "id": "ganadores-26",
+    "fecha": "01-11-2026",
+    "tipo": "premio",
+    "titulo": "La Hamburguesa de Oro 2026 ya tiene dueño",
+    "resumen": "Calle Janolo consigue el galardón a mejor jugador de la temporada.",
+    "cuerpo": "Después de la gala de premios correspondientes a la temporada 25/26, ya conocemos que Calle Jnaolo, nuestro capitán, sale elegido como mejor jugador. Además el mejor gol se lo lleva Nivo el pirata, el premio al mejor portero Pipa el Pro, que ha sido jugador de apoyo esta temporada, y como máximo goleador tenemos a Toni el Flaco, con nada más que 5 goles, temporada poco goleadora del equipo en genral.",
+    "destacada": true,
+    "fotos":[
+      "janto.jpg",
+      "pipa.jpg",
+      "nivo.jpg"
+    ],
+    "portada": "calle.jpg"
+  },
+  {
+    "id": "fichajes-2627",
+    "fecha": "02-11-2026",
+    "tipo": "fichaje",
+    "titulo": "Nuevos fichajes para Gordos FC",
+    "resumen": "Dos nuevos jugadores se incorporarán a la plantilla. En unos días se conoceran.",
+    "cuerpo": "Tras la finalización de la gala de premios podemos decir orgullosamente que tenemos a dos jugadoes ansiosos por ser fichados por el club. Dos jugadores que ya han venido alguna vez como jugadores de apoyo, pero que esta vez quieren formar parte de la plantilla principal.",
+    "destacada": true,
+    "portada": "nuevos-fichajes-2627.jpg"
   }
 ]
