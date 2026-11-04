@@ -17,6 +17,6 @@
   "divisiones": { "1": 3, "2": 3, "3": 3 } },
 
   { "id": "2026-27", "nombre": "Temporada 2026/27",
-  "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "puch", "delmo", "davo", "jivo", "pelayo", "llanty"],
+  "plantilla": ["calle", "muelsa", "janto", "nivo", "pomo", "puch", "delmo", "davo", "jivo", "pelayo", "llanty", "alegre", "pipa"],
   "splitActual": 1, "divisiones": { "1": 3 }}
 ]

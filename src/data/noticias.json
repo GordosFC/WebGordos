@@ -111,7 +111,20 @@
     "titulo": "Nuevos fichajes para Gordos FC",
     "resumen": "Dos nuevos jugadores se incorporarán a la plantilla. En unos días se conoceran.",
     "cuerpo": "Tras la finalización de la gala de premios podemos decir orgullosamente que tenemos a dos jugadoes ansiosos por ser fichados por el club. Dos jugadores que ya han venido alguna vez como jugadores de apoyo, pero que esta vez quieren formar parte de la plantilla principal.",
-    "destacada": true,
     "portada": "nuevos-fichajes-2627.jpg"
+  },
+  {
+    "id": "fichajes-pipa-alegre",
+    "fecha": "04-11-2026",
+    "tipo": "fichaje",
+    "titulo": "Pipa y Alegre se unen a Gordos FC",
+    "resumen": "Los nuevos fichajes ya están aquí. Conoce a Alegre el Triste y Pipa el Pro.",
+    "cuerpo": "Alegre y Pipa, dos jugadores que ya habian venido algun que otro partido como apoyos en temporadas pasadas, se unen oficialmente al club para aportar lo máximo de ellos. [Pipa el Pro](/jugadores/pipa/), un portero fantástico que nos aportara un gran seguridad defensiva y un buen juego de pies. [Alegre el Triste](/jugadores/alegre/), un jugador con mucha clase, que nos aportará tanto su mágia como su gran actitud colaborativa. Dos refuerzos de lujo que ya sienten nuestros colores y que llegan dispuestos a dejarse la piel en el campo.",
+    "destacada": true,
+    "fotos": [
+      "pipa.jpg",
+      "alegre.jpg"
+    ],
+    "portada": "portada.jpg"
   }
 ]
