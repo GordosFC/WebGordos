@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import NotaRegistro from '../../components/NotaRegistro.astro';
-import { jugadores, temporadas, partidos, hayAsistencias, partidosDe, statsJugador, rolDe, esApoyo, golesPorPartido, url } from '../../lib/stats';
+import { jugadores, temporadas, partidos, hayAsistencias, partidosDe, statsJugador, rolDe, esApoyo, golesPorPartido, premiosDe, infoPremio, url } from '../../lib/stats';
 
 export function getStaticPaths() {
   return jugadores.map((j) => ({ params: { id: j.id }, props: { j } }));
@@ -17,6 +17,7 @@ const soloApoyo = porTemporada.length > 0 && porTemporada.every(({ t }) => esApo
 const foto = (j as typeof j & { foto?: string }).foto ?? `${j.id}.jpg`;
 const palabras = j.nombre.split(' ');
 const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.length - 1][0] : '')).toUpperCase();
+const premios = premiosDe(j.id);
 ---
 <Base titulo={j.nombre}>
   <div class="cabecera-ficha">
@@ -57,6 +58,30 @@ const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.len
     </table>
   </div>
   <NotaRegistro />
+
+  {premios.length > 0 && (
+    <section class="vitrina">
+      <h2>Vitrina</h2>
+      <div class="trofeos">
+        {premios.map(({ anio, categoria }) => {
+          const i = infoPremio(categoria.id);
+          return (
+            <figure class="trofeo-card">
+              <div class="foto-trofeo">
+                <img src={url(`/premios/${categoria.foto ?? `${categoria.id}.png`}`)} alt={categoria.nombre} loading="lazy"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+                <span class="emoji" aria-hidden="true">{i.emoji}</span>
+              </div>
+              <figcaption>
+                <strong>{categoria.nombre} ({anio})</strong>
+                {i.subtitulo && <span class="sub">{i.subtitulo}</span>}
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    </section>
+  )}
 </Base>
 
 <style>
@@ -68,13 +93,23 @@ const iniciales = (palabras[0][0] + (palabras.length > 1 ? palabras[palabras.len
   }
   .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
   .monograma { font-size: 2.6rem; font-weight: 800; color: var(--destacado); }
-
   /* cifras algo más compactas para que quepan junto a la foto */
   .datos :global(.cifras) { gap: 0.5rem; }
   .datos :global(.cifra) { padding: 0.5rem 0.75rem; min-width: 0; }
-
   @media (max-width: 40rem) { /* en el móvil la foto va arriba */
     .cabecera-ficha { grid-template-columns: 1fr; }
     .foto { order: -1; width: 7.5rem; }
   }
+
+  /* Vitrina de premios */
+  .vitrina { margin-top: 2.5rem; padding: 1.2rem 1.2rem 1.6rem; color: #fff; background: var(--cesped); border-top: 0.3rem solid var(--destacado); }
+  .vitrina h2 { margin: 0 0 1rem; color: var(--destacado); font-size: 1.3rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .trofeos { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 1.4rem 1rem; }
+  .trofeo-card { margin: 0; text-align: center; }
+  .foto-trofeo { position: relative; aspect-ratio: 1; display: grid; place-items: center; background: radial-gradient(circle, rgba(241, 196, 15, 0.3) 0%, rgba(241, 196, 15, 0) 68%); }
+  .foto-trofeo img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0.5rem 0.8rem rgba(0, 0, 0, 0.6)); }
+  .emoji { display: none; font-size: 5rem; line-height: 1; }
+  figcaption { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  figcaption strong { font-size: 1rem; line-height: 1.2; }
+  .sub { color: rgba(255, 255, 255, 0.55); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 </style>

@@ -397,3 +397,25 @@ export function rankingPromedioGoles(lista: Partido[] = partidos, minPartidos = 
     .filter((x) => x.pj >= minPartidos && x.valor > 0)
     .sort((a, b) => b.valor - a.valor || b.pj - a.pj);
 }
+
+// ---------- Vitrina: premios ganados por un jugador ----------
+/** Orden, texto gris y emoji (mientras no hay foto) de cada premio. Los mismos ids que en premios.json. */
+export const PREMIOS_INFO: Record<string, { orden: number; subtitulo: string; emoji: string }> = {
+  'mejor-jugador':   { orden: 1, subtitulo: 'Mejor jugador',   emoji: '🍔' },
+  'maximo-goleador': { orden: 2, subtitulo: 'Máximo goleador', emoji: '🌭' },
+  'mejor-portero':   { orden: 3, subtitulo: 'Mejor portero',   emoji: '🍕' },
+  'mejor-gol':       { orden: 4, subtitulo: 'Mejor gol',       emoji: '🌶️' },
+};
+export const infoPremio = (id: string) => PREMIOS_INFO[id] ?? { orden: 99, subtitulo: '', emoji: '🏆' };
+
+/** Premios ganados por un jugador, de la gala más reciente a la más antigua. `anio` es el año en que acaba la temporada (2025-26 → 2026). */
+export function premiosDe(jugadorId: string) {
+  return galas.flatMap((g) => {
+    const m = /^(\d{4})-(\d{2})$/.exec(g.temporada);
+    const anio = m ? String(Number(m[1]) + 1) : g.temporada;
+    return g.categorias
+      .filter((c) => c.ganador === jugadorId)
+      .sort((a, b) => infoPremio(a.id).orden - infoPremio(b.id).orden)
+      .map((c) => ({ temporada: g.temporada, anio, categoria: c as typeof c & { foto?: string } }));
+  });
+}
