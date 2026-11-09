@@ -25,6 +25,8 @@ const goleadores = ranking('goles', partidos, 3);
       <p>Próximo partido</p>
       <h2>{proximo.local ? nombreClub : proximo.rival} vs {proximo.local ? proximo.rival : nombreClub}</h2>
       <p>{fecha(proximo.fecha)}{horaPartido(proximo) && ` · ${horaPartido(proximo)}`} · {etiquetaPartido(proximo)}</p>
+      <p>📆</p>
+      <p><a href={url('/temporadas/2026-27')}>Ver calendario</a></p>
     </section>
   ) : (
     <section class="proximo">
@@ -33,6 +35,7 @@ const goleadores = ranking('goles', partidos, 3);
       <p>{actual ? `${actual.nombre}${actual.splitActual ? ` · Split ${actual.splitActual}` : ''} · ` : ''}Calendario por definir</p>
     </section>
   )}
+  
 
   {gala && (
     <a class="gala" href={url('/premios/')}>
