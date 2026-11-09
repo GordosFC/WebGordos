@@ -75,5 +75,19 @@
       "golesVisitante": 4
     }
   ]
+},
+{
+  "temporada": "2026-27",
+  "split": 1,
+  "grupoFinalizado": false,
+  "resultados": [
+    {
+      "jornada": 1,
+      "local": "Team Cremas",
+      "visitante": "UP Las Vegas",
+      "golesLocal": 5,
+      "golesVisitante": 0
+    }
+  ]
 }
 ]
