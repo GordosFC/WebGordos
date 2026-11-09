@@ -228,6 +228,7 @@ export type PartidoJornada = {
   golesLocal: number | null; golesVisitante: number | null; nuestro: boolean;
   idPartido?: string;                                   // solo en nuestros partidos: para enlazar a su página
   hora?: string;                                         // hora del partido, si aún no se ha jugado
+  asistentes?: { id: string; n: number }[];              // quién dio asistencias en nuestro partido
   incomparecencia?: 'rival' | 'nosotros' | 'otro';       // partido dado por incomparecencia ('otro' = entre otros equipos)
   sinGoles?: boolean;                                   // nuestro partido jugado en el que no marcamos
   goleadores?: { id: string; nombre: string; goles: number }[]; // solo en nuestros partidos
@@ -250,6 +251,9 @@ export function jornadas(temporadaId: string, split: number) {
     añadir(p.jornada!, {
       idPartido: p.id,
       hora: ok ? undefined : p.hora,
+      asistentes: ok && hayAsistencias(p)
+        ? p.apariciones.filter((a) => (a.asistencias ?? 0) > 0).sort((a, b) => b.asistencias! - a.asistencias!).map((a) => ({ id: a.jugador, n: a.asistencias! }))
+        : [],
       incomparecencia: p.incomparecencia,
       sinGoles: ok && p.golesFavor === 0 && !p.incomparecencia,
       local: p.local ? nombreClub : p.rival,

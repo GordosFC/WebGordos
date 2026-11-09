@@ -1382,10 +1382,32 @@
     "hora": "13:00",
     "rival": "Real Hiroshing de Gijón",
     "local": true,
-    "golesFavor": null,
-    "golesContra": null,
+    "golesFavor": 4,
+    "golesContra": 2,
     "apariciones": [
-
+      {
+        "jugador": "calle",
+        "goles": 2,
+        "mvp": true
+      },
+      {
+        "jugador": "janto",
+        "goles": 1,
+        "asistencias": 1
+      },
+      {
+        "jugador": "llanty",
+        "asistencias": 2
+      },
+      {
+        "jugador": "alegre",
+        "goles": 1
+      },
+      {
+        "jugador": "nivo",
+        "asistencias": 1
+      },
+      {"jugador": "muelsa"}, {"jugador": "jivo"}, {"jugador": "puch"},  {"jugador": "tomas"}
     ]
   },
   {

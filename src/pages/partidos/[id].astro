@@ -14,6 +14,9 @@ const apoyo = p.apariciones.filter((a) => esApoyo(p.temporada, a.jugador));
 const ordenadas = [...titulares, ...apoyo];
 const propiaRival = p.propiaRival ?? 0;
 const enPropia = p.apariciones.filter((a) => (a.propia ?? 0) > 0);
+const asistentes = hayAsistencias(p)
+  ? p.apariciones.filter((a) => (a.asistencias ?? 0) > 0).sort((a, b) => b.asistencias! - a.asistencias!)
+  : [];
 const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) => b.goles! - a.goles!);
 ---
 <Base titulo={titulo}>
@@ -53,6 +56,17 @@ const goleadores = p.apariciones.filter((a) => (a.goles ?? 0) > 0).sort((a, b) =
             <>{i > 0 && ', '}<NombreJugador id={a.jugador} />{a.propia! > 1 && ` (${a.propia})`}</>
           ))}
         </p>
+      )}
+
+      {asistentes.length > 0 && (
+        <>
+          <h2>Asistencias</h2>
+          <ul class="lista-goles">
+            {asistentes.map((a) => (
+              <li><NombreJugador id={a.jugador} /> {'🅰️'.repeat(a.asistencias!)}</li>
+            ))}
+          </ul>
+        </>
       )}
     </>
   )}

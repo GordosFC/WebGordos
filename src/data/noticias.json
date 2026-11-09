@@ -126,5 +126,30 @@
       "alegre.jpg"
     ],
     "portada": "portada.jpg"
+  },
+  {
+    "id": "partido-8-11-26",
+    "fecha": "09-11-2026",
+    "tipo": "partido",
+    "titulo": "Vuelve Gordos FC con una victoria en su debut",
+    "resumen": "Gordos FC consigue su primera victoria del split ganando a Real Hiroshing de Gijón.",
+    "cuerpo": "Tras un largo verano y una temporada pasada con muchos tropiezos y malas pasadas, Gordos vuelve por todo lo alto. El equipo ha demostrado una muy buena actitud, consiguiendo una victoria contra el Real Hiroshing de Gijón por 4 goles a 2.\n\nGran partido de nuestro capitán [Calle Janolo](/jugadores/calle/), que ha salido MVP del partido después de su doblete, tras dos asistencias de un estelar [Llanty Crack](/jugadores/llanty/). Los otros goles tienen la firma del debutante [Alegre el Triste](/jugadores/alegre/) con asistencia de uno de nuestro capitanes, [Toni el Flaco](/jugadores/janto/), que además marcó su propio gol de un corner centrado por [Nivo el Pirata](/jugadores/nivo/).\n\nMención especial y agradeciemiento a [Tomas el Petardo](/jugadores/tomas/), que ha vuelto después de mucho tiempo a jugar con nosotros, esta vez defendiendo la porteria de la mejor manera posible.\n\nAhora toca centrarse en el próximo partido, un partido especialmente importante para algunos de nuestros jugadores y muy clave para el club.\n\n¡Vamos Gordos 💛!",
+    "destacada": true,
+    "fotos": [
+      "foto_partido (1).jpeg",
+      "foto_partido (2).jpeg",
+      "foto_partido (3).jpeg",
+      "foto_partido (4).jpeg",
+      "foto_partido (5).jpeg",
+      "foto_partido (6).jpeg",
+      "foto_partido (7).jpeg",
+      "foto_partido (8).jpeg",
+      "foto_partido (10).jpeg",
+      "foto_partido (11).jpeg",
+      "foto_partido (12).jpeg",
+      "foto_partido (13).jpeg",
+      "foto_partido (14).jpeg"
+    ],
+    "portada": "equipo.jpg"
   }
 ]

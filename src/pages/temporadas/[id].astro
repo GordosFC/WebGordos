@@ -79,9 +79,10 @@ const splits = splitsDe(t.id);
                             <td>{m.visitante}</td>
                             <td class="ver">{m.idPartido ? <a href={url(`/partidos/${m.idPartido}/`)}>Ver partido →</a> : m.incomparecencia ? <span class="suave">Incomparecencia</span> : null}</td>
                           </tr>
-                          {m.goleadores && (m.goleadores.length > 0 || !!m.propiaRival || (m.enPropia?.length ?? 0) > 0) && (
+                          {m.goleadores && (m.goleadores.length > 0 || !!m.propiaRival || (m.enPropia?.length ?? 0) > 0 || (m.asistentes?.length ?? 0) > 0) && (
                             <tr class="nuestro goleadores">
                               <td colspan="4">
+                                <div class="goles-y-asistencias">
                                 <ul class="lista-goles">
                                   {m.goleadores.map((g) => (
                                     <li><NombreJugador id={g.id} /> {'⚽'.repeat(g.goles)}</li>
@@ -91,6 +92,14 @@ const splits = splitsDe(t.id);
                                     <li><NombreJugador id={g.id} /> <span class="suave">en propia{g.goles > 1 ? ` (${g.goles})` : ''}</span></li>
                                   ))}
                                 </ul>
+                                {m.asistentes && m.asistentes.length > 0 && (
+                                  <ul class="lista-goles">
+                                    {m.asistentes.map((a) => (
+                                      <li><NombreJugador id={a.id} /> {'🅰️'.repeat(a.n)}</li>
+                                    ))}
+                                  </ul>
+                                )}
+                                </div>
                               </td>
                             </tr>
                           )}
@@ -168,6 +177,7 @@ const splits = splitsDe(t.id);
   tr.clasifica td:first-child { box-shadow: inset 4px 0 0 var(--victoria); }
   tr.seccion td { background: var(--linea); color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
   td.ver { font-size: 0.9rem; }
+  .goles-y-asistencias { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.4rem 2rem; }
   ul.lista-goles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
   tr.goleadores td { font-size: 0.9rem; font-weight: 400; white-space: normal; }
   .leyenda { font-size: 0.85rem; margin: 0.4rem 0 0; }
